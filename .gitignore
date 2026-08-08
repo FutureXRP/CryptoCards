@@ -1,0 +1,13 @@
+# Print output is regenerated deterministically from the repo — never committed.
+/output/
+
+# Stand-in art, generated on demand and never printable.
+/art/placeholder/
+
+# Art awaiting QC lives outside version control until approved.
+/art/incoming/*
+!/art/incoming/.gitkeep
+
+__pycache__/
+*.pyc
+.DS_Store
