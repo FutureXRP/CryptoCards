@@ -1,0 +1,6 @@
+# Production pipeline dependencies.
+# `python generate.py validate` runs on the standard library alone;
+# every image/PDF command needs these.
+Pillow>=10.0
+numpy>=1.24
+reportlab>=4.0
