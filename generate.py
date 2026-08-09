@@ -389,13 +389,15 @@ def opal_band(Image, np, seed: int, strength: float):
     rng = np.random.default_rng(seed)
     ph = rng.uniform(0.0, 2.0 * math.pi, size=3).astype(np.float32)
     r = np.sqrt((u - 0.5) ** 2 + (v - 0.5) ** 2)
-    n = (np.sin(u * 9.0 + v * 13.0 + ph[0])
-         + np.sin((u - v) * 17.0 + ph[1]) * 0.6
-         + np.sin(r * 24.0 + ph[2]) * 0.8)
-    hue = ((n * 0.24) % 1.0).astype(np.float32)
+    n = (np.sin(u * 34.0 + v * 47.0 + ph[0])
+         + np.sin((u - v) * 61.0 + ph[1]) * 0.6
+         + np.sin(r * 88.0 + ph[2]) * 0.8)
+    hue = ((n * 0.16) % 1.0).astype(np.float32)
 
-    sat = np.full_like(hue, 0.34 + 0.30 * strength)
-    val = np.full_like(hue, 0.99)
+    # Low saturation + near-white value reads as pearlescent laminate; a high
+    # saturation version prints as tie-dye rather than foil.
+    sat = np.full_like(hue, 0.16 + 0.12 * strength)
+    val = np.full_like(hue, 1.0)
     i = np.floor(hue * 6.0)
     f = hue * 6.0 - i
     p = val * (1.0 - sat)
@@ -407,8 +409,9 @@ def opal_band(Image, np, seed: int, strength: float):
     bb = np.select([i == 0, i == 1, i == 2, i == 3, i == 4, i == 5], [p, p, t, val, val, q])
     out = np.stack([rr, gg, bb], axis=-1) * 255.0
 
+    out = out * 0.80 + 255.0 * 0.20            # lift toward white foil
     sparkle = rng.random((h, w)).astype(np.float32)
-    out = np.where((sparkle > 0.9965)[..., None], 255.0, out)
+    out = np.where((sparkle > 0.988)[..., None], 255.0, out)
     return Image.fromarray(np.clip(out, 0, 255).astype("uint8"), "RGB")
 
 
@@ -454,6 +457,19 @@ def gold_text(canvas, Image, ImageDraw, text: str, face, cx: int, y: int,
     ImageDraw.Draw(hi).text((x, top), text, font=face, fill=0)
     canvas.paste(Image.new("RGB", canvas.size, GOLD_HI), (0, 0), hi)
     return tw
+
+
+def fit_block(draw, text, role, width, height, sizes, weight=None):
+    """Largest size from `sizes` whose wrapped block fits `height`."""
+    face = font(role, sizes[-1], weight)
+    lines = wrap(draw, text, face, width)
+    for size in sizes:
+        f = font(role, size, weight)
+        ls = wrap(draw, text, f, width)
+        if len(ls) * (size + 6) <= height:
+            return f, ls
+        face, lines = f, ls
+    return face, lines
 
 
 def gold_rule(draw, x0, y, x1, width=4):
@@ -524,13 +540,6 @@ def rarity_badge(canvas, Image, ImageDraw, box, rarity, style):
     cx = (x0 + x1) // 2
     plate(canvas, Image, ImageDraw, box, radius=(y1 - y0) // 2, fill=(26, 18, 44), alpha=245)
     d = ImageDraw.Draw(canvas, "RGBA")
-    # laurel
-    for side in (-1, 1):
-        for k in range(6):
-            t = k / 5.0
-            ax = cx + side * (int((x1 - x0) * 0.30) + int(t * 8))
-            ay = y0 + 26 + int(t * (y1 - y0 - 52))
-            d.ellipse((ax - 9, ay - 5, ax + 9, ay + 5), outline=GOLD + (200,), width=3)
     d.text((cx, y0 + 14), "RARITY", font=font("caps", 22, 600), fill=(198, 186, 220), anchor="ma")
     gold_text(canvas, Image, ImageDraw, rarity.upper(), font("display", 38), cx, y0 + 44,
               stroke=3, shadow=3)
@@ -619,11 +628,11 @@ def compose_front(card: dict, serial: int):
                  font("caps", 30, 600), (226, 206, 168), tracking=8, anchor_center_x=cx)
 
     title = require(card, "name").upper()
-    tface = fit_font(d, title, "display", R - L - 300, 128, 58)
+    tface = fit_font(d, title, "display", R - L - 620, 112, 46)
     gold_text(canvas, Image, ImageDraw, title, tface, cx, BORDER_BAND + 74)
 
     sub = require(card, "subtitle").upper()
-    sface = fit_font(d, sub, "caps", R - L - 340, 40, 22, weight=600)
+    sface = fit_font(d, sub, "caps", R - L - 640, 34, 17, weight=600)
     d = ImageDraw.Draw(canvas, "RGBA")
     draw_tracked(d, (0, BORDER_BAND + 224), sub, sface, (232, 214, 176), tracking=6, anchor_center_x=cx)
 
@@ -658,9 +667,17 @@ def compose_front(card: dict, serial: int):
     draw_tracked(d, (0, PANEL_TOP + 26), tl, tface2, (232, 220, 192), tracking=2, anchor_center_x=cx)
     gold_rule(d, L, PANEL_TOP + 74, R, 3)
 
+    # --- bottom stack is measured upward from the footer --------------------
+    ft_bot = FULL_H - BORDER_BAND - 22
+    ft_top = ft_bot - 96
+    fl_bot = ft_top - 16
+    fl_top = fl_bot - 206
+    wk_bot = fl_top - 16
+    wk_top = wk_bot - 84
+
     # --- abilities: three medallion columns ---------------------------------
     ab_top = PANEL_TOP + 92
-    ab_bot = ab_top + 452
+    ab_bot = wk_top - 18
     plate(canvas, Image, ImageDraw, (L, ab_top, R, ab_bot), radius=14, fill=PLATE_BG2, alpha=246)
     d = ImageDraw.Draw(canvas, "RGBA")
     lab = font("caps", 24, 700)
@@ -699,8 +716,6 @@ def compose_front(card: dict, serial: int):
             ty += 33
 
     # --- weakness -----------------------------------------------------------
-    wk_top = ab_bot + 20
-    wk_bot = wk_top + 84
     plate(canvas, Image, ImageDraw, (L, wk_top, R, wk_bot), radius=12, fill=PLATE_BG2, alpha=246)
     d = ImageDraw.Draw(canvas, "RGBA")
     draw_tracked(d, (L + 26, wk_top + 30), "WEAKNESS", font("caps", 24, 700), GOLD_HI, tracking=5)
@@ -709,29 +724,27 @@ def compose_front(card: dict, serial: int):
     d.text((L + 244, wk_top + 28), require(card, "weakness"), font=wface, fill=(226, 218, 204))
 
     # --- flavor + market lore ----------------------------------------------
-    fl_top = wk_bot + 20
-    fl_bot = FULL_H - BORDER_BAND - 140
     split = L + int((R - L) * 0.38)
     plate(canvas, Image, ImageDraw, (L, fl_top, split - 10, fl_bot), radius=12, fill=PLATE_BG2, alpha=246)
     plate(canvas, Image, ImageDraw, (split + 10, fl_top, R, fl_bot), radius=12, fill=PLATE_BG2, alpha=246)
     d = ImageDraw.Draw(canvas, "RGBA")
     draw_tracked(d, (L + 24, fl_top + 20), "FLAVOR TEXT", font("caps", 22, 700), GOLD_HI, tracking=4)
-    fface = font("italic", 30, 500)
-    fy = fl_top + 62
-    for line in wrap(d, f"“{require(card,'flavor')}”", fface, split - L - 50):
+    fface, flines = fit_block(d, f"“{require(card,'flavor')}”", "italic",
+                              split - L - 50, fl_bot - fl_top - 76, (30, 28, 26, 24, 22), 500)
+    fy = fl_top + 58
+    for line in flines:
         d.text((L + 24, fy), line, font=fface, fill=(238, 228, 208))
-        fy += 38
+        fy += fface.size + 8
 
     draw_tracked(d, (split + 34, fl_top + 20), "MARKET LORE", font("caps", 22, 700), GOLD_HI, tracking=4)
-    lface = font("body", 26, 450)
-    ly = fl_top + 62
-    for line in wrap(d, require(card, "lore"), lface, R - split - 60):
+    lface, llines = fit_block(d, require(card, "lore"), "body",
+                              R - split - 60, fl_bot - fl_top - 74, (26, 24, 22, 20, 18), 450)
+    ly = fl_top + 56
+    for line in llines:
         d.text((split + 34, ly), line, font=lface, fill=(224, 216, 202))
-        ly += 32
+        ly += lface.size + 5
 
     # --- footer -------------------------------------------------------------
-    ft_top = fl_bot + 16
-    ft_bot = FULL_H - BORDER_BAND - 22
     plate(canvas, Image, ImageDraw, (L, ft_top, R, ft_bot), radius=12, fill=PLATE_BG, alpha=250)
     d = ImageDraw.Draw(canvas, "RGBA")
     draw_tracked(d, (L + 26, ft_top + 16), "SUPPLY", font("caps", 20, 600), (188, 176, 156), tracking=4)
