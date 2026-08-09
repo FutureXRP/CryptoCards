@@ -1,0 +1,8 @@
+# Generated print artefacts — regenerate with `python generate.py all`
+/output/
+
+__pycache__/
+*.pyc
+.DS_Store
+
+.claude/settings.local.json

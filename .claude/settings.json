@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "mcp__Higgsfield",
+      "mcp__Higgsfield__sandbox_exec",
+      "mcp__Higgsfield__media_upload",
+      "mcp__Higgsfield__media_confirm",
+      "mcp__Higgsfield__media_import_url",
+      "mcp__Higgsfield__generate_image",
+      "mcp__Higgsfield__generate_image_batch",
+      "mcp__Higgsfield__jobs_wait",
+      "mcp__Higgsfield__show_generations",
+      "mcp__Higgsfield__show_generation_by_ids",
+      "mcp__Higgsfield__job_display",
+      "mcp__Higgsfield__models_explore",
+      "mcp__Higgsfield__upscale_image",
+      "mcp__Higgsfield__balance",
+      "mcp__Higgsfield__show_medias"
+    ]
+  }
+}

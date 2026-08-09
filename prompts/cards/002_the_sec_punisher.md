@@ -1,0 +1,8 @@
+# 002 — The SEC Punisher  (mythic / archetype)
+
+Scene beats from lore: he does not chase, he files; the clerk stamps the date; the calendar belongs to him.
+
+> Museum-quality oil painting on aged canvas, dark epic fantasy meets financial mythology. A towering faceless magistrate in heavy layered robes of black wool and oxidised bronze, standing rigid and frontal, face lost entirely in shadow beneath a flat wide-brimmed judicial cap. One gloved hand extends a single folded sealed document bearing a heavy red wax seal; the other rests on a great bronze gavel resting on a stone lectern. Behind the figure rises a vast wall of pigeonholed archive drawers and bound ledgers stacked into darkness, brass handles catching the light, dust suspended in volumetric haze. Palette strictly black, bronze, oxidised gold, ember orange and bone white, with one narrow cold blue rim light separating the silhouette from the dark and a single hard warm key light raking from the upper left. Painterly visible brushwork, impasto in the highlights, deep chiaroscuro falloff, aged varnish, fine canvas grain, gilt flaking at the extreme edges. Centred iconic frontal composition, subject occupying the upper two thirds of the frame, the lower third falling away into quiet near-black empty shadow with no detail. The outermost edges of the image are dark, uniform and undisturbed. Painterly, not photorealistic, not 3D render. Absolutely no text, no letters, no words, no numerals, no runes, no signature, no watermark, no logos or brand marks anywhere in the image.
+
+QC: the sealed document carries abstract pen strokes, not letterforms; checked
+at 100%. No legible text anywhere.
