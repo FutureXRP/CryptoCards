@@ -15,8 +15,8 @@ source of truth and this file mirrors it.
 | lore_complete | 11 |
 | art_prompted | 0 |
 | art_incoming | 0 |
-| art_approved | 4 |
-| composed | 0 |
+| art_approved | 3 |
+| composed | 1 |
 | proofed | 0 |
 | print_ready | 0 |
 | **total** | **100** |
@@ -25,7 +25,7 @@ source of truth and this file mirrors it.
 
 | # | Name | Tier | Category | Status |
 |---|---|---|---|---|
-| 001 | The HODLR | mythic | archetype | art_approved |
+| 001 | The HODLR | mythic | archetype | composed |
 | 002 | The SEC Punisher | mythic | archetype | art_approved |
 | 003 | The Whale | mythic | archetype | art_approved |
 | 004 | The Rug Puller | mythic | archetype | art_approved |
@@ -128,9 +128,9 @@ source of truth and this file mirrors it.
 
 ## Next up
 
-1. Compose + proof 002–004 and promote them to `proofed`.
-2. Write full content for the Epic block 005–014 (already `lore_complete`;
-   they need art prompts, then art).
-3. Card 100 (The Architect) has lore; it is the set-closing chase card and
-   should get art last, once the house style is fully settled.
-4. Cards 015–099 are `named` only — design in blocks of 10 per session.
+1. Owner sign-off on card 001 front + back (the house style is now set).
+2. Resolve the copy question: the manifest's wording for 001-004 differs from
+   the owner's reference cards (subtitle, type, alignment, stat labels).
+3. Generate `art/templates/back_epic|rare|uncommon|common.png` from the same
+   prompt as `back_mythic.png`, then re-check `BACK_BANDS` against each.
+4. Compose + proof 002-004, then write content for the Rare block 015-024.

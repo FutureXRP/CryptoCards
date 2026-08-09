@@ -1,39 +1,49 @@
 # HANDOFF — Crypto Lore Series, Genesis Series 2026
 
 Written 2026-08-09. Read this first, then `CLAUDE.md`.
-Branch: `claude/crypto-cards-higgsfield-25ogi5` (public repo, all work pushed).
+Branch: `claude/handoff-build-review-h1zi8n` (public repo, all work pushed).
 
 ---
 
-## 0. Read this before touching the renderer
+## 0. Where the design landed (owner-approved direction)
 
-**The design target is the four reference card images the owner produced with
-ChatGPT — not the layout described in the original `build.md`.** `build.md`
-(now `CLAUDE.md`) describes an "engraved frame with a small art window". That is
-wrong. The real product is:
+The design target is the owner's reference cards. As of this session:
 
-- **Full-bleed art.** The painting fills the whole card; UI panels sit on top of it.
-- **Prismatic opal foil edge** — a bright, fine-grained, full-spectrum
-  holographic band. Do **not** replace this with a tasteful narrow gold sheen;
-  that was tried and it is wrong.
-- **Huge beveled/extruded gold title** with a dark outline and gradient fill.
-- **Left rail of five colour-coded stat chips**, each with an icon and a large number.
-- **Three-column abilities**, each with a circular gold medallion, the ability
-  name, an ACTIVE / PASSIVE / ULTIMATE pill, and body text.
-- **Badge system:** circular monogram roundel top-left, `GENESIS EDITION 001/100`
-  plate top-right, rarity badge under it.
-- **Bottom stack:** weakness bar → FLAVOR TEXT + MARKET LORE panels → footer with
-  SUPPLY / monogram / `CARD #001`.
-- **Back:** art plate on top, parchment lore panel, traits list with icons and
-  chevrons, flavor line, `#001 / 100`, series footer.
+- **Front:** full-bleed art, prismatic opal foil edge, huge beveled gold title
+  with a warm bloom, five colour-coded stat chips, three medallion ability
+  columns (medallion left, copy right), badge system, weakness bar, flavor +
+  market lore, footer. Owner reviewed and approved the look.
+- **Back:** an **ornate template plate — no character art**. The owner
+  explicitly does not want the figure repeated on the back. The plate is a
+  text-free AI painting in `art/templates/back_<tier>.png`; all type is set by
+  the pipeline over it.
+- Both faces carry a diagonal gloss `sheen()` so the card reads as laminated
+  stock ("make it shine a bit more").
 
-The reference cards also contain things the old doc bans — readable in-scene text
-("FUD", "WE STILL HODL") and real asset marks (₿, XRP X). That is the owner's
-product call. **Ask before removing them or re-banning them.**
+### The back layout is band-based
+
+`BACK_BANDS` in `generate.py` places the title on the plate's engraved
+nameplate, the lore parchment on the gold shield and the traits on the open
+starfield below it, as fractions of the field inside the foil edge. **These
+fractions are tuned to the shipped template — regenerating a plate means
+re-checking them.** Copy length is absorbed by auto-shrinking type, so the
+bands hold for any card.
+
+### Two rendering traps, both hit and fixed
+
+1. `ImageDraw` on an RGBA layer **writes the source alpha** rather than
+   accumulating it. Drawing a translucent sheen over an opaque fill punched the
+   stat chips full of holes and the art showed through the labels. Chips are now
+   an opaque gradient pasted through a rounded mask. Do not reintroduce
+   translucent overdraw on a panel that must stay opaque.
+2. The opal foil went through neon-static and candy-stripe failures. It is now
+   upsampled noise (not sinusoids) at a **low saturation** with a high value
+   floor. Saturation is the dial that ruins it — leave it low.
 
 ---
 
 ## 1. Where the work actually stands
+
 
 ### Done and working
 
@@ -44,7 +54,7 @@ product call. **Ask before removing them or re-banning them.**
 | `generate.py compose` | Renders front + back at 1650×2250 @ 600 DPI. Works. |
 | `prep` / `proof` / `foil` / `sheet` / `all` | Implemented. `proof` and `foil` verified on real output; `sheet` (PDF) is **implemented but never executed** — see §4. |
 | Fonts | Cinzel, Cinzel Decorative, EB Garamond + Italic in `fonts/`, with OFL licences. Committed. |
-| Art | Cards 001–004 have approved 1696×2528 paintings in `art/approved/`, all text-free, all visually QC'd at full size. |
+| Art | Cards 001–004 have approved 1696×2528 paintings in `art/approved/`, all text-free, all visually QC'd at full size. `art/templates/back_mythic.png` is the approved back plate; the other four tiers are not generated yet. |
 | Prompts | `prompts/` has base + 5 tier + 5 category templates, plus per-card records for 001–004. |
 | Docs | `CLAUDE.md`, `PRINT_SPEC.md`, `STATUS.md`. |
 | Permissions | `.claude/settings.json` allows all Higgsfield MCP tools. Committed, so a **fresh session will not prompt**. |
