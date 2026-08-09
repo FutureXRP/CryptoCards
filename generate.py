@@ -325,19 +325,26 @@ def draw_tracked(draw, xy, text: str, face, fill, tracking: int = 0, anchor_cent
 # Frame construction
 # ---------------------------------------------------------------------------
 
-def holo_field(np, w: int, h: int, seed: int, strength: float):
-    """Opalescent interference field — deterministic per card."""
+def holo_tint(np, w: int, h: int, seed: int, strength: float):
+    """Opalescent sheen as a narrow-gamut per-channel gain around 1.0.
+
+    Deliberately NOT a full-spectrum rainbow: a collector foil shifts through
+    warm gold / green-gold / rose within a tight band. Amplitude is capped so
+    the engraved metal stays dominant and the card never reads as candy stripe.
+    """
     yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
     u, v = xx / max(w - 1, 1), yy / max(h - 1, 1)
     rng = np.random.default_rng(seed)
-    phase = rng.uniform(0.0, 2.0 * math.pi, size=3).astype(np.float32)
-    band = (u * 7.0 + v * 11.0)
-    swirl = np.sin((u - 0.5) * (v - 0.5) * 26.0)
-    out = np.zeros((h, w, 3), dtype=np.float32)
-    for i in range(3):
-        wave = np.sin(band * 2.0 * math.pi + phase[i] + swirl * 1.6)
-        out[..., i] = 0.5 + 0.5 * wave
-    return np.clip(out * strength, 0.0, 1.0)
+    phase = rng.uniform(0.0, 2.0 * math.pi)
+    band = u * 2.6 + v * 3.4
+    swirl = np.sin((u - 0.5) * (v - 0.5) * 9.0)
+    wave = np.sin(band * 2.0 * math.pi + phase + swirl * 1.1)
+    amp = 0.16 * float(strength)          # <= 16% channel deviation
+    gain = np.empty((h, w, 3), dtype=np.float32)
+    gain[..., 0] = 1.0 + amp * wave                     # red leads
+    gain[..., 1] = 1.0 + amp * np.sin(band * 2.0 * math.pi + phase + 2.2 + swirl * 1.1) * 0.75
+    gain[..., 2] = 1.0 + amp * np.sin(band * 2.0 * math.pi + phase + 4.3 + swirl * 1.1) * 0.55
+    return gain
 
 
 def build_border(Image, ImageDraw, ImageFilter, np, style: dict, seed: int, mythic: bool):
@@ -352,17 +359,16 @@ def build_border(Image, ImageDraw, ImageFilter, np, style: dict, seed: int, myth
     # Engraved ribbing across the band plus a brushed-metal grain.
     rib = 0.5 + 0.5 * np.sin(t * math.pi * 6.0)
     rng = np.random.default_rng(seed)
-    grain = rng.normal(0.0, 1.0, size=(FULL_H, FULL_W)).astype(np.float32)
-    grain = grain * 0.05
+    grain = rng.normal(0.0, 1.0, size=(FULL_H, FULL_W)).astype(np.float32) * 0.05
 
-    shade = (0.42 + 0.58 * rib + grain)[..., None]
-    band = dark + (foil - dark) * np.clip(shade, 0.0, 1.4)
+    shade = (0.34 + 0.62 * rib + grain)[..., None]
+    band = dark + (foil - dark) * np.clip(shade, 0.0, 1.35)
 
-    holo = holo_field(np, FULL_W, FULL_H, seed, style["holo"])
-    band = band * (1.0 - 0.30 * style["holo"]) + (band * holo * 1.9) * (0.30 * style["holo"])
+    # Darken toward the inner edge so the frame reads as a raised bevel.
+    bevel = (0.72 + 0.28 * (1.0 - t))[..., None]
+    band = band * bevel
 
-    if mythic:
-        band = band * 0.86 + (holo * 255.0) * 0.14
+    band = band * holo_tint(np, FULL_W, FULL_H, seed, style["holo"])
 
     img = Image.fromarray(np.clip(band, 0, 255).astype("uint8"), "RGB")
     img = img.filter(ImageFilter.GaussianBlur(0.6))
@@ -414,6 +420,40 @@ def panel(Image, ImageDraw, size, radius=18, alpha=214):
 
 def hairline(draw, box, color, width=3, radius=14):
     draw.rounded_rectangle(box, radius=radius, outline=color, width=width)
+
+
+def kind_mark(draw, cx, cy, kind: str, style):
+    """Ability marker drawn as geometry — the display faces have no such glyphs."""
+    r = 13
+    if kind == "active":                       # filled diamond
+        draw.polygon([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], fill=style["accent"])
+    elif kind == "passive":                    # open ring
+        draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=style["accent"], width=4)
+    else:                                      # ultimate: eight-point star
+        pts = []
+        for i in range(16):
+            ang = -math.pi / 2 + i * math.pi / 8
+            rad = r if i % 2 == 0 else r * 0.42
+            pts.append((cx + math.cos(ang) * rad, cy + math.sin(ang) * rad))
+        draw.polygon(pts, fill=style["accent"])
+
+
+def draw_sigil(draw, cx, cy, r, style):
+    """Engraved set sigil — fills the lower back panel instead of dead space."""
+    draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=style["dark"], width=5)
+    draw.ellipse((cx - r * 0.82, cy - r * 0.82, cx + r * 0.82, cy + r * 0.82),
+                 outline=style["dark"], width=2)
+    for i in range(24):
+        ang = i * math.pi / 12
+        x0, y0 = cx + math.cos(ang) * r * 0.82, cy + math.sin(ang) * r * 0.82
+        x1, y1 = cx + math.cos(ang) * r * 0.62, cy + math.sin(ang) * r * 0.62
+        draw.line((x0, y0, x1, y1), fill=style["dark"], width=3)
+    for i in range(6):
+        ang = -math.pi / 2 + i * math.pi / 3
+        x0, y0 = cx + math.cos(ang) * r * 0.52, cy + math.sin(ang) * r * 0.52
+        draw.line((cx, cy, x0, y0), fill=style["dark"], width=3)
+        draw.ellipse((x0 - 9, y0 - 9, x0 + 9, y0 + 9), outline=style["dark"], width=3)
+    draw.ellipse((cx - 16, cy - 16, cx + 16, cy + 16), fill=style["dark"])
 
 
 def rarity_crest(draw, cx, cy, r, style, rarity):
@@ -503,24 +543,39 @@ def compose_front(card: dict, serial: int) -> "object":
         draw.text((safe_l + inner_w - 112, row_y - 2), vt, font=value_face, fill=style["accent"])
 
     # --- abilities ---------------------------------------------------------
-    abilities = require(card, "abilities")
+    abilities = sorted(require(card, "abilities"), key=lambda a: ABILITY_KINDS.index(a["kind"]))
     ay = sy + plate_h + 24
-    ab_bottom = SAFE_BOX[3] - 96
-    canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, ab_bottom - ay)), (safe_l, ay))
+    ab_bottom = SAFE_BOX[3] - 88
+    avail = ab_bottom - ay
+
+    # Fit before drawing: shrink type until the block provably clears the footer.
+    text_l = safe_l + 66
+    text_w = inner_w - 92
+    for name_pt, body_pt in ((34, 32), (32, 30), (30, 28), (28, 26), (26, 24)):
+        name_face = font("caps", name_pt, 700)
+        body_face = font("body", body_pt, 450)
+        head_h, line_h, gap = name_pt + 12, body_pt + 5, 14
+        block = []
+        total = 24
+        for ability in abilities:
+            lines = wrap(draw, ability["text"], body_face, text_w)
+            block.append((ability, lines))
+            total += head_h + len(lines) * line_h + gap
+        if total <= avail:
+            break
+
+    canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, avail)), (safe_l, ay))
     hairline(draw, (safe_l, ay, safe_l + inner_w, ab_bottom), style["dark"], 3)
 
-    kind_mark = {"active": "◆", "passive": "○", "ultimate": "✦"}
-    name_face = font("caps", 34, 700)
-    body_face = font("body", 32, 450)
-    y = ay + 20
-    for ability in sorted(abilities, key=lambda a: ABILITY_KINDS.index(a["kind"])):
-        head = f"{kind_mark[ability['kind']]}  {ability['name'].upper()}"
-        draw.text((safe_l + 24, y), head, font=name_face, fill=style["accent"])
-        y += 42
-        for line in wrap(draw, ability["text"], body_face, inner_w - 60):
-            draw.text((safe_l + 26, y), line, font=body_face, fill=INK)
-            y += 36
-        y += 10
+    y = ay + 16
+    for ability, lines in block:
+        kind_mark(draw, safe_l + 36, y + name_pt // 2 + 2, ability["kind"], style)
+        draw.text((text_l, y), ability["name"].upper(), font=name_face, fill=style["accent"])
+        y += head_h
+        for line in lines:
+            draw.text((text_l, y), line, font=body_face, fill=INK)
+            y += line_h
+        y += gap
 
     # --- footer ------------------------------------------------------------
     foot_y = SAFE_BOX[3] - 62
@@ -574,22 +629,26 @@ def compose_back(card: dict, serial: int) -> "object":
 
     # --- traits ------------------------------------------------------------
     traits = require(card, "traits")
-    head_face = font("caps", 32, 700)
+    head_face = font("caps", 30, 700)
     trait_face = font("body", 31, 450)
-    trait_rows = []
-    for trait in traits:
-        trait_rows.append((trait["label"].upper(), wrap(draw, trait["text"], trait_face, inner_w - 300)))
-    traits_h = sum(38 + max(len(t[1]) - 1, 0) * 36 for t in trait_rows) + 76
+    # Column width is measured from the widest label, so labels can never
+    # collide with their text however they are worded.
+    label_w = max(draw.textlength(t["label"].upper(), font=head_face) for t in traits)
+    col = int(label_w) + 44
+    trait_rows = [(t["label"].upper(), wrap(draw, t["text"], trait_face, inner_w - col - 56))
+                  for t in traits]
+    row_h = 42
+    traits_h = sum(row_h + max(len(r[1]) - 1, 0) * 36 for r in trait_rows) + 82
 
     canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, traits_h), alpha=196), (safe_l, y))
     hairline(draw, (safe_l, y, safe_l + inner_w, y + traits_h), style["dark"], 3)
     draw_tracked(draw, (safe_l + 30, y + 18), "TRAITS", font("caps", 30, 700), style["accent"], tracking=7)
-    ty = y + 62
+    ty = y + 66
     for label, lines in trait_rows:
         draw.text((safe_l + 30, ty), label, font=head_face, fill=style["serial"])
         for j, line in enumerate(lines):
-            draw.text((safe_l + 268, ty + j * 36), line, font=trait_face, fill=INK)
-        ty += 38 + max(len(lines) - 1, 0) * 36
+            draw.text((safe_l + col, ty + j * 36), line, font=trait_face, fill=INK)
+        ty += row_h + max(len(lines) - 1, 0) * 36
     y += traits_h + 26
 
     # --- weakness ----------------------------------------------------------
@@ -607,7 +666,15 @@ def compose_back(card: dict, serial: int) -> "object":
     flavor = f"“{require(card, 'flavor')}”"
     fl_face = fit_font(draw, flavor, "italic", inner_w - 120, 40, 26, weight=500)
     fw = draw.textlength(flavor, font=fl_face)
-    draw.text((cx - fw / 2, y + 6), flavor, font=fl_face, fill=style["serial"])
+    draw.text((cx - fw / 2, y + 10), flavor, font=fl_face, fill=style["serial"])
+    y += 74
+
+    # --- set sigil fills the remaining panel rather than leaving it dead ----
+    foot_top = SAFE_BOX[3] - 96
+    room = foot_top - y
+    if room > 180:
+        radius = min(int(room * 0.42), 260)
+        draw_sigil(draw, cx, y + room // 2, radius, style)
 
     # --- footer ------------------------------------------------------------
     foot_y = SAFE_BOX[3] - 62
