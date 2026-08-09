@@ -339,11 +339,14 @@ def holo_tint(np, w: int, h: int, seed: int, strength: float):
     band = u * 2.6 + v * 3.4
     swirl = np.sin((u - 0.5) * (v - 0.5) * 9.0)
     wave = np.sin(band * 2.0 * math.pi + phase + swirl * 1.1)
-    amp = 0.16 * float(strength)          # <= 16% channel deviation
+    amp = 0.13 * float(strength)
+    # All three channels share one phase, with green trailing red and blue
+    # moving against it. The hue can only travel warm gold <-> cool bronze —
+    # it can never cross into green, which is what made this read as plastic.
     gain = np.empty((h, w, 3), dtype=np.float32)
-    gain[..., 0] = 1.0 + amp * wave                     # red leads
-    gain[..., 1] = 1.0 + amp * np.sin(band * 2.0 * math.pi + phase + 2.2 + swirl * 1.1) * 0.75
-    gain[..., 2] = 1.0 + amp * np.sin(band * 2.0 * math.pi + phase + 4.3 + swirl * 1.1) * 0.55
+    gain[..., 0] = 1.0 + amp * wave
+    gain[..., 1] = 1.0 + amp * wave * 0.52
+    gain[..., 2] = 1.0 - amp * wave * 0.34
     return gain
 
 
@@ -361,11 +364,12 @@ def build_border(Image, ImageDraw, ImageFilter, np, style: dict, seed: int, myth
     rng = np.random.default_rng(seed)
     grain = rng.normal(0.0, 1.0, size=(FULL_H, FULL_W)).astype(np.float32) * 0.05
 
-    shade = (0.34 + 0.62 * rib + grain)[..., None]
-    band = dark + (foil - dark) * np.clip(shade, 0.0, 1.35)
+    shade = (0.22 + 0.62 * rib + grain)[..., None]
+    band = dark + (foil - dark) * np.clip(shade, 0.0, 1.25)
 
-    # Darken toward the inner edge so the frame reads as a raised bevel.
-    bevel = (0.72 + 0.28 * (1.0 - t))[..., None]
+    # Darken toward the inner edge so the frame reads as a raised bevel, and
+    # keep the whole band below paper-white so it prints as metal, not pastel.
+    bevel = (0.62 + 0.30 * (1.0 - t))[..., None]
     band = band * bevel
 
     band = band * holo_tint(np, FULL_W, FULL_H, seed, style["holo"])
