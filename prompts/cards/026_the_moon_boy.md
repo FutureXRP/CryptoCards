@@ -1,0 +1,45 @@
+# 026 - The Moon Boy
+*Perpetually Early*
+
+- **Rarity:** rare  |  **Category:** archetype  |  **Type:** Herald  |  **Alignment:** Faith
+- **Output:** 1024 x 1536 (2:3), no text of any kind, no logos, no real people.
+
+## Subject
+
+A single allegorical figure — a person as a force of character, not a
+portrait of anyone real. Face partly shadowed or obscured by hood, mask,
+helm, smoke or distance; features stylised toward myth rather than likeness.
+Costume built from ledger-world materials: engraved plate, wax seals, chain,
+coin-scale mail, parchment robes, bronze instruments of trade.
+
+The figure should read instantly in silhouette. One gesture, one posture, one
+telling prop. No crowd, no background characters, no recognisable modern
+clothing or branding.
+
+## Scene beats
+
+- Optimism: Has never met a chart that could not recover.
+- Volume: Publishes faster than anyone can fact check.
+- Selection: Curates the archive down to the winning call.
+
+## Frame and finish
+
+Strong, dignified, less ceremonial than the upper tiers.
+
+Painterly oil rendering, black and bronze palette, one dramatic key light and
+a soft rim. Ornament is architectural rather than decorative — the gold shows
+up as hardware, engraving on objects in the scene, a seal or a fitting, not as
+a border. Haze is thinner; the scene is more legible and less theatrical.
+
+Composition: centred, subject in the upper two thirds, base third quiet.
+Outer ten pixels dark and uniform.
+
+Finish this tier prints with: gold foil title and a foil rarity crest.
+
+## Lore reference (for mood only - do not render as text)
+
+> The Moon Boy is not a liar, merely an optimist with a publishing schedule. Every cycle he calls the bottom a dozen times, and once a cycle the calendar agrees with him. That single victory is quoted for years, and the other eleven are deleted.
+
+## Negative prompt
+
+text, letters, words, numerals, watermark, signature, logo, brand marks, ticker symbols, real people, celebrity likeness, existing IP characters, photorealistic faces, low contrast, flat lighting, cartoon, meme style, extra fingers.
