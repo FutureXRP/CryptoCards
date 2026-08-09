@@ -54,7 +54,7 @@ FULL_H = TRIM_H + 2 * BLEED                   # 2250
 TRIM_BOX = (BLEED, BLEED, BLEED + TRIM_W, BLEED + TRIM_H)
 SAFE_BOX = (BLEED + SAFE, BLEED + SAFE, BLEED + TRIM_W - SAFE, BLEED + TRIM_H - SAFE)
 
-BORDER_BAND = 118      # holo/foil border thickness from the full-bleed edge
+BORDER_BAND = 96       # opal foil edge; covers the 75px bleed with margin
 INNER_RULE = 14        # gold rule inboard of the border band
 
 RARITIES = ("mythic", "epic", "rare", "uncommon", "common")
@@ -321,387 +321,237 @@ def draw_tracked(draw, xy, text: str, face, fill, tracking: int = 0, anchor_cent
     return total
 
 
-# ---------------------------------------------------------------------------
-# Frame construction
-# ---------------------------------------------------------------------------
 
-def holo_tint(np, w: int, h: int, seed: int, strength: float):
-    """Opalescent sheen as a narrow-gamut per-channel gain around 1.0.
-
-    Deliberately NOT a full-spectrum rainbow: a collector foil shifts through
-    warm gold / green-gold / rose within a tight band. Amplitude is capped so
-    the engraved metal stays dominant and the card never reads as candy stripe.
-    """
-    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    u, v = xx / max(w - 1, 1), yy / max(h - 1, 1)
-    rng = np.random.default_rng(seed)
-    phase = rng.uniform(0.0, 2.0 * math.pi)
-    band = u * 2.6 + v * 3.4
-    swirl = np.sin((u - 0.5) * (v - 0.5) * 9.0)
-    wave = np.sin(band * 2.0 * math.pi + phase + swirl * 1.1)
-    amp = 0.13 * float(strength)
-    # All three channels share one phase, with green trailing red and blue
-    # moving against it. The hue can only travel warm gold <-> cool bronze —
-    # it can never cross into green, which is what made this read as plastic.
-    gain = np.empty((h, w, 3), dtype=np.float32)
-    gain[..., 0] = 1.0 + amp * wave
-    gain[..., 1] = 1.0 + amp * wave * 0.52
-    gain[..., 2] = 1.0 - amp * wave * 0.34
-    return gain
-
-
-def build_border(Image, ImageDraw, ImageFilter, np, style: dict, seed: int, mythic: bool):
-    """Ornate engraved border occupying the outer band (bleed is border only)."""
-    foil = np.array(style["foil"], dtype=np.float32)
-    dark = np.array(style["dark"], dtype=np.float32)
-
-    yy, xx = np.mgrid[0:FULL_H, 0:FULL_W].astype(np.float32)
-    edge = np.minimum(np.minimum(xx, FULL_W - 1 - xx), np.minimum(yy, FULL_H - 1 - yy))
-    t = np.clip(edge / float(BORDER_BAND), 0.0, 1.0)
-
-    # Engraved ribbing across the band plus a brushed-metal grain.
-    rib = 0.5 + 0.5 * np.sin(t * math.pi * 6.0)
-    rng = np.random.default_rng(seed)
-    grain = rng.normal(0.0, 1.0, size=(FULL_H, FULL_W)).astype(np.float32) * 0.05
-
-    shade = (0.22 + 0.62 * rib + grain)[..., None]
-    band = dark + (foil - dark) * np.clip(shade, 0.0, 1.25)
-
-    # Darken toward the inner edge so the frame reads as a raised bevel, and
-    # keep the whole band below paper-white so it prints as metal, not pastel.
-    bevel = (0.62 + 0.30 * (1.0 - t))[..., None]
-    band = band * bevel
-
-    band = band * holo_tint(np, FULL_W, FULL_H, seed, style["holo"])
-
-    img = Image.fromarray(np.clip(band, 0, 255).astype("uint8"), "RGB")
-    img = img.filter(ImageFilter.GaussianBlur(0.6))
-
-    # Ornament: corner rosettes and a repeating engraved motif along the band.
-    draw = ImageDraw.Draw(img, "RGBA")
-    accent = style["accent"]
-    rnd = random.Random(seed)
-    for cx, cy in ((BORDER_BAND, BORDER_BAND), (FULL_W - BORDER_BAND, BORDER_BAND),
-                   (BORDER_BAND, FULL_H - BORDER_BAND), (FULL_W - BORDER_BAND, FULL_H - BORDER_BAND)):
-        for r in (86, 64, 42, 22):
-            draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=accent + (70,), width=3)
-        for k in range(12):
-            ang = k * math.pi / 6.0 + rnd.random() * 0.05
-            draw.line((cx, cy, cx + math.cos(ang) * 78, cy + math.sin(ang) * 78),
-                      fill=accent + (46,), width=2)
-
-    step = 96
-    for x in range(BORDER_BAND + step, FULL_W - BORDER_BAND, step):
-        for y in (BORDER_BAND // 2, FULL_H - BORDER_BAND // 2):
-            draw.ellipse((x - 11, y - 11, x + 11, y + 11), outline=accent + (58,), width=2)
-    for y in range(BORDER_BAND + step, FULL_H - BORDER_BAND, step):
-        for x in (BORDER_BAND // 2, FULL_W - BORDER_BAND // 2):
-            draw.ellipse((x - 11, y - 11, x + 11, y + 11), outline=accent + (58,), width=2)
-    return img
-
-
-def place_art(Image, art_path: Path, box: tuple[int, int, int, int]):
-    """Cover-fit finished art into the card's art window."""
+def place_art(Image, art_path, box):
+    """Cover-fit finished art into a card region, trimming the painted canvas edge."""
     if not art_path.exists():
         raise PipelineError(f"missing art file: {art_path}")
     art = Image.open(art_path).convert("RGB")
-    # The paintings carry a painted canvas edge (dark rim + gilt flaking).
-    # Trim it before fitting, or it reads as a second frame inside our own.
     inset_x, inset_y = int(art.width * 0.025), int(art.height * 0.025)
     art = art.crop((inset_x, inset_y, art.width - inset_x, art.height - inset_y))
     bw, bh = box[2] - box[0], box[3] - box[1]
     scale = max(bw / art.width, bh / art.height)
-    new = (max(int(math.ceil(art.width * scale)), bw), max(int(math.ceil(art.height * scale)), bh))
-    art = art.resize(new, Image.LANCZOS)
+    art = art.resize((max(int(math.ceil(art.width * scale)), bw),
+                      max(int(math.ceil(art.height * scale)), bh)), Image.LANCZOS)
     left = (art.width - bw) // 2
-    top = int((art.height - bh) * 0.34)   # bias upward: subjects sit high in frame
-    top = max(0, min(top, art.height - bh))
+    top = max(0, min(int((art.height - bh) * 0.20), art.height - bh))
     return art.crop((left, top, left + bw, top + bh))
 
 
-def panel(Image, ImageDraw, size, radius=18, alpha=214):
-    plate = Image.new("RGBA", size, (0, 0, 0, 0))
-    ImageDraw.Draw(plate).rounded_rectangle((0, 0, size[0] - 1, size[1] - 1), radius=radius,
-                                            fill=PANEL + (alpha,))
-    return plate
-
-
-def hairline(draw, box, color, width=3, radius=14):
-    draw.rounded_rectangle(box, radius=radius, outline=color, width=width)
-
-
-def kind_mark(draw, cx, cy, kind: str, style):
-    """Ability marker drawn as geometry — the display faces have no such glyphs."""
-    r = 13
-    if kind == "active":                       # filled diamond
-        draw.polygon([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], fill=style["accent"])
-    elif kind == "passive":                    # open ring
-        draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=style["accent"], width=4)
-    else:                                      # ultimate: eight-point star
-        pts = []
-        for i in range(16):
-            ang = -math.pi / 2 + i * math.pi / 8
-            rad = r if i % 2 == 0 else r * 0.42
-            pts.append((cx + math.cos(ang) * rad, cy + math.sin(ang) * rad))
-        draw.polygon(pts, fill=style["accent"])
-
-
-def draw_sigil(draw, cx, cy, r, style):
-    """Engraved set sigil — fills the lower back panel instead of dead space."""
-    draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=style["dark"], width=5)
-    draw.ellipse((cx - r * 0.82, cy - r * 0.82, cx + r * 0.82, cy + r * 0.82),
-                 outline=style["dark"], width=2)
-    for i in range(24):
-        ang = i * math.pi / 12
-        x0, y0 = cx + math.cos(ang) * r * 0.82, cy + math.sin(ang) * r * 0.82
-        x1, y1 = cx + math.cos(ang) * r * 0.62, cy + math.sin(ang) * r * 0.62
-        draw.line((x0, y0, x1, y1), fill=style["dark"], width=3)
-    for i in range(6):
-        ang = -math.pi / 2 + i * math.pi / 3
-        x0, y0 = cx + math.cos(ang) * r * 0.52, cy + math.sin(ang) * r * 0.52
-        draw.line((cx, cy, x0, y0), fill=style["dark"], width=3)
-        draw.ellipse((x0 - 9, y0 - 9, x0 + 9, y0 + 9), outline=style["dark"], width=3)
-    draw.ellipse((cx - 16, cy - 16, cx + 16, cy + 16), fill=style["dark"])
-
-
-def rarity_crest(draw, cx, cy, r, style, rarity):
-    pips = {"mythic": 5, "epic": 4, "rare": 3, "uncommon": 2, "common": 1}[rarity]
-    draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=style["foil"], width=4)
-    draw.ellipse((cx - r + 9, cy - r + 9, cx + r - 9, cy + r - 9), outline=style["dark"], width=2)
-    for i in range(pips):
-        ang = -math.pi / 2 + i * (2 * math.pi / max(pips, 1))
-        px, py = cx + math.cos(ang) * (r * 0.52), cy + math.sin(ang) * (r * 0.52)
-        draw.ellipse((px - 6, py - 6, px + 6, py + 6), fill=style["accent"])
-
-
-# ---------------------------------------------------------------------------
-# compose
-# ---------------------------------------------------------------------------
-
-def compose_front(card: dict, serial: int) -> "object":
-    Image, ImageDraw, ImageFilter, ImageFont, np = _imaging()
-    rarity = card["rarity"]
-    style = TIER_STYLE[rarity]
-    seed = card["num"]
-
-    canvas = build_border(Image, ImageDraw, ImageFilter, np, style, seed, rarity == "mythic")
-
-    inner = (BORDER_BAND, BORDER_BAND, FULL_W - BORDER_BAND, FULL_H - BORDER_BAND)
-    canvas.paste(Image.new("RGB", (inner[2] - inner[0], inner[3] - inner[1]), (9, 8, 8)), inner[:2])
-
-    art_box = (BORDER_BAND + 34, BORDER_BAND + 214, FULL_W - BORDER_BAND - 34, BORDER_BAND + 1214)
-    canvas.paste(place_art(Image, ROOT / require(card, "art_front"), art_box), art_box[:2])
-
-    canvas = canvas.convert("RGBA")
-    draw = ImageDraw.Draw(canvas, "RGBA")
-
-    # Vignette under the lower text stack so type always reads.
-    fade = Image.new("RGBA", (art_box[2] - art_box[0], 260), (0, 0, 0, 0))
-    fd = ImageDraw.Draw(fade)
-    for i in range(260):
-        fd.line((0, i, fade.width, i), fill=(6, 5, 5, int(226 * (i / 259) ** 1.5)))
-    canvas.alpha_composite(fade, (art_box[0], art_box[3] - 260))
-
-    draw.rectangle(inner, outline=style["foil"], width=INNER_RULE // 2)
-
-    cx = FULL_W // 2
-    safe_l, safe_r = SAFE_BOX[0], SAFE_BOX[2]
-    inner_w = safe_r - safe_l
-
-    # --- title plate -------------------------------------------------------
-    name = require(card, "name").upper()
-    title_face = fit_font(draw, name, "display", inner_w - 60, 92, 46)
-    draw_tracked(draw, (0, BORDER_BAND + 40), name, title_face, style["accent"], tracking=4, anchor_center_x=cx)
-
-    sub_face = fit_font(draw, require(card, "subtitle"), "italic", inner_w - 120, 44, 26, weight=500)
-    sw = draw.textlength(card["subtitle"], font=sub_face)
-    draw.text((cx - sw / 2, BORDER_BAND + 150), card["subtitle"], font=sub_face, fill=INK_DIM)
-
-    rule_y = BORDER_BAND + 202
-    draw.line((safe_l + 40, rule_y, safe_r - 40, rule_y), fill=style["dark"], width=3)
-
-    # --- type line ---------------------------------------------------------
-    type_line = f"{require(card, 'type')}  •  {require(card, 'alignment')}"
-    tl_face = font("caps", 40, 600)
-    ty = art_box[3] + 26
-    draw_tracked(draw, (0, ty), type_line.upper(), tl_face, style["accent"], tracking=6, anchor_center_x=cx)
-    rarity_crest(draw, safe_r - 44, ty + 22, 40, style, rarity)
-
-    # --- stats -------------------------------------------------------------
-    stats = require(card, "stats")
-    sy = ty + 96
-    stat_h = 52
-    plate_h = stat_h * len(stats) + 30
-    canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, plate_h)), (safe_l, sy))
-    hairline(draw, (safe_l, sy, safe_l + inner_w, sy + plate_h), style["dark"], 3)
-
-    label_face = font("caps", 32, 600)
-    value_face = font("caps", 34, 700)
-    bar_l = safe_l + 430
-    bar_r = safe_l + inner_w - 130
-    for i, stat in enumerate(stats):
-        row_y = sy + 21 + i * stat_h
-        draw.text((safe_l + 26, row_y), stat["label"].upper(), font=label_face, fill=INK_DIM)
-        value = stat["value"]
-        draw.line((bar_l, row_y + 20, bar_r, row_y + 20), fill=(46, 40, 34), width=12)
-        filled = bar_l + int(round((bar_r - bar_l) * value / 100.0))
-        if filled > bar_l:
-            draw.line((bar_l, row_y + 20, filled, row_y + 20), fill=style["foil"], width=12)
-        vt = f"{value:3d}"
-        draw.text((safe_l + inner_w - 112, row_y - 2), vt, font=value_face, fill=style["accent"])
-
-    # --- abilities ---------------------------------------------------------
-    abilities = sorted(require(card, "abilities"), key=lambda a: ABILITY_KINDS.index(a["kind"]))
-    ay = sy + plate_h + 24
-    ab_bottom = SAFE_BOX[3] - 104
-    avail = ab_bottom - ay
-
-    # Fit before drawing: shrink type until the block provably clears the footer.
-    text_l = safe_l + 66
-    text_w = inner_w - 92
-    for name_pt, body_pt in ((34, 32), (32, 30), (30, 28), (28, 26), (26, 24)):
-        name_face = font("caps", name_pt, 700)
-        body_face = font("body", body_pt, 450)
-        head_h, line_h, gap = name_pt + 12, body_pt + 5, 14
-        block = []
-        total = 24
-        for ability in abilities:
-            lines = wrap(draw, ability["text"], body_face, text_w)
-            block.append((ability, lines))
-            total += head_h + len(lines) * line_h + gap
-        if total <= avail:
-            break
-
-    canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, avail)), (safe_l, ay))
-    hairline(draw, (safe_l, ay, safe_l + inner_w, ab_bottom), style["dark"], 3)
-
-    y = ay + 16
-    for ability, lines in block:
-        kind_mark(draw, safe_l + 36, y + name_pt // 2 + 2, ability["kind"], style)
-        draw.text((text_l, y), ability["name"].upper(), font=name_face, fill=style["accent"])
-        y += head_h
-        for line in lines:
-            draw.text((text_l, y), line, font=body_face, fill=INK)
-            y += line_h
-        y += gap
-
-    # --- footer ------------------------------------------------------------
-    foot_y = SAFE_BOX[3] - 76
-    foot_face = font("caps", 34, 600)
-    draw.text((safe_l + 4, foot_y), f"{card['num']:03d}/100", font=foot_face, fill=INK_DIM)
-    code = load_manifest()["set"]["code"]
-    draw_tracked(draw, (0, foot_y), code, font("caps", 30, 500), INK_DIM, tracking=5, anchor_center_x=cx)
-    serial_text = f"{serial:03d}/100"
-    sw = draw.textlength(serial_text, font=foot_face)
-    draw.text((safe_r - sw - 4, foot_y), serial_text, font=foot_face, fill=style["serial"])
-
-    return canvas.convert("RGB")
-
-
-def compose_back(card: dict, serial: int) -> "object":
-    Image, ImageDraw, ImageFilter, ImageFont, np = _imaging()
-    rarity = card["rarity"]
-    style = TIER_STYLE[rarity]
-    seed = card["num"] + 1000
-
-    canvas = build_border(Image, ImageDraw, ImageFilter, np, style, seed, rarity == "mythic")
-    inner = (BORDER_BAND, BORDER_BAND, FULL_W - BORDER_BAND, FULL_H - BORDER_BAND)
-    canvas.paste(Image.new("RGB", (inner[2] - inner[0], inner[3] - inner[1]), (11, 9, 9)), inner[:2])
-    canvas = canvas.convert("RGBA")
-    draw = ImageDraw.Draw(canvas, "RGBA")
-    draw.rectangle(inner, outline=style["foil"], width=INNER_RULE // 2)
-
-    cx = FULL_W // 2
-    safe_l, safe_r = SAFE_BOX[0], SAFE_BOX[2]
-    inner_w = safe_r - safe_l
-
-    name = require(card, "name").upper()
-    title_face = fit_font(draw, name, "display", inner_w - 80, 70, 38)
-    draw_tracked(draw, (0, BORDER_BAND + 40), name, title_face, style["accent"], tracking=3, anchor_center_x=cx)
-    rule_y = BORDER_BAND + 132
-    draw.line((safe_l + 60, rule_y, safe_r - 60, rule_y), fill=style["dark"], width=3)
-
-    y = rule_y + 34
-
-    # --- lore --------------------------------------------------------------
-    lore_face = font("body", 36, 450)
-    lore_lines = wrap(draw, require(card, "lore"), lore_face, inner_w - 68)
-    lore_h = len(lore_lines) * 44 + 40
-    canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, lore_h), alpha=196), (safe_l, y))
-    hairline(draw, (safe_l, y, safe_l + inner_w, y + lore_h), style["dark"], 3)
-    ly = y + 22
-    for line in lore_lines:
-        draw.text((safe_l + 32, ly), line, font=lore_face, fill=INK)
-        ly += 44
-    y += lore_h + 28
-
-    # --- traits ------------------------------------------------------------
-    traits = require(card, "traits")
-    head_face = font("caps", 30, 700)
-    trait_face = font("body", 31, 450)
-    # Column width is measured from the widest label, so labels can never
-    # collide with their text however they are worded.
-    label_w = max(draw.textlength(t["label"].upper(), font=head_face) for t in traits)
-    col = int(label_w) + 44
-    trait_rows = [(t["label"].upper(), wrap(draw, t["text"], trait_face, inner_w - col - 56))
-                  for t in traits]
-    row_h = 42
-    traits_h = sum(row_h + max(len(r[1]) - 1, 0) * 36 for r in trait_rows) + 82
-
-    canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, traits_h), alpha=196), (safe_l, y))
-    hairline(draw, (safe_l, y, safe_l + inner_w, y + traits_h), style["dark"], 3)
-    draw_tracked(draw, (safe_l + 30, y + 18), "TRAITS", font("caps", 30, 700), style["accent"], tracking=7)
-    ty = y + 66
-    for label, lines in trait_rows:
-        draw.text((safe_l + 30, ty), label, font=head_face, fill=style["serial"])
-        for j, line in enumerate(lines):
-            draw.text((safe_l + col, ty + j * 36), line, font=trait_face, fill=INK)
-        ty += row_h + max(len(lines) - 1, 0) * 36
-    y += traits_h + 26
-
-    # --- weakness ----------------------------------------------------------
-    weak_face = font("body", 32, 500)
-    weak_lines = wrap(draw, require(card, "weakness"), weak_face, inner_w - 300)
-    weak_h = 30 + len(weak_lines) * 38 + 26
-    canvas.alpha_composite(panel(Image, ImageDraw, (inner_w, weak_h), alpha=196), (safe_l, y))
-    hairline(draw, (safe_l, y, safe_l + inner_w, y + weak_h), style["dark"], 3)
-    draw_tracked(draw, (safe_l + 30, y + 20), "WEAKNESS", font("caps", 30, 700), style["accent"], tracking=7)
-    for j, line in enumerate(weak_lines):
-        draw.text((safe_l + 300, y + 18 + j * 38), line, font=weak_face, fill=INK)
-    y += weak_h + 30
-
-    # --- flavor ------------------------------------------------------------
-    flavor = f"“{require(card, 'flavor')}”"
-    fl_face = fit_font(draw, flavor, "italic", inner_w - 120, 40, 26, weight=500)
-    fw = draw.textlength(flavor, font=fl_face)
-    draw.text((cx - fw / 2, y + 10), flavor, font=fl_face, fill=style["serial"])
-    y += 74
-
-    # --- set sigil fills the remaining panel rather than leaving it dead ----
-    foot_top = SAFE_BOX[3] - 96
-    room = foot_top - y
-    if room > 180:
-        radius = min(int(room * 0.42), 260)
-        draw_sigil(draw, cx, y + room // 2, radius, style)
-
-    # --- footer ------------------------------------------------------------
-    foot_y = SAFE_BOX[3] - 76
-    foot_face = font("caps", 34, 600)
-    manifest = load_manifest()
-    draw.text((safe_l + 4, foot_y), f"{card['num']:03d}/100", font=foot_face, fill=INK_DIM)
-    draw_tracked(draw, (0, foot_y), manifest["set"]["series"].upper(), font("caps", 28, 500),
-                 INK_DIM, tracking=4, anchor_center_x=cx)
-    serial_text = f"{serial:03d}/100"
-    sw = draw.textlength(serial_text, font=foot_face)
-    draw.text((safe_r - sw - 4, foot_y), serial_text, font=foot_face, fill=style["serial"])
-
-    return canvas.convert("RGB")
-
-
-def save_print(img, path: Path):
+def save_print(img, path):
     path.parent.mkdir(parents=True, exist_ok=True)
     img.save(path, "PNG", dpi=(DPI, DPI))
     return path
+
+
+# ---------------------------------------------------------------------------
+# Card furniture
+#
+# Design target is the approved Genesis look: full-bleed art with a prismatic
+# opal foil edge, a beveled gold title, a colour-coded stat rail, medallion
+# abilities and a badge system. Every element is drawn, so it repeats across
+# 100 cards without drift.
+# ---------------------------------------------------------------------------
+
+GOLD_HI = (255, 236, 178)
+GOLD = (226, 178, 78)
+GOLD_DEEP = (146, 100, 28)
+GOLD_SHADOW = (44, 28, 6)
+PLATE_BG = (10, 9, 12)
+PLATE_BG2 = (20, 17, 22)
+
+# Stat rail chip colours, applied by row so a card always reads the same way.
+CHIP_COLORS = [
+    ((16, 52, 40), (86, 226, 170)),
+    ((54, 42, 12), (240, 202, 110)),
+    ((38, 24, 66), (178, 150, 255)),
+    ((62, 16, 26), (255, 128, 140)),
+    ((14, 40, 68), (128, 196, 255)),
+]
+
+ABILITY_PILL = {
+    "active": ((36, 78, 60), (120, 240, 190)),
+    "passive": ((58, 46, 14), (246, 212, 128)),
+    "ultimate": ((60, 22, 30), (255, 150, 160)),
+}
+
+
+def opal_band(Image, np, seed: int, strength: float):
+    """Full-spectrum prismatic foil for the card edge.
+
+    This is deliberately a wide-gamut rainbow: the approved cards use an opal
+    holographic laminate at the edge, and a narrow gold-only sheen reads as
+    flat card stock next to it.
+    """
+    h, w = FULL_H, FULL_W
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    u, v = xx / (w - 1), yy / (h - 1)
+    rng = np.random.default_rng(seed)
+    ph = rng.uniform(0.0, 2.0 * math.pi, size=3).astype(np.float32)
+    r = np.sqrt((u - 0.5) ** 2 + (v - 0.5) ** 2)
+    n = (np.sin(u * 9.0 + v * 13.0 + ph[0])
+         + np.sin((u - v) * 17.0 + ph[1]) * 0.6
+         + np.sin(r * 24.0 + ph[2]) * 0.8)
+    hue = ((n * 0.24) % 1.0).astype(np.float32)
+
+    sat = np.full_like(hue, 0.34 + 0.30 * strength)
+    val = np.full_like(hue, 0.99)
+    i = np.floor(hue * 6.0)
+    f = hue * 6.0 - i
+    p = val * (1.0 - sat)
+    q = val * (1.0 - sat * f)
+    t = val * (1.0 - sat * (1.0 - f))
+    i = (i % 6).astype(np.int32)
+    rr = np.select([i == 0, i == 1, i == 2, i == 3, i == 4, i == 5], [val, q, p, p, t, val])
+    gg = np.select([i == 0, i == 1, i == 2, i == 3, i == 4, i == 5], [t, val, val, q, p, p])
+    bb = np.select([i == 0, i == 1, i == 2, i == 3, i == 4, i == 5], [p, p, t, val, val, q])
+    out = np.stack([rr, gg, bb], axis=-1) * 255.0
+
+    sparkle = rng.random((h, w)).astype(np.float32)
+    out = np.where((sparkle > 0.9965)[..., None], 255.0, out)
+    return Image.fromarray(np.clip(out, 0, 255).astype("uint8"), "RGB")
+
+
+def vgradient(Image, size, top, mid, bottom):
+    w, h = size
+    img = Image.new("RGB", (1, h))
+    px = img.load()
+    for y in range(h):
+        t = y / max(h - 1, 1)
+        if t < 0.5:
+            k = t / 0.5
+            c = tuple(int(top[i] + (mid[i] - top[i]) * k) for i in range(3))
+        else:
+            k = (t - 0.5) / 0.5
+            c = tuple(int(mid[i] + (bottom[i] - mid[i]) * k) for i in range(3))
+        px[0, y] = c
+    return img.resize((w, h))
+
+
+def gold_text(canvas, Image, ImageDraw, text: str, face, cx: int, y: int,
+              stroke: int = 5, shadow: int = 5):
+    """Beveled, gradient-filled gold type — the set's title treatment."""
+    draw = ImageDraw.Draw(canvas, "RGBA")
+    box = draw.textbbox((0, 0), text, font=face)
+    tw, th = box[2] - box[0], box[3] - box[1]
+    x = int(cx - tw / 2) - box[0]
+    top = y - box[1]
+
+    draw.text((x + shadow, top + shadow), text, font=face, fill=(0, 0, 0, 190),
+              stroke_width=stroke, stroke_fill=(0, 0, 0, 190))
+    draw.text((x, top), text, font=face, fill=GOLD_SHADOW,
+              stroke_width=stroke, stroke_fill=GOLD_SHADOW)
+
+    mask = Image.new("L", canvas.size, 0)
+    ImageDraw.Draw(mask).text((x, top), text, font=face, fill=255)
+    grad = vgradient(Image, canvas.size, GOLD_HI, GOLD, GOLD_DEEP)
+    band = vgradient(Image, (canvas.size[0], max(th, 2)), GOLD_HI, GOLD, GOLD_DEEP)
+    grad.paste(band, (0, y))
+    canvas.paste(grad, (0, 0), mask)
+
+    hi = Image.new("L", canvas.size, 0)
+    ImageDraw.Draw(hi).text((x, top - 3), text, font=face, fill=90)
+    ImageDraw.Draw(hi).text((x, top), text, font=face, fill=0)
+    canvas.paste(Image.new("RGB", canvas.size, GOLD_HI), (0, 0), hi)
+    return tw
+
+
+def gold_rule(draw, x0, y, x1, width=4):
+    draw.line((x0, y, x1, y), fill=GOLD_DEEP, width=width + 2)
+    draw.line((x0, y - 1, x1, y - 1), fill=GOLD, width=max(width - 2, 1))
+
+
+def plate(canvas, Image, ImageDraw, box, radius=16, fill=None, rule=True, alpha=232):
+    x0, y0, x1, y1 = box
+    layer = Image.new("RGBA", (x1 - x0, y1 - y0), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    body = (fill or PLATE_BG) + (alpha,)
+    d.rounded_rectangle((0, 0, x1 - x0 - 1, y1 - y0 - 1), radius=radius, fill=body)
+    canvas.alpha_composite(layer, (x0, y0))
+    if rule:
+        d2 = ImageDraw.Draw(canvas, "RGBA")
+        d2.rounded_rectangle(box, radius=radius, outline=GOLD_DEEP + (255,), width=3)
+        d2.rounded_rectangle((x0 + 3, y0 + 3, x1 - 3, y1 - 3), radius=max(radius - 3, 2),
+                             outline=GOLD + (90,), width=1)
+
+
+def icon_glyph(draw, cx, cy, r, kind: str, color):
+    """Small drawn pictographs — the display faces carry no symbol glyphs."""
+    if kind == "diamond":
+        draw.polygon([(cx, cy - r), (cx + r * 0.8, cy), (cx, cy + r), (cx - r * 0.8, cy)], fill=color)
+    elif kind == "shield":
+        draw.polygon([(cx - r * 0.8, cy - r * 0.8), (cx + r * 0.8, cy - r * 0.8),
+                      (cx + r * 0.8, cy * 1.0 + r * 0.1), (cx, cy + r), (cx - r * 0.8, cy + r * 0.1)],
+                     fill=color)
+    elif kind == "chevron":
+        for k in (0, 1):
+            off = k * r * 0.7
+            draw.polygon([(cx, cy - r + off), (cx + r * 0.75, cy + off),
+                          (cx, cy - r * 0.35 + off), (cx - r * 0.75, cy + off)], fill=color)
+    elif kind == "heart":
+        rr = r * 0.55
+        draw.ellipse((cx - rr * 1.5, cy - rr, cx + rr * 0.1, cy + rr * 0.4), fill=color)
+        draw.ellipse((cx - rr * 0.1, cy - rr, cx + rr * 1.5, cy + rr * 0.4), fill=color)
+        draw.polygon([(cx - r * 0.86, cy), (cx + r * 0.86, cy), (cx, cy + r)], fill=color)
+    elif kind == "hex":
+        pts = [(cx + math.cos(math.pi / 6 + i * math.pi / 3) * r,
+                cy + math.sin(math.pi / 6 + i * math.pi / 3) * r) for i in range(6)]
+        draw.polygon(pts, fill=color)
+    elif kind == "ring":
+        draw.ellipse((cx - r, cy - r, cx + r, cy + r), outline=color, width=max(int(r * 0.32), 3))
+    else:                                             # star
+        pts = []
+        for i in range(16):
+            ang = -math.pi / 2 + i * math.pi / 8
+            rad = r if i % 2 == 0 else r * 0.44
+            pts.append((cx + math.cos(ang) * rad, cy + math.sin(ang) * rad))
+        draw.polygon(pts, fill=color)
+
+
+STAT_ICONS = ("diamond", "shield", "chevron", "heart", "hex")
+ABILITY_ICONS = {"active": "diamond", "passive": "shield", "ultimate": "star"}
+
+
+def roundel(canvas, Image, ImageDraw, cx, cy, r, letter, face):
+    d = ImageDraw.Draw(canvas, "RGBA")
+    d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(8, 7, 9, 255), outline=GOLD_DEEP, width=6)
+    d.ellipse((cx - r + 12, cy - r + 12, cx + r - 12, cy + r - 12), outline=GOLD, width=4)
+    gold_text(canvas, Image, ImageDraw, letter, face, cx, cy - int(r * 0.52), stroke=3, shadow=3)
+
+
+def rarity_badge(canvas, Image, ImageDraw, box, rarity, style):
+    x0, y0, x1, y1 = box
+    cx = (x0 + x1) // 2
+    plate(canvas, Image, ImageDraw, box, radius=(y1 - y0) // 2, fill=(26, 18, 44), alpha=245)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    # laurel
+    for side in (-1, 1):
+        for k in range(6):
+            t = k / 5.0
+            ax = cx + side * (int((x1 - x0) * 0.30) + int(t * 8))
+            ay = y0 + 26 + int(t * (y1 - y0 - 52))
+            d.ellipse((ax - 9, ay - 5, ax + 9, ay + 5), outline=GOLD + (200,), width=3)
+    d.text((cx, y0 + 14), "RARITY", font=font("caps", 22, 600), fill=(198, 186, 220), anchor="ma")
+    gold_text(canvas, Image, ImageDraw, rarity.upper(), font("display", 38), cx, y0 + 44,
+              stroke=3, shadow=3)
+    icon_glyph(ImageDraw.Draw(canvas, "RGBA"), cx, y1 - 26, 15, "diamond", style["accent"])
+
+
+def stat_chip(canvas, Image, ImageDraw, box, label, value, idx):
+    x0, y0, x1, y1 = box
+    bg, accent = CHIP_COLORS[idx % len(CHIP_COLORS)]
+    layer = Image.new("RGBA", (x1 - x0, y1 - y0), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    d.rounded_rectangle((0, 0, x1 - x0 - 1, y1 - y0 - 1), radius=14, fill=bg + (238,))
+    canvas.alpha_composite(layer, (x0, y0))
+    d2 = ImageDraw.Draw(canvas, "RGBA")
+    d2.rounded_rectangle(box, radius=14, outline=GOLD_DEEP + (255,), width=3)
+
+    icon_glyph(d2, x0 + 40, y0 + 42, 21, STAT_ICONS[idx % len(STAT_ICONS)], accent)
+    lab = fit_font(d2, label.upper(), "caps", (x1 - x0) - 96, 26, 16, weight=650)
+    d2.text((x0 + 72, y0 + 26), label.upper(), font=lab, fill=(226, 220, 232))
+    gold_text(canvas, Image, ImageDraw, f"{value}", font("display", 52),
+              (x0 + x1) // 2, y0 + 62, stroke=3, shadow=3)
 
 
 def cmd_compose(args) -> int:
@@ -719,7 +569,275 @@ def cmd_compose(args) -> int:
     return 0
 
 
-# ---------------------------------------------------------------------------
+def card_base(Image, ImageDraw, np, card, seed):
+    """Opal edge + full-bleed art + inner gold rule. Shared by both faces."""
+    style = TIER_STYLE[card["rarity"]]
+    canvas = opal_band(Image, np, seed, style["holo"]).convert("RGBA")
+
+    art = place_art(Image, ROOT / require(card, "art_front"),
+                    (BORDER_BAND, BORDER_BAND, FULL_W - BORDER_BAND, FULL_H - BORDER_BAND))
+    canvas.paste(art, (BORDER_BAND, BORDER_BAND))
+
+    d = ImageDraw.Draw(canvas, "RGBA")
+    d.rectangle((BORDER_BAND - 6, BORDER_BAND - 6, FULL_W - BORDER_BAND + 5, FULL_H - BORDER_BAND + 5),
+                outline=GOLD_DEEP, width=6)
+    d.rectangle((BORDER_BAND, BORDER_BAND, FULL_W - BORDER_BAND - 1, FULL_H - BORDER_BAND - 1),
+                outline=GOLD, width=3)
+    return canvas, style
+
+
+def scrim(canvas, Image, ImageDraw, box, top_alpha=0, bottom_alpha=238):
+    x0, y0, x1, y1 = box
+    h = y1 - y0
+    layer = Image.new("RGBA", (x1 - x0, h), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    for i in range(h):
+        t = i / max(h - 1, 1)
+        a = int(top_alpha + (bottom_alpha - top_alpha) * (t ** 1.4))
+        d.line((0, i, x1 - x0, i), fill=(6, 5, 8, a))
+    canvas.alpha_composite(layer, (x0, y0))
+
+
+def compose_front(card: dict, serial: int):
+    Image, ImageDraw, ImageFilter, ImageFont, np = _imaging()
+    canvas, style = card_base(Image, ImageDraw, np, card, card["num"])
+    manifest = load_manifest()
+    cx = FULL_W // 2
+    L, R = BORDER_BAND + 26, FULL_W - BORDER_BAND - 26
+
+    # Art is full-bleed; everything below the portrait sits on a dark field.
+    PANEL_TOP = 1268
+    scrim(canvas, Image, ImageDraw, (BORDER_BAND, PANEL_TOP - 190, FULL_W - BORDER_BAND, PANEL_TOP), 0, 250)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    d.rectangle((BORDER_BAND, PANEL_TOP, FULL_W - BORDER_BAND, FULL_H - BORDER_BAND), fill=(7, 6, 9, 255))
+    gold_rule(d, BORDER_BAND, PANEL_TOP, FULL_W - BORDER_BAND, 5)
+    scrim(canvas, Image, ImageDraw, (BORDER_BAND, BORDER_BAND, FULL_W - BORDER_BAND, BORDER_BAND + 430), 235, 0)
+
+    # --- series line + title ------------------------------------------------
+    d = ImageDraw.Draw(canvas, "RGBA")
+    draw_tracked(d, (0, BORDER_BAND + 26), manifest["set"]["title"].upper(),
+                 font("caps", 30, 600), (226, 206, 168), tracking=8, anchor_center_x=cx)
+
+    title = require(card, "name").upper()
+    tface = fit_font(d, title, "display", R - L - 300, 128, 58)
+    gold_text(canvas, Image, ImageDraw, title, tface, cx, BORDER_BAND + 74)
+
+    sub = require(card, "subtitle").upper()
+    sface = fit_font(d, sub, "caps", R - L - 340, 40, 22, weight=600)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    draw_tracked(d, (0, BORDER_BAND + 224), sub, sface, (232, 214, 176), tracking=6, anchor_center_x=cx)
+
+    # --- badges -------------------------------------------------------------
+    roundel(canvas, Image, ImageDraw, BORDER_BAND + 86, BORDER_BAND + 88, 76,
+            require(card, "name").replace("The ", "")[:1].upper(), font("display", 76))
+
+    ed_box = (R - 330, BORDER_BAND + 20, R, BORDER_BAND + 128)
+    plate(canvas, Image, ImageDraw, ed_box, radius=12, fill=PLATE_BG2)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    d.text(((ed_box[0] + ed_box[2]) // 2, ed_box[1] + 16), "GENESIS EDITION",
+           font=font("caps", 24, 600), fill=(214, 198, 166), anchor="ma")
+    gold_text(canvas, Image, ImageDraw, f"{serial:03d}/100", font("display", 44),
+              (ed_box[0] + ed_box[2]) // 2, ed_box[1] + 52, stroke=3, shadow=3)
+
+    rarity_badge(canvas, Image, ImageDraw, (R - 300, BORDER_BAND + 148, R, BORDER_BAND + 288),
+                 card["rarity"], style)
+
+    # --- stat rail ----------------------------------------------------------
+    stats = require(card, "stats")
+    chip_w, chip_h, gap = 300, 108, 14
+    sy = BORDER_BAND + 330
+    for i, stat in enumerate(stats):
+        top = sy + i * (chip_h + gap)
+        stat_chip(canvas, Image, ImageDraw, (L, top, L + chip_w, top + chip_h),
+                  stat["label"], stat["value"], i)
+
+    # --- type line ----------------------------------------------------------
+    d = ImageDraw.Draw(canvas, "RGBA")
+    tl = f"TYPE: {require(card,'type').upper()}    |    ALIGNMENT: {require(card,'alignment').upper()}    |    RARITY: {card['rarity'].upper()}"
+    tface2 = fit_font(d, tl, "caps", R - L - 20, 30, 17, weight=600)
+    draw_tracked(d, (0, PANEL_TOP + 26), tl, tface2, (232, 220, 192), tracking=2, anchor_center_x=cx)
+    gold_rule(d, L, PANEL_TOP + 74, R, 3)
+
+    # --- abilities: three medallion columns ---------------------------------
+    ab_top = PANEL_TOP + 92
+    ab_bot = ab_top + 452
+    plate(canvas, Image, ImageDraw, (L, ab_top, R, ab_bot), radius=14, fill=PLATE_BG2, alpha=246)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    lab = font("caps", 24, 700)
+    lw = d.textlength("ABILITIES", font=lab)
+    d.rectangle((cx - lw / 2 - 22, ab_top - 13, cx + lw / 2 + 22, ab_top + 13), fill=(20, 17, 22, 255))
+    draw_tracked(d, (0, ab_top - 12), "ABILITIES", lab, GOLD_HI, tracking=6, anchor_center_x=cx)
+
+    abilities = sorted(require(card, "abilities"), key=lambda a: ABILITY_KINDS.index(a["kind"]))
+    colw = (R - L) // 3
+    for i, ab in enumerate(abilities):
+        x0 = L + i * colw
+        ccx = x0 + colw // 2
+        if i:
+            d.line((x0, ab_top + 26, x0, ab_bot - 26), fill=GOLD_DEEP + (150,), width=2)
+        d.ellipse((ccx - 46, ab_top + 34, ccx + 46, ab_top + 126), fill=(12, 10, 14, 255),
+                  outline=GOLD_DEEP, width=5)
+        d.ellipse((ccx - 36, ab_top + 44, ccx + 36, ab_top + 116), outline=GOLD + (150,), width=2)
+        icon_glyph(d, ccx, ab_top + 80, 26, ABILITY_ICONS[ab["kind"]], GOLD_HI)
+
+        nface = fit_font(d, ab["name"].upper(), "caps", colw - 44, 30, 18, weight=700)
+        draw_tracked(d, (0, ab_top + 148), ab["name"].upper(), nface, GOLD_HI, tracking=2,
+                     anchor_center_x=ccx)
+
+        pbg, pfg = ABILITY_PILL[ab["kind"]]
+        ptxt = ab["kind"].upper()
+        pf = font("caps", 19, 700)
+        pw = d.textlength(ptxt, font=pf) + 26
+        d.rounded_rectangle((ccx - pw / 2, ab_top + 186, ccx + pw / 2, ab_top + 220), radius=8,
+                            fill=pbg + (255,), outline=pfg + (170,), width=2)
+        d.text((ccx, ab_top + 191), ptxt, font=pf, fill=pfg, anchor="ma")
+
+        bface = font("body", 27, 450)
+        ty = ab_top + 240
+        for line in wrap(d, ab["text"], bface, colw - 46):
+            d.text((ccx, ty), line, font=bface, fill=(222, 214, 200), anchor="ma")
+            ty += 33
+
+    # --- weakness -----------------------------------------------------------
+    wk_top = ab_bot + 20
+    wk_bot = wk_top + 84
+    plate(canvas, Image, ImageDraw, (L, wk_top, R, wk_bot), radius=12, fill=PLATE_BG2, alpha=246)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    draw_tracked(d, (L + 26, wk_top + 30), "WEAKNESS", font("caps", 24, 700), GOLD_HI, tracking=5)
+    d.line((L + 214, wk_top + 22, L + 214, wk_bot - 22), fill=GOLD_DEEP + (200,), width=2)
+    wface = fit_font(d, card["weakness"], "body", R - L - 270, 28, 18, weight=450)
+    d.text((L + 244, wk_top + 28), require(card, "weakness"), font=wface, fill=(226, 218, 204))
+
+    # --- flavor + market lore ----------------------------------------------
+    fl_top = wk_bot + 20
+    fl_bot = FULL_H - BORDER_BAND - 140
+    split = L + int((R - L) * 0.38)
+    plate(canvas, Image, ImageDraw, (L, fl_top, split - 10, fl_bot), radius=12, fill=PLATE_BG2, alpha=246)
+    plate(canvas, Image, ImageDraw, (split + 10, fl_top, R, fl_bot), radius=12, fill=PLATE_BG2, alpha=246)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    draw_tracked(d, (L + 24, fl_top + 20), "FLAVOR TEXT", font("caps", 22, 700), GOLD_HI, tracking=4)
+    fface = font("italic", 30, 500)
+    fy = fl_top + 62
+    for line in wrap(d, f"“{require(card,'flavor')}”", fface, split - L - 50):
+        d.text((L + 24, fy), line, font=fface, fill=(238, 228, 208))
+        fy += 38
+
+    draw_tracked(d, (split + 34, fl_top + 20), "MARKET LORE", font("caps", 22, 700), GOLD_HI, tracking=4)
+    lface = font("body", 26, 450)
+    ly = fl_top + 62
+    for line in wrap(d, require(card, "lore"), lface, R - split - 60):
+        d.text((split + 34, ly), line, font=lface, fill=(224, 216, 202))
+        ly += 32
+
+    # --- footer -------------------------------------------------------------
+    ft_top = fl_bot + 16
+    ft_bot = FULL_H - BORDER_BAND - 22
+    plate(canvas, Image, ImageDraw, (L, ft_top, R, ft_bot), radius=12, fill=PLATE_BG, alpha=250)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    draw_tracked(d, (L + 26, ft_top + 16), "SUPPLY", font("caps", 20, 600), (188, 176, 156), tracking=4)
+    sup = card.get("supply") or manifest["set"]["supply_default"]
+    d.text((L + 26, ft_top + 48), sup.upper(), font=font("caps", 26, 700), fill=GOLD_HI)
+    roundel(canvas, Image, ImageDraw, cx, (ft_top + ft_bot) // 2, 44,
+            require(card, "name").replace("The ", "")[:1].upper(), font("display", 42))
+    d = ImageDraw.Draw(canvas, "RGBA")
+    d.text((R - 26, ft_top + 14), manifest["set"]["series"].upper(),
+           font=font("caps", 24, 600), fill=(212, 198, 170), anchor="ra")
+    gold_text(canvas, Image, ImageDraw, f"CARD #{card['num']:03d}", font("display", 40),
+              R - 130, ft_top + 46, stroke=3, shadow=3)
+
+    return canvas.convert("RGB")
+
+
+def compose_back(card: dict, serial: int):
+    Image, ImageDraw, ImageFilter, ImageFont, np = _imaging()
+    canvas, style = card_base(Image, ImageDraw, np, card, card["num"] + 1000)
+    manifest = load_manifest()
+    cx = FULL_W // 2
+    L, R = BORDER_BAND + 26, FULL_W - BORDER_BAND - 26
+
+    # Art stays as a top plate; the rest is the lore field.
+    ART_BOT = 1010
+    d = ImageDraw.Draw(canvas, "RGBA")
+    d.rectangle((BORDER_BAND, ART_BOT, FULL_W - BORDER_BAND, FULL_H - BORDER_BAND), fill=(7, 6, 9, 255))
+    scrim(canvas, Image, ImageDraw, (BORDER_BAND, ART_BOT - 200, FULL_W - BORDER_BAND, ART_BOT), 0, 252)
+    scrim(canvas, Image, ImageDraw, (BORDER_BAND, BORDER_BAND, FULL_W - BORDER_BAND, BORDER_BAND + 380), 244, 0)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    gold_rule(d, BORDER_BAND, ART_BOT, FULL_W - BORDER_BAND, 5)
+
+    # corner ornaments
+    for ox, oy in ((L, BORDER_BAND + 18), (R - 54, BORDER_BAND + 18),
+                   (L, FULL_H - BORDER_BAND - 72), (R - 54, FULL_H - BORDER_BAND - 72)):
+        d.rectangle((ox, oy, ox + 54, oy + 54), outline=GOLD_DEEP, width=4)
+        d.rectangle((ox + 12, oy + 12, ox + 42, oy + 42), outline=GOLD + (170,), width=2)
+
+    draw_tracked(d, (0, BORDER_BAND + 34), manifest["set"]["title"].upper(),
+                 font("caps", 28, 600), (226, 206, 168), tracking=8, anchor_center_x=cx)
+
+    title = require(card, "name").upper()
+    tface = fit_font(d, title, "display", R - L - 160, 116, 52)
+    gold_text(canvas, Image, ImageDraw, title, tface, cx, BORDER_BAND + 78)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    sub = require(card, "subtitle").upper()
+    sface = fit_font(d, sub, "caps", R - L - 220, 34, 20, weight=600)
+    draw_tracked(d, (0, BORDER_BAND + 220), sub, sface, (232, 214, 176), tracking=6, anchor_center_x=cx)
+
+    # --- lore on parchment --------------------------------------------------
+    y = ART_BOT + 28
+    lface = font("body", 32, 450)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    lines = wrap(d, require(card, "lore"), lface, R - L - 76)
+    lore_h = len(lines) * 42 + 52
+    parch = Image.new("RGBA", (R - L, lore_h), (0, 0, 0, 0))
+    pd = ImageDraw.Draw(parch)
+    pd.rounded_rectangle((0, 0, R - L - 1, lore_h - 1), radius=10, fill=(214, 202, 176, 246))
+    canvas.alpha_composite(parch, (L, y))
+    d = ImageDraw.Draw(canvas, "RGBA")
+    d.rounded_rectangle((L, y, R, y + lore_h), radius=10, outline=GOLD_DEEP, width=4)
+    ly = y + 26
+    for line in lines:
+        d.text((cx, ly), line, font=lface, fill=(28, 24, 20), anchor="ma")
+        ly += 42
+    y += lore_h + 30
+
+    # --- traits -------------------------------------------------------------
+    traits = require(card, "traits")
+    head = font("caps", 26, 700)
+    tfaceb = font("body", 28, 450)
+    label_w = max(d.textlength(t["label"].upper(), font=head) for t in traits)
+    col = int(label_w) + 96
+    rows = [(t["label"].upper(), wrap(d, t["text"], tfaceb, R - L - col - 60)) for t in traits]
+    row_h = 52
+    tr_h = sum(row_h + max(len(r[1]) - 1, 0) * 34 for r in rows) + 74
+    plate(canvas, Image, ImageDraw, (L, y, R, y + tr_h), radius=12, fill=PLATE_BG2, alpha=246)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    lw = d.textlength("TRAITS", font=head)
+    d.rectangle((cx - lw / 2 - 22, y - 14, cx + lw / 2 + 22, y + 14), fill=(20, 17, 22, 255))
+    draw_tracked(d, (0, y - 13), "TRAITS", head, GOLD_HI, tracking=6, anchor_center_x=cx)
+    ty = y + 52
+    for i, (label, lines2) in enumerate(rows):
+        icon_glyph(d, L + 40, ty + 14, 16, STAT_ICONS[i % len(STAT_ICONS)],
+                   CHIP_COLORS[i % len(CHIP_COLORS)][1])
+        d.text((L + 74, ty), label, font=head, fill=GOLD_HI)
+        d.text((L + col - 44, ty + 1), "»", font=font("body", 30, 600), fill=GOLD)
+        for j, line in enumerate(lines2):
+            d.text((L + col, ty + j * 34), line, font=tfaceb, fill=(224, 216, 202))
+        ty += row_h + max(len(lines2) - 1, 0) * 34
+    y += tr_h + 26
+
+    # --- flavor + serial ----------------------------------------------------
+    flavor = f"“{require(card, 'flavor')}”"
+    fface = fit_font(d, flavor, "italic", R - L - 80, 40, 24, weight=500)
+    fw = d.textlength(flavor, font=fface)
+    d.text((cx - fw / 2, y), flavor, font=fface, fill=(240, 226, 198))
+    y += 66
+
+    gold_text(canvas, Image, ImageDraw, f"#{card['num']:03d} / 100", font("display", 52), cx, y)
+    d = ImageDraw.Draw(canvas, "RGBA")
+    foot = f"{manifest['set']['series'].upper()}  •  {serial:03d}/100"
+    draw_tracked(d, (0, FULL_H - BORDER_BAND - 66), foot, font("caps", 26, 600),
+                 (212, 198, 170), tracking=5, anchor_center_x=cx)
+    return canvas.convert("RGB")
+
 # prep / proof / foil
 # ---------------------------------------------------------------------------
 

@@ -5,7 +5,8 @@
     "code": "CLS-GEN",
     "total_cards": 100,
     "editions": 100,
-    "serial_format": "{serial:03d}/100"
+    "serial_format": "{serial:03d}/100",
+    "supply_default": "Limited — but legendary"
   },
   "cards": [
     {
