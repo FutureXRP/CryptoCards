@@ -389,15 +389,16 @@ def opal_band(Image, np, seed: int, strength: float):
     rng = np.random.default_rng(seed)
     ph = rng.uniform(0.0, 2.0 * math.pi, size=3).astype(np.float32)
     r = np.sqrt((u - 0.5) ** 2 + (v - 0.5) ** 2)
-    n = (np.sin(u * 34.0 + v * 47.0 + ph[0])
-         + np.sin((u - v) * 61.0 + ph[1]) * 0.6
-         + np.sin(r * 88.0 + ph[2]) * 0.8)
-    hue = ((n * 0.16) % 1.0).astype(np.float32)
+    n = (np.sin(u * 150.0 + v * 197.0 + ph[0])
+         + np.sin((u - v) * 268.0 + ph[1]) * 0.6
+         + np.sin(r * 410.0 + ph[2]) * 0.8)
+    hue = ((n * 0.17) % 1.0).astype(np.float32)
 
     # Low saturation + near-white value reads as pearlescent laminate; a high
     # saturation version prints as tie-dye rather than foil.
-    sat = np.full_like(hue, 0.16 + 0.12 * strength)
-    val = np.full_like(hue, 1.0)
+    sat = np.full_like(hue, 0.30 + 0.22 * strength)
+    # Fine luminance break-up so the band glitters instead of reading as marble.
+    val = (0.72 + 0.28 * (0.5 + 0.5 * np.sin(u * 210.0 + v * 173.0 + ph[1]))).astype(np.float32)
     i = np.floor(hue * 6.0)
     f = hue * 6.0 - i
     p = val * (1.0 - sat)
@@ -409,9 +410,10 @@ def opal_band(Image, np, seed: int, strength: float):
     bb = np.select([i == 0, i == 1, i == 2, i == 3, i == 4, i == 5], [p, p, t, val, val, q])
     out = np.stack([rr, gg, bb], axis=-1) * 255.0
 
-    out = out * 0.80 + 255.0 * 0.20            # lift toward white foil
+    out = out * 0.88 + 255.0 * 0.12            # lift toward white foil
     sparkle = rng.random((h, w)).astype(np.float32)
-    out = np.where((sparkle > 0.988)[..., None], 255.0, out)
+    out = np.where((sparkle > 0.972)[..., None], 255.0, out)
+    out = np.where((sparkle < 0.010)[..., None], out * 0.45, out)
     return Image.fromarray(np.clip(out, 0, 255).astype("uint8"), "RGB")
 
 
