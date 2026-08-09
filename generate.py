@@ -1468,6 +1468,65 @@ def cmd_prompts(args) -> None:
     print(f"prompts   wrote {written} card prompt(s) to {PROMPT_CARD_DIR.relative_to(ROOT)}")
 
 
+def write_manifest(cards: list[dict]) -> None:
+    """Rewrite the manifest, preserving the document wrapper and formatting."""
+    doc = json.loads(MANIFEST_PATH.read_text())
+    if isinstance(doc, dict):
+        doc["cards"] = cards
+    else:
+        doc = cards
+    MANIFEST_PATH.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n")
+
+
+def cmd_ingest(args) -> None:
+    """QC a finished art file and approve it into art/approved/ for one card.
+
+    Checks the things a human eye cannot check quickly (aspect, resolution,
+    colour mode) and refuses on failure. It cannot check for garbled lettering
+    or composition — that is QC gate 2 and stays a human job.
+    """
+    card = get_card(args.card)
+    src = Path(args.inp)
+    if not src.exists():
+        raise PipelineError(f"no such art file: {src}")
+
+    img = Image.open(src)
+    w, h = img.size
+    ratio = w / h
+    target = ART_W / ART_H
+    if abs(ratio - target) > 0.01:
+        raise PipelineError(
+            f"{src} is {w}x{h} (ratio {ratio:.3f}); card art must be 2:3 "
+            f"(ratio {target:.3f}). Reframe it before approving."
+        )
+    if w < ART_W or h < ART_H:
+        raise PipelineError(
+            f"{src} is {w}x{h}, below the {ART_W}x{ART_H} minimum. Upscale it "
+            "before approving — the pipeline will not invent detail."
+        )
+
+    ART_APPROVED.mkdir(parents=True, exist_ok=True)
+    dest = ART_APPROVED / f"{card_stem(card)}_front.png"
+    img.convert("RGB").save(dest, dpi=(DPI, DPI))
+    print(f"ingest    {src} -> {dest.relative_to(ROOT)}  ({w}x{h})")
+
+    if card.get("art_front") != str(dest.relative_to(ROOT)):
+        raise PipelineError(
+            f"card {card['num']:03d} declares art_front={card.get('art_front')!r} "
+            f"but ingest wrote {dest.relative_to(ROOT)}. Fix the manifest."
+        )
+
+    cards = load_manifest()
+    for entry in cards:
+        if entry["num"] == card["num"]:
+            previous = entry["status"]
+            entry["status"] = args.status
+    write_manifest(cards)
+    print(f"ingest    card {card['num']:03d} {card['name']}: "
+          f"status {previous} -> {args.status}")
+    cmd_status(args)
+
+
 def cmd_status(_args) -> None:
     cards = sorted(load_manifest(), key=lambda c: c["num"])
     counts: dict[str, int] = {s: 0 for s in STATUS_ORDER}
@@ -1602,6 +1661,12 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("prompts", help="manifest -> prompts/cards/*.md")
     p.add_argument("--card", type=int, default=None)
     p.set_defaults(func=cmd_prompts)
+
+    p = sub.add_parser("ingest", help="QC and approve finished art for one card")
+    p.add_argument("--card", type=int, required=True)
+    p.add_argument("--in", dest="inp", required=True)
+    p.add_argument("--status", default="art_approved", choices=STATUS_ORDER)
+    p.set_defaults(func=cmd_ingest)
 
     p = sub.add_parser("status", help="rewrite STATUS.md from the manifest")
     p.set_defaults(func=cmd_status)
