@@ -141,3 +141,50 @@ python generate.py validate                                         # manifest l
 ## Definition of done
 
 100/100 cards `print_ready`; `GenesisSeries_PRINT_singles.pdf` regenerates deterministically from the repo in one command (`python generate.py all`); PRINT_SPEC.md current; a stranger with this repo and no context could reprint the entire set identically.
+
+---
+
+## Operating notes (added in production)
+
+### Environment
+
+This repo is developed from Claude Code on the web. That container has **no
+PyPI and no apt access**, so Pillow / numpy / reportlab cannot be installed
+locally. Consequences:
+
+- `python generate.py validate` runs on the standard library alone and works
+  everywhere. Run it after every manifest edit.
+- Every **image/PDF** command needs the dependencies in `requirements.txt`.
+  They run on any normal machine (`pip install -r requirements.txt`), and in
+  the Higgsfield sandbox, which has Pillow + numpy + ImageMagick preinstalled.
+- Sandbox render loop: push the branch, then in the sandbox
+  `git clone --depth 1 -b <branch> https://github.com/FutureXRP/CryptoCards.git`
+  and run `generate.py` there. The repo is public, so no credentials are
+  involved. To look at a result, request a `media_upload` URL, `PUT` the PNG
+  from the sandbox, and fetch it from the returned CDN URL.
+
+### Fonts
+
+`fonts/` holds Cinzel, Cinzel Decorative and EB Garamond (variable TTFs) with
+their OFL licences. Google Fonts is unreachable from the container; they were
+pulled from the `google/fonts` GitHub mirror. Do not delete them — `compose`
+fails loudly without them.
+
+### Art generation
+
+Higgsfield, `nano_banana_2` (the batch endpoint may serve `nano_banana_flash`),
+`2:3`, `2k` → 1696×2528, 2 credits per image. The prompt is assembled per
+`prompts/README.md`. Generate 2 variants, keep the one with the calmest edges.
+
+The paintings come back with a painted canvas edge; `place_art` trims 2.5% off
+each side before fitting so it never reads as a second frame.
+
+### Frame design decisions
+
+- The holo tint is a **narrow-gamut warm gain**, not a spectrum. All three
+  channels share one phase so the hue can only travel gold ↔ bronze. An early
+  full-spectrum version printed as plastic candy stripe.
+- The abilities block **measures itself and shrinks** before drawing, so text
+  can never cross into the footer regardless of how long the copy is.
+- Ability markers and the back sigil are **drawn geometry**, not glyphs —
+  Cinzel has no ◆ ○ ✦ and rendered them as tofu.

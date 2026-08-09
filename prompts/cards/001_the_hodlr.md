@@ -1,0 +1,8 @@
+# 001 — The HODLR  (mythic / archetype)
+
+Scene beats from lore: never sold; the throne grew frost; the coffer stayed shut.
+
+> Museum-quality oil painting on aged canvas, dark epic fantasy meets financial mythology. A lone hooded ascetic seated in absolute stillness on a throne of frozen black stone, head bowed, face lost entirely in shadow beneath a heavy cowl. Robes of layered parchment and dark wool weighted with oxidised bronze fittings; a single heavy iron chain across the chest; gloved hands folded around a small sealed bronze coffer resting in the lap. Hoarfrost creeping up the stone, drifting ash and snow suspended in volumetric haze. Behind the figure looms a vast circular engraved gold rosette seal, oxidised, cracked, half-swallowed by darkness. Palette strictly black, bronze, oxidised gold, ember orange and bone white, with one narrow cold blue rim light separating the silhouette from the dark and a single hard warm key light raking from the upper left. Painterly visible brushwork, impasto in the highlights, deep chiaroscuro falloff, aged varnish, fine canvas grain, gilt flaking at the extreme edges. Centred iconic frontal composition, subject occupying the upper two thirds of the frame, the lower third falling away into quiet near-black empty shadow with no detail. The outermost edges of the image are dark, uniform and undisturbed. Painterly, not photorealistic, not 3D render. Absolutely no text, no letters, no words, no numerals, no runes, no signature, no watermark, no logos or brand marks anywhere in the image.
+
+Approved: variant A of 2. Chosen for the calmer outer edge — variant B had a
+heavy painted canvas frame that fought the card's own border.

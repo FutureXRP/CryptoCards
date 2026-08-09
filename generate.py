@@ -405,6 +405,10 @@ def place_art(Image, art_path: Path, box: tuple[int, int, int, int]):
     if not art_path.exists():
         raise PipelineError(f"missing art file: {art_path}")
     art = Image.open(art_path).convert("RGB")
+    # The paintings carry a painted canvas edge (dark rim + gilt flaking).
+    # Trim it before fitting, or it reads as a second frame inside our own.
+    inset_x, inset_y = int(art.width * 0.025), int(art.height * 0.025)
+    art = art.crop((inset_x, inset_y, art.width - inset_x, art.height - inset_y))
     bw, bh = box[2] - box[0], box[3] - box[1]
     scale = max(bw / art.width, bh / art.height)
     new = (max(int(math.ceil(art.width * scale)), bw), max(int(math.ceil(art.height * scale)), bh))
@@ -549,7 +553,7 @@ def compose_front(card: dict, serial: int) -> "object":
     # --- abilities ---------------------------------------------------------
     abilities = sorted(require(card, "abilities"), key=lambda a: ABILITY_KINDS.index(a["kind"]))
     ay = sy + plate_h + 24
-    ab_bottom = SAFE_BOX[3] - 88
+    ab_bottom = SAFE_BOX[3] - 104
     avail = ab_bottom - ay
 
     # Fit before drawing: shrink type until the block provably clears the footer.
@@ -582,7 +586,7 @@ def compose_front(card: dict, serial: int) -> "object":
         y += gap
 
     # --- footer ------------------------------------------------------------
-    foot_y = SAFE_BOX[3] - 62
+    foot_y = SAFE_BOX[3] - 76
     foot_face = font("caps", 34, 600)
     draw.text((safe_l + 4, foot_y), f"{card['num']:03d}/100", font=foot_face, fill=INK_DIM)
     code = load_manifest()["set"]["code"]
@@ -681,7 +685,7 @@ def compose_back(card: dict, serial: int) -> "object":
         draw_sigil(draw, cx, y + room // 2, radius, style)
 
     # --- footer ------------------------------------------------------------
-    foot_y = SAFE_BOX[3] - 62
+    foot_y = SAFE_BOX[3] - 76
     foot_face = font("caps", 34, 600)
     manifest = load_manifest()
     draw.text((safe_l + 4, foot_y), f"{card['num']:03d}/100", font=foot_face, fill=INK_DIM)
