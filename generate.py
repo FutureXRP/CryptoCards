@@ -40,7 +40,9 @@ import argparse
 import json
 import math
 import re
+import shutil
 import sys
+import urllib.request
 from pathlib import Path
 
 import numpy as np
@@ -1478,6 +1480,30 @@ def write_manifest(cards: list[dict]) -> None:
     MANIFEST_PATH.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n")
 
 
+def download_art(url: str, dest: Path) -> Path:
+    """Fetch generated art straight into art/incoming/. No manual handoff."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    request = urllib.request.Request(url, headers={"User-Agent": "crypto-lore-pipeline"})
+    try:
+        with urllib.request.urlopen(request, timeout=180) as response:
+            if getattr(response, "status", 200) != 200:
+                raise PipelineError(f"{url} returned HTTP {response.status}")
+            with open(dest, "wb") as handle:
+                shutil.copyfileobj(response, handle)
+    except PipelineError:
+        raise
+    except Exception as exc:  # network, TLS, proxy policy
+        dest.unlink(missing_ok=True)
+        raise PipelineError(
+            f"could not fetch {url}: {exc}\n"
+            "If the session's network policy blocks the host, set the cloud "
+            "environment's Network access to Custom and add the host to Allowed "
+            "domains (keeping the default package-manager list), then start a new "
+            "session - a running session keeps the policy it started with."
+        ) from exc
+    return dest
+
+
 def cmd_ingest(args) -> None:
     """QC a finished art file and approve it into art/approved/ for one card.
 
@@ -1486,11 +1512,19 @@ def cmd_ingest(args) -> None:
     or composition — that is QC gate 2 and stays a human job.
     """
     card = get_card(args.card)
-    src = Path(args.inp)
+    if args.url:
+        src = download_art(args.url, ART_INCOMING / f"{card_stem(card)}_front.png")
+        print(f"fetch     {args.url} -> {src.relative_to(ROOT)}")
+    else:
+        src = Path(args.inp)
     if not src.exists():
         raise PipelineError(f"no such art file: {src}")
 
-    img = Image.open(src)
+    try:
+        img = Image.open(src)
+        img.load()
+    except Exception as exc:
+        raise PipelineError(f"{src} is not a readable image: {exc}") from exc
     w, h = img.size
     ratio = w / h
     target = ART_W / ART_H
@@ -1664,7 +1698,9 @@ def main(argv: list[str] | None = None) -> int:
 
     p = sub.add_parser("ingest", help="QC and approve finished art for one card")
     p.add_argument("--card", type=int, required=True)
-    p.add_argument("--in", dest="inp", required=True)
+    src = p.add_mutually_exclusive_group(required=True)
+    src.add_argument("--in", dest="inp", help="path to a finished art file")
+    src.add_argument("--url", help="download the art directly from a generator URL")
     p.add_argument("--status", default="art_approved", choices=STATUS_ORDER)
     p.set_defaults(func=cmd_ingest)
 

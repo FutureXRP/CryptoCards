@@ -63,6 +63,7 @@ explicitly ask for a stamped placeholder.
 | `templates` | Synthesizes the 10 blank frames (front + back × 5 tiers) and their foil separations |
 | `prompts` | Manifest + templates → `prompts/cards/*.md` |
 | `artgen` | Deterministic placeholder art, stamped NOT FOR PRINT |
+| `ingest --card N` | QC finished art (`--in PATH` or `--url URL`) and approve it into `art/approved/` |
 | `compose --card N` | Manifest → finished front and back, plus exact foil separations |
 | `prep --in PATH` | Finished art → full-bleed canvas (`fit-trim` or `cover`) |
 | `proof --in PATH` | Adds red trim / dashed blue safe-zone overlay |
@@ -71,9 +72,33 @@ explicitly ask for a stamped placeholder.
 | `all` | validate → templates → compose + proof everything → PDFs |
 | `status` | Rewrites `STATUS.md` from the manifest |
 
+## The art loop
+
+Per card, once its image has been generated from `prompts/cards/NNN_slug.md`:
+
+```bash
+python generate.py ingest  --card 1 --url https://…/generated.png   # or --in PATH
+python generate.py compose --card 1 --serial 1
+python generate.py proof   --in output/print/001_the_hodlr_front_s001.png
+```
+
+`ingest` refuses art that is not 2:3 or is smaller than 1024×1536, writes it
+under the canonical name, and advances the card's status. Nothing is renamed,
+moved, or resized by hand.
+
+### Network access for `--url`
+
+`--url` needs the image host reachable from the session. Cloud sessions default
+to **Trusted** network access, which allows package registries and GitHub and
+nothing else — an image CDN is blocked, and the session will say so rather than
+half-finish. To fix it, edit the cloud environment at
+[claude.ai/code](https://claude.ai/code): set **Network access** to **Custom**,
+add the CDN host to **Allowed domains** (a leading `*.` matches subdomains),
+leave *Also include default list of common package managers* checked, and start
+a new session — a running session keeps the policy it started with.
+
 ## State of the set
 
 All 100 cards are written, validated, and prompted — `status: art_prompted`.
 The pipeline runs end to end and produces both PDFs. What remains is art:
-generate each card's 1024×1536 image from its prompt in `prompts/cards/`, QC it,
-move it to `art/approved/NNN_slug_front.png`, and advance the card's status.
+generate each card's image from its prompt, then run the loop above.

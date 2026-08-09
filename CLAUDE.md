@@ -109,7 +109,9 @@ python generate.py all                                              # batch ever
 python generate.py validate                                         # manifest lint: schema, counts, duplicates
 ```
 
-Supporting commands: `templates` (synthesize the blank frames), `artgen` (deterministic placeholder art, never printable), `prompts` (manifest → `prompts/cards/*.md`), `status` (rewrite STATUS.md).
+Supporting commands: `templates` (synthesize the blank frames), `artgen` (deterministic placeholder art, never printable), `prompts` (manifest → `prompts/cards/*.md`), `ingest` (QC and approve finished art from a path or URL), `status` (rewrite STATUS.md).
+
+`ingest --card N [--in PATH | --url URL]` is the only supported way art enters `art/approved/`: it enforces 2:3 aspect and the 1024×1536 minimum, writes the canonical `NNN_slug_front.png` name, cross-checks it against the card's declared `art_front`, and advances `status`. It refuses rather than repairs — reframing and upscaling are decisions, not defaults. `--url` requires the image host to be allowed by the cloud environment's network policy (see README).
 
 `compose` and `all` accept `--allow-placeholder`, which composes against stamped stand-in art when no approved art exists. Placeholder output is proof-only and is stamped PLACEHOLDER ART — NOT FOR PRINT on the card face; it can never reach `print_ready` because gate 2 fails on sight.
 
