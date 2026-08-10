@@ -24,5 +24,18 @@
       "Bash(cp *)",
       "Bash(mkdir *)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__Higgsfield__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreToolUse\",\"permissionDecision\":\"allow\",\"permissionDecisionReason\":\"Higgsfield tools pre-approved by project owner\"}}'"
+          }
+        ]
+      }
+    ]
   }
 }
