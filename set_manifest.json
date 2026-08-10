@@ -303,7 +303,7 @@
       "subtitle": "Transaction Torment",
       "rarity": "epic",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Specter",
       "alignment": "Chaos",
       "stats": [
@@ -383,7 +383,7 @@
       "subtitle": "Leverage Addict",
       "rarity": "epic",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Gambler",
       "alignment": "Chaos",
       "stats": [
@@ -455,7 +455,7 @@
       "subtitle": "Unbreakable Conviction",
       "rarity": "epic",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Believer",
       "alignment": "Order",
       "stats": [
@@ -663,7 +663,7 @@
       "subtitle": "Wrecked in One Candle",
       "rarity": "epic",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Cautionary Ghost",
       "alignment": "Chaos",
       "stats": [
@@ -919,7 +919,7 @@
       "subtitle": "Architect of Freedom",
       "rarity": "epic",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Revolutionary",
       "alignment": "Order",
       "stats": [
@@ -1135,7 +1135,7 @@
       "subtitle": "Twelve Sacred Words",
       "rarity": "epic",
       "category": "relic",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Relic",
       "alignment": "Order",
       "stats": [
@@ -1431,7 +1431,7 @@
       "subtitle": "Minutes of Terror",
       "rarity": "epic",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Cataclysm",
       "alignment": "Chaos",
       "stats": [
@@ -1543,7 +1543,7 @@
       "subtitle": "The Domino Effect",
       "rarity": "epic",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Chain Reaction",
       "alignment": "Entropy",
       "stats": [
@@ -2023,7 +2023,7 @@
       "subtitle": "Empire to Ashes",
       "rarity": "epic",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Reckoning",
       "alignment": "Entropy",
       "stats": [
@@ -2151,7 +2151,7 @@
       "subtitle": "Predator in the Mempool",
       "rarity": "epic",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Automaton",
       "alignment": "Chaos",
       "stats": [
@@ -2303,7 +2303,7 @@
       "subtitle": "Code Without Mercy",
       "rarity": "epic",
       "category": "relic",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Covenant",
       "alignment": "Order",
       "stats": [
@@ -2447,7 +2447,7 @@
       "subtitle": "Forged by Energy",
       "rarity": "epic",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Doctrine",
       "alignment": "Order",
       "stats": [
@@ -2823,7 +2823,7 @@
       "subtitle": "Breaker of Keys",
       "rarity": "epic",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Omen",
       "alignment": "Entropy",
       "stats": [
@@ -2903,7 +2903,7 @@
       "subtitle": "This Time Is Different",
       "rarity": "epic",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Mirage",
       "alignment": "Chaos",
       "stats": [
