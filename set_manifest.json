@@ -303,7 +303,71 @@
       "subtitle": "Transaction Torment",
       "rarity": "epic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Specter",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Persistence",
+          "value": 98
+        },
+        {
+          "label": "Appetite",
+          "value": 93
+        },
+        {
+          "label": "Timing",
+          "value": 95
+        },
+        {
+          "label": "Predictability",
+          "value": 11
+        },
+        {
+          "label": "Mercy",
+          "value": 2
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Toll the Gate",
+          "kind": "active",
+          "text": "Appears at the moment of greatest urgency and names its price."
+        },
+        {
+          "name": "Never Refunded",
+          "kind": "passive",
+          "text": "What it takes, it keeps — even when the transaction fails."
+        },
+        {
+          "name": "Congestion",
+          "kind": "ultimate",
+          "text": "Once per frenzy, multiplies every toll a hundredfold."
+        }
+      ],
+      "weakness": "Quiet nights. An empty road starves it.",
+      "lore": "It waits at the narrow bridge every transaction must cross, palm open, price unwritten. In calm hours it takes pennies and is ignored. In the frenzy it takes fortunes and is begged. Either way, it is paid.",
+      "traits": [
+        {
+          "label": "Toll Keeper",
+          "text": "Every crossing has its price."
+        },
+        {
+          "label": "Surge Born",
+          "text": "Grows fat on crowded blocks."
+        },
+        {
+          "label": "Unrefunded",
+          "text": "Failure is still billed."
+        },
+        {
+          "label": "Patient Specter",
+          "text": "The road always fills again."
+        }
+      ],
+      "flavor": "Urgency has a price. It sets it.",
+      "art_front": "art/approved/005_the_gas_fee_ghost_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 6,
@@ -319,7 +383,71 @@
       "subtitle": "Leverage Addict",
       "rarity": "epic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Gambler",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Risk Appetite",
+          "value": 100
+        },
+        {
+          "label": "Speed",
+          "value": 97
+        },
+        {
+          "label": "Conviction",
+          "value": 88
+        },
+        {
+          "label": "Survival",
+          "value": 63
+        },
+        {
+          "label": "Timing",
+          "value": 41
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Full Send",
+          "kind": "active",
+          "text": "Enters any position at maximum size, ignoring all risk signals."
+        },
+        {
+          "name": "Shrug It Off",
+          "kind": "passive",
+          "text": "Losses do not reduce conviction. Ever."
+        },
+        {
+          "name": "Generational Trade",
+          "kind": "ultimate",
+          "text": "Once per cycle, turns pocket change into legend."
+        }
+      ],
+      "weakness": "Risk management. All of it.",
+      "lore": "He enters every position at maximum size and calls it conviction. The chart is a coin flip wearing indicators, and he flips it hourly. Twice he has turned lunch money into legend; the other thousand times are not discussed. He would not change a single trade.",
+      "traits": [
+        {
+          "label": "Full Size",
+          "text": "No position too large, no odds too long."
+        },
+        {
+          "label": "No Memory",
+          "text": "Losses evaporate by morning."
+        },
+        {
+          "label": "Casino Blood",
+          "text": "Every market is a table."
+        },
+        {
+          "label": "One More",
+          "text": "The next trade fixes everything."
+        }
+      ],
+      "flavor": "Scared money makes none.",
+      "art_front": "art/approved/007_the_degen_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 8,
@@ -327,7 +455,71 @@
       "subtitle": "Unbreakable Conviction",
       "rarity": "epic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Believer",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Grip",
+          "value": 100
+        },
+        {
+          "label": "Conviction",
+          "value": 97
+        },
+        {
+          "label": "Pain Threshold",
+          "value": 96
+        },
+        {
+          "label": "Flexibility",
+          "value": 4
+        },
+        {
+          "label": "Exit Speed",
+          "value": 1
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Tighten Grip",
+          "kind": "active",
+          "text": "The deeper the drawdown, the harder the hold."
+        },
+        {
+          "name": "Unshakeable",
+          "kind": "passive",
+          "text": "No dip, no crash, no headline loosens the hands."
+        },
+        {
+          "name": "Vindication",
+          "kind": "ultimate",
+          "text": "Once per cycle, holds through the bottom and greets the peak."
+        }
+      ],
+      "weakness": "Knowing when the thesis is actually dead.",
+      "lore": "The hands were ordinary once, soft as anyone's. Then came the first crash, and the second, and something in the grip crystallised. Now the fingers do not open. Some say they cannot; the hands say they will not.",
+      "traits": [
+        {
+          "label": "Crystal Grip",
+          "text": "Pressure only hardens them."
+        },
+        {
+          "label": "Pain Immune",
+          "text": "Drawdowns read as discounts."
+        },
+        {
+          "label": "No Exit",
+          "text": "Selling is not in the vocabulary."
+        },
+        {
+          "label": "Cycle Tested",
+          "text": "Forged in three crashes."
+        }
+      ],
+      "flavor": "The hands remember what the mind forgets.",
+      "art_front": "art/approved/008_the_diamond_hands_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 9,
@@ -471,7 +663,71 @@
       "subtitle": "Wrecked in One Candle",
       "rarity": "epic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Cautionary Ghost",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Leverage",
+          "value": 100
+        },
+        {
+          "label": "Confidence",
+          "value": 99
+        },
+        {
+          "label": "Legacy",
+          "value": 77
+        },
+        {
+          "label": "Timing",
+          "value": 8
+        },
+        {
+          "label": "Margin",
+          "value": 3
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Max Leverage",
+          "kind": "active",
+          "text": "Borrows until the position dwarfs the collateral."
+        },
+        {
+          "name": "One Candle",
+          "kind": "passive",
+          "text": "A single wick is always enough."
+        },
+        {
+          "name": "Cautionary Tale",
+          "kind": "ultimate",
+          "text": "Once per cycle, his screenshot teaches ten thousand traders nothing."
+        }
+      ],
+      "weakness": "A two percent move in the wrong direction.",
+      "lore": "He calculated everything except the wick. In the dead of night a single red candle reached down, touched his liquidation price, and reversed within the minute. The position was gone; the chart barely noticed. His screenshot outlived his account.",
+      "traits": [
+        {
+          "label": "Overextended",
+          "text": "Borrowed conviction, compounding hourly."
+        },
+        {
+          "label": "Wick Bait",
+          "text": "Stops rest exactly where wicks reach."
+        },
+        {
+          "label": "Instant Zero",
+          "text": "Gone between two prints."
+        },
+        {
+          "label": "Immortal Meme",
+          "text": "The loss outlived the trade."
+        }
+      ],
+      "flavor": "The wick always knows where you sleep.",
+      "art_front": "art/approved/018_the_liquidated_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 19,
@@ -663,7 +919,71 @@
       "subtitle": "Architect of Freedom",
       "rarity": "epic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Revolutionary",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Principle",
+          "value": 100
+        },
+        {
+          "label": "Craft",
+          "value": 96
+        },
+        {
+          "label": "Foresight",
+          "value": 94
+        },
+        {
+          "label": "Fame",
+          "value": 15
+        },
+        {
+          "label": "Compromise",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Write the Code",
+          "kind": "active",
+          "text": "Publishes what governments preferred unwritten."
+        },
+        {
+          "name": "Mathematics Answers",
+          "kind": "passive",
+          "text": "Trusts no promise that cannot be proven."
+        },
+        {
+          "name": "Release the Genie",
+          "kind": "ultimate",
+          "text": "Once per era, ships an idea that cannot be recalled."
+        }
+      ],
+      "weakness": "User experience. Freedom ships with bad fonts.",
+      "lore": "Before the money there was the mailing list, and before the mailing list there was the conviction: privacy is not requested, it is taken, in code. He wrote through the night for decades nobody counted. Everything now standing was scaffolded in those emails.",
+      "traits": [
+        {
+          "label": "First Principles",
+          "text": "Starts from zero, trusts proofs."
+        },
+        {
+          "label": "Night Shift",
+          "text": "The future ships after midnight."
+        },
+        {
+          "label": "No Permission",
+          "text": "Never asked, never will."
+        },
+        {
+          "label": "Seed Planter",
+          "text": "Wrote the ideas others built."
+        }
+      ],
+      "flavor": "Privacy is taken, not requested.",
+      "art_front": "art/approved/026_the_cypherpunk_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 27,
@@ -815,7 +1135,71 @@
       "subtitle": "Twelve Sacred Words",
       "rarity": "epic",
       "category": "relic",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Relic",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Power",
+          "value": 100
+        },
+        {
+          "label": "Simplicity",
+          "value": 95
+        },
+        {
+          "label": "Fragility",
+          "value": 88
+        },
+        {
+          "label": "Redundancy",
+          "value": 2
+        },
+        {
+          "label": "Forgiveness",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Restore All",
+          "kind": "active",
+          "text": "Twelve words in order rebuild an entire fortune from nothing."
+        },
+        {
+          "name": "Single Point",
+          "kind": "passive",
+          "text": "Whoever holds the words holds it all."
+        },
+        {
+          "name": "Final Backup",
+          "kind": "ultimate",
+          "text": "Once per era, survives the fire, the flood and the heirs."
+        }
+      ],
+      "weakness": "Being photographed. Once seen, never safe again.",
+      "lore": "Twelve common words in an uncommon order, worth everything or nothing depending on who reads them. It has been stamped into steel, sewn into coats, whispered to no one. Empires of paper needed vaults; this needs only memory. That is the mercy and the terror of it.",
+      "traits": [
+        {
+          "label": "Total Key",
+          "text": "The words are the wealth."
+        },
+        {
+          "label": "Memory Sized",
+          "text": "Fits inside a human head."
+        },
+        {
+          "label": "Unforgiving",
+          "text": "One wrong word is zero."
+        },
+        {
+          "label": "Steel Kept",
+          "text": "Stamped where fire cannot reach."
+        }
+      ],
+      "flavor": "Twelve words between fortune and nothing.",
+      "art_front": "art/approved/029_the_seed_phrase_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 30,
@@ -1047,7 +1431,71 @@
       "subtitle": "Minutes of Terror",
       "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Cataclysm",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Speed",
+          "value": 100
+        },
+        {
+          "label": "Depth",
+          "value": 94
+        },
+        {
+          "label": "Recovery",
+          "value": 82
+        },
+        {
+          "label": "Duration",
+          "value": 6
+        },
+        {
+          "label": "Warning",
+          "value": 1
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Pull the Floor",
+          "kind": "active",
+          "text": "Every bid vanishes in the same second."
+        },
+        {
+          "name": "Cascade Trigger",
+          "kind": "passive",
+          "text": "Each stop hit fires the next one down."
+        },
+        {
+          "name": "V-Shape",
+          "kind": "ultimate",
+          "text": "Once per panic, recovers before the news can load."
+        }
+      ],
+      "weakness": "Its own speed. It ends before it can feed.",
+      "lore": "For six minutes the order book was a rumor. Prices printed that no one will admit to selling at, and fortunes changed hands between machines while their owners slept. By breakfast the chart looked almost normal. Almost.",
+      "traits": [
+        {
+          "label": "No Bid",
+          "text": "The book empties in one breath."
+        },
+        {
+          "label": "Stop Hunter",
+          "text": "Finds every resting trigger."
+        },
+        {
+          "label": "Six Minutes",
+          "text": "History happens between candles."
+        },
+        {
+          "label": "Machine Fast",
+          "text": "No human hand touched it."
+        }
+      ],
+      "flavor": "Blink, and you owned nothing.",
+      "art_front": "art/approved/034_the_flash_crash_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 35,
@@ -1095,7 +1543,71 @@
       "subtitle": "The Domino Effect",
       "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Chain Reaction",
+      "alignment": "Entropy",
+      "stats": [
+        {
+          "label": "Momentum",
+          "value": 100
+        },
+        {
+          "label": "Contagion",
+          "value": 96
+        },
+        {
+          "label": "Depth",
+          "value": 91
+        },
+        {
+          "label": "Exhaustion",
+          "value": 74
+        },
+        {
+          "label": "Mercy",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "First Domino",
+          "kind": "active",
+          "text": "One forced sale prices the next one lower."
+        },
+        {
+          "name": "Feeding Forward",
+          "kind": "passive",
+          "text": "Every liquidation is the trigger for two more."
+        },
+        {
+          "name": "Full Unwind",
+          "kind": "ultimate",
+          "text": "Once per mania, deleverages an entire market in an hour."
+        }
+      ],
+      "weakness": "Cash buyers. Someone eventually catches the knife.",
+      "lore": "It begins with one account, overextended and asleep: the forced sale moves the price, and the price forces the next sale. By the third domino nobody is selling by choice. The cascade does not want anything. It simply obeys arithmetic, all the way down.",
+      "traits": [
+        {
+          "label": "Self Feeding",
+          "text": "Each fall funds the next."
+        },
+        {
+          "label": "Pure Arithmetic",
+          "text": "No malice, only math."
+        },
+        {
+          "label": "Deep Reach",
+          "text": "Finds leverage wherever it hides."
+        },
+        {
+          "label": "Burnout",
+          "text": "Ends only when nothing is left."
+        }
+      ],
+      "flavor": "Dominoes don't ask permission to fall.",
+      "art_front": "art/approved/040_the_liquidation_cascade_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 41,
@@ -1511,7 +2023,71 @@
       "subtitle": "Empire to Ashes",
       "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Reckoning",
+      "alignment": "Entropy",
+      "stats": [
+        {
+          "label": "Hubris",
+          "value": 100
+        },
+        {
+          "label": "Scale",
+          "value": 97
+        },
+        {
+          "label": "Aftermath",
+          "value": 96
+        },
+        {
+          "label": "Speed",
+          "value": 93
+        },
+        {
+          "label": "Warning",
+          "value": 12
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Bank Run",
+          "kind": "active",
+          "text": "Every withdrawal reveals what was never there."
+        },
+        {
+          "name": "Commingled",
+          "kind": "passive",
+          "text": "The vault was always someone else's wallet."
+        },
+        {
+          "name": "Eight Days",
+          "kind": "ultimate",
+          "text": "Once per era, a throne becomes a courtroom within the week."
+        }
+      ],
+      "weakness": "A single leaked balance sheet.",
+      "lore": "The empire sponsored stadiums and sat beside presidents, and the whole time the vault was a promise written in someone else's ledger. One leak, one tweet, one week. The temple emptied before the priests admitted there was nothing under the floor.",
+      "traits": [
+        {
+          "label": "Paper Throne",
+          "text": "Built on customer deposits."
+        },
+        {
+          "label": "One Tweet",
+          "text": "Confidence died in a sentence."
+        },
+        {
+          "label": "Week Long",
+          "text": "Empire to ashes in days."
+        },
+        {
+          "label": "Long Shadow",
+          "text": "Every exchange answers for it now."
+        }
+      ],
+      "flavor": "The vault was always empty.",
+      "art_front": "art/approved/060_the_ftx_collapse_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 61,
@@ -1575,7 +2151,71 @@
       "subtitle": "Predator in the Mempool",
       "rarity": "epic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Automaton",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Speed",
+          "value": 100
+        },
+        {
+          "label": "Precision",
+          "value": 97
+        },
+        {
+          "label": "Sight",
+          "value": 95
+        },
+        {
+          "label": "Patience",
+          "value": 88
+        },
+        {
+          "label": "Empathy",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Sandwich",
+          "kind": "active",
+          "text": "Buys before you, sells after you, profits from your slippage."
+        },
+        {
+          "name": "Mempool Eyes",
+          "kind": "passive",
+          "text": "Sees every transaction before it lands."
+        },
+        {
+          "name": "Priority Auction",
+          "kind": "ultimate",
+          "text": "Once per block, outbids the world for the right to be first."
+        }
+      ],
+      "weakness": "A faster bot. There is always a faster bot.",
+      "lore": "It lives in the half-second between your click and your confirmation. There it reads your intent, races ahead, and returns to sell you your own price. No one has seen it; everyone has paid it. It is the toll of being visible.",
+      "traits": [
+        {
+          "label": "Front Row",
+          "text": "First to every block."
+        },
+        {
+          "label": "Intent Reader",
+          "text": "Your order is its map."
+        },
+        {
+          "label": "Tireless",
+          "text": "Runs every second of every year."
+        },
+        {
+          "label": "Invisible Tax",
+          "text": "Paid by all, seen by none."
+        }
+      ],
+      "flavor": "It read your order before the chain did.",
+      "art_front": "art/approved/068_the_mev_bot_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 69,
@@ -1663,7 +2303,71 @@
       "subtitle": "Code Without Mercy",
       "rarity": "epic",
       "category": "relic",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Covenant",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Precision",
+          "value": 100
+        },
+        {
+          "label": "Obedience",
+          "value": 99
+        },
+        {
+          "label": "Literalism",
+          "value": 97
+        },
+        {
+          "label": "Speed",
+          "value": 92
+        },
+        {
+          "label": "Judgment",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Execute",
+          "kind": "active",
+          "text": "Does exactly what is written, instantly, forever."
+        },
+        {
+          "name": "No Appeals",
+          "kind": "passive",
+          "text": "Intent does not matter. Only the code."
+        },
+        {
+          "name": "Immutable Term",
+          "kind": "ultimate",
+          "text": "Once deployed, not even its author can stop it."
+        }
+      ],
+      "weakness": "The bug its author swore was a feature.",
+      "lore": "It is a covenant with no judge, no jury and no mercy — only execution. Feed it the right conditions and it pays like clockwork; feed it a flaw and it pays the thief with the same serene precision. It has never once been wrong. It has only ever been exactly what was written.",
+      "traits": [
+        {
+          "label": "Literal Mind",
+          "text": "Reads the letter, never the spirit."
+        },
+        {
+          "label": "Always On",
+          "text": "Executes at every hour."
+        },
+        {
+          "label": "No Takebacks",
+          "text": "Deployment is destiny."
+        },
+        {
+          "label": "Honest Machine",
+          "text": "Cheats no one, spares no one."
+        }
+      ],
+      "flavor": "The code meant exactly what it said.",
+      "art_front": "art/approved/071_the_smart_contract_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 72,
@@ -1743,7 +2447,71 @@
       "subtitle": "Forged by Energy",
       "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Doctrine",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Security",
+          "value": 100
+        },
+        {
+          "label": "Cost",
+          "value": 96
+        },
+        {
+          "label": "Honesty",
+          "value": 94
+        },
+        {
+          "label": "Inertia",
+          "value": 90
+        },
+        {
+          "label": "Efficiency",
+          "value": 12
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Burn to Prove",
+          "kind": "active",
+          "text": "Converts raw energy into unforgeable truth."
+        },
+        {
+          "name": "Costly Signal",
+          "kind": "passive",
+          "text": "Lying costs more than honesty pays."
+        },
+        {
+          "name": "Deepest Moat",
+          "kind": "ultimate",
+          "text": "Once per era, repels an attack by sheer expense."
+        }
+      ],
+      "weakness": "The power bill. It is the point, and the problem.",
+      "lore": "Every block is a receipt for energy spent and never refunded, and that waste is the wall: to rewrite history you must outspend history. Critics call it a furnace; believers call it the only honest lock ever built. The furnace does not care. It burns either way.",
+      "traits": [
+        {
+          "label": "Energy Wall",
+          "text": "Truth backed by megawatts."
+        },
+        {
+          "label": "Honest Furnace",
+          "text": "Burning is the proof."
+        },
+        {
+          "label": "Immovable",
+          "text": "Rewriting costs more than owning."
+        },
+        {
+          "label": "Old Faith",
+          "text": "The original consensus."
+        }
+      ],
+      "flavor": "Truth costs exactly what it burns.",
+      "art_front": "art/approved/073_proof_of_work_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 74,
@@ -2055,7 +2823,71 @@
       "subtitle": "Breaker of Keys",
       "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Omen",
+      "alignment": "Entropy",
+      "stats": [
+        {
+          "label": "Menace",
+          "value": 98
+        },
+        {
+          "label": "Patience",
+          "value": 96
+        },
+        {
+          "label": "Dread",
+          "value": 93
+        },
+        {
+          "label": "Distance",
+          "value": 85
+        },
+        {
+          "label": "Presence",
+          "value": 4
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Split the Prime",
+          "kind": "active",
+          "text": "Undoes in minutes what mathematics promised was eternal."
+        },
+        {
+          "name": "Not Yet",
+          "kind": "passive",
+          "text": "Grows stronger in laboratories nobody can see."
+        },
+        {
+          "name": "Q-Day",
+          "kind": "ultimate",
+          "text": "Once, someday, every old lock opens at dawn."
+        }
+      ],
+      "weakness": "New locks. The defenders are also building.",
+      "lore": "Somewhere in a cold laboratory, a machine is learning to divide the indivisible. The day it succeeds, every old signature becomes a suggestion. The chains know it is coming; they are quietly changing their locks. The race is polite, well funded, and absolutely mortal.",
+      "traits": [
+        {
+          "label": "Patient Doom",
+          "text": "Arrives on no schedule."
+        },
+        {
+          "label": "Key Eater",
+          "text": "Old cryptography is its food."
+        },
+        {
+          "label": "Lab Grown",
+          "text": "Built in whispers and helium."
+        },
+        {
+          "label": "Great Motivator",
+          "text": "Forces every lock to evolve."
+        }
+      ],
+      "flavor": "Every lock is temporary. Someday arrives.",
+      "art_front": "art/approved/096_the_quantum_threat_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 97,
@@ -2071,7 +2903,71 @@
       "subtitle": "This Time Is Different",
       "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Mirage",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Allure",
+          "value": 100
+        },
+        {
+          "label": "Hangover",
+          "value": 97
+        },
+        {
+          "label": "Believers",
+          "value": 94
+        },
+        {
+          "label": "Duration",
+          "value": 55
+        },
+        {
+          "label": "Evidence",
+          "value": 15
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Escape Velocity",
+          "kind": "active",
+          "text": "Declares the old cycles obsolete at the exact top."
+        },
+        {
+          "name": "New Paradigm",
+          "kind": "passive",
+          "text": "Every chart becomes proof once you believe."
+        },
+        {
+          "name": "The Long Con",
+          "kind": "ultimate",
+          "text": "Once per generation, is briefly, gloriously right."
+        }
+      ],
+      "weakness": "Gravity. It has never actually left.",
+      "lore": "Each cycle, near the summit, a voice announces that summits are over — that this mountain goes up forever. The voice is sincere, credentialed and early to every top. One day it may even be right. That possibility is what makes it dangerous.",
+      "traits": [
+        {
+          "label": "Top Caller",
+          "text": "Speaks loudest at the peak."
+        },
+        {
+          "label": "True Believer",
+          "text": "Means every word it says."
+        },
+        {
+          "label": "Seductive Math",
+          "text": "Charts that only rise."
+        },
+        {
+          "label": "Maybe Someday",
+          "text": "Even mirages sit on real sand."
+        }
+      ],
+      "flavor": "The four most expensive words in finance.",
+      "art_front": "art/approved/098_the_supercycle_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 99,

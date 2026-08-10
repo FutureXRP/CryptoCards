@@ -11,8 +11,8 @@ source of truth and this file mirrors it.
 
 | Status | Cards |
 |---|---|
-| named | 78 |
-| lore_complete | 7 |
+| named | 64 |
+| lore_complete | 21 |
 | art_prompted | 0 |
 | art_incoming | 0 |
 | art_approved | 11 |
@@ -29,10 +29,10 @@ source of truth and this file mirrors it.
 | 002 | The SEC Punisher | mythic | archetype | composed |
 | 003 | The Whale | mythic | archetype | composed |
 | 004 | The Rug Puller | mythic | archetype | composed |
-| 005 | The Gas Fee Ghost | epic | archetype | named |
+| 005 | The Gas Fee Ghost | epic | archetype | lore_complete |
 | 006 | The Ponzi Schemer | common | archetype | named |
-| 007 | The Degen | epic | archetype | named |
-| 008 | The Diamond Hands | epic | archetype | named |
+| 007 | The Degen | epic | archetype | lore_complete |
+| 008 | The Diamond Hands | epic | archetype | lore_complete |
 | 009 | The Paper Hands | rare | archetype | named |
 | 010 | The Moonboy | rare | archetype | named |
 | 011 | The Maxi | rare | archetype | lore_complete |
@@ -42,7 +42,7 @@ source of truth and this file mirrors it.
 | 015 | The Dip Buyer | common | archetype | named |
 | 016 | The Day Trader | common | archetype | named |
 | 017 | The Leverage King | rare | archetype | named |
-| 018 | The Liquidated | epic | archetype | named |
+| 018 | The Liquidated | epic | archetype | lore_complete |
 | 019 | The Shill | common | archetype | named |
 | 020 | The Influencer | common | archetype | named |
 | 021 | The Satoshi | legendary | archetype | art_approved |
@@ -50,21 +50,21 @@ source of truth and this file mirrors it.
 | 023 | The Validator | rare | archetype | named |
 | 024 | The Node Runner | common | archetype | named |
 | 025 | The Developer | common | archetype | named |
-| 026 | The Cypherpunk | epic | archetype | named |
+| 026 | The Cypherpunk | epic | archetype | lore_complete |
 | 027 | The Cold Wallet | epic | relic | lore_complete |
 | 028 | The Lost Keys | legendary | relic | art_approved |
-| 029 | The Seed Phrase | epic | relic | named |
+| 029 | The Seed Phrase | epic | relic | lore_complete |
 | 030 | The Ledger | common | relic | named |
 | 031 | The Bull | epic | force | lore_complete |
 | 032 | The Bear | epic | force | lore_complete |
 | 033 | The Black Swan | legendary | force | art_approved |
-| 034 | The Flash Crash | epic | force | named |
+| 034 | The Flash Crash | epic | force | lore_complete |
 | 035 | The God Candle | rare | force | named |
 | 036 | The Death Candle | rare | force | named |
 | 037 | The Pump | common | force | named |
 | 038 | The Dump | common | force | named |
 | 039 | The Short Squeeze | rare | force | named |
-| 040 | The Liquidation Cascade | epic | force | named |
+| 040 | The Liquidation Cascade | epic | force | lore_complete |
 | 041 | The FUD Machine | rare | relic | named |
 | 042 | The Hopium Dealer | common | archetype | named |
 | 043 | The Fear & Greed Oracle | common | archetype | named |
@@ -84,7 +84,7 @@ source of truth and this file mirrors it.
 | 057 | The NFT Mania | common | force | named |
 | 058 | The Meme Coin | rare | token | named |
 | 059 | The Dog Coin | rare | token | named |
-| 060 | The FTX Collapse | epic | force | named |
+| 060 | The FTX Collapse | epic | force | lore_complete |
 | 061 | The Bank Run | common | force | named |
 | 062 | The Exchange Hacker | common | archetype | named |
 | 063 | The Bridge Hacker | common | archetype | named |
@@ -92,12 +92,12 @@ source of truth and this file mirrors it.
 | 065 | The Exit Scam | common | force | named |
 | 066 | The Honeypot | common | relic | named |
 | 067 | The Pump Group | common | realm | named |
-| 068 | The MEV Bot | epic | archetype | named |
+| 068 | The MEV Bot | epic | archetype | lore_complete |
 | 069 | The Front Runner | common | archetype | named |
 | 070 | The Oracle | epic | archetype | lore_complete |
-| 071 | The Smart Contract | epic | relic | named |
+| 071 | The Smart Contract | epic | relic | lore_complete |
 | 072 | The Blockchain | legendary | relic | art_approved |
-| 073 | Proof of Work | epic | force | named |
+| 073 | Proof of Work | epic | force | lore_complete |
 | 074 | Proof of Stake | rare | force | named |
 | 075 | The Fork | rare | force | named |
 | 076 | The Layer Two | common | realm | named |
@@ -120,9 +120,9 @@ source of truth and this file mirrors it.
 | 093 | The Regulator | rare | archetype | named |
 | 094 | The Central Banker | rare | archetype | named |
 | 095 | The CBDC | rare | token | named |
-| 096 | The Quantum Threat | epic | force | named |
+| 096 | The Quantum Threat | epic | force | lore_complete |
 | 097 | The AI Trader | rare | archetype | named |
-| 098 | The Supercycle | epic | force | named |
+| 098 | The Supercycle | epic | force | lore_complete |
 | 099 | The Final Block | legendary | force | art_approved |
 | 100 | The Crypto King | mythic | archetype | art_approved |
 
