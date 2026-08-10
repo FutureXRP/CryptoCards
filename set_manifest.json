@@ -495,7 +495,7 @@
       "subtitle": "The Vanished Founder",
       "rarity": "legendary",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Founder",
       "alignment": "Neutral",
       "stats": [
@@ -743,7 +743,7 @@
       "subtitle": "Fortune Forever Sealed",
       "rarity": "legendary",
       "category": "relic",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Relic",
       "alignment": "Entropy",
       "stats": [
@@ -975,7 +975,7 @@
       "subtitle": "The Unseen Catastrophe",
       "rarity": "legendary",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Calamity",
       "alignment": "Chaos",
       "stats": [
@@ -1239,7 +1239,7 @@
       "subtitle": "The Supply Reckoning",
       "rarity": "legendary",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Rite",
       "alignment": "Order",
       "stats": [
@@ -1311,7 +1311,7 @@
       "subtitle": "Where It All Began",
       "rarity": "legendary",
       "category": "relic",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Relic",
       "alignment": "Order",
       "stats": [
@@ -1415,7 +1415,7 @@
       "subtitle": "The Long Freeze",
       "rarity": "legendary",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Season",
       "alignment": "Neutral",
       "stats": [
@@ -1671,7 +1671,7 @@
       "subtitle": "The Immutable Chronicle",
       "rarity": "legendary",
       "category": "relic",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Ledger",
       "alignment": "Order",
       "stats": [
@@ -1807,7 +1807,7 @@
       "subtitle": "Digital Gold",
       "rarity": "legendary",
       "category": "token",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Asset",
       "alignment": "Order",
       "stats": [
@@ -1879,7 +1879,7 @@
       "subtitle": "World Computer",
       "rarity": "legendary",
       "category": "token",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Asset",
       "alignment": "Neutral",
       "stats": [
@@ -2079,7 +2079,7 @@
       "subtitle": "When the Last Bitcoin Falls",
       "rarity": "legendary",
       "category": "force",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Prophecy",
       "alignment": "Neutral",
       "stats": [
@@ -2151,7 +2151,7 @@
       "subtitle": "Survivor of Every Cycle",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "lore_complete",
+      "status": "art_prompted",
       "type": "Sovereign",
       "alignment": "Order",
       "stats": [
