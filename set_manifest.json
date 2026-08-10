@@ -495,7 +495,71 @@
       "subtitle": "The Vanished Founder",
       "rarity": "legendary",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Founder",
+      "alignment": "Neutral",
+      "stats": [
+        {
+          "label": "Mystery",
+          "value": 100
+        },
+        {
+          "label": "Foresight",
+          "value": 97
+        },
+        {
+          "label": "Restraint",
+          "value": 96
+        },
+        {
+          "label": "Authority",
+          "value": 91
+        },
+        {
+          "label": "Presence",
+          "value": 2
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Lay the Stone",
+          "kind": "active",
+          "text": "Builds a system that no longer requires its builder."
+        },
+        {
+          "name": "Absent",
+          "kind": "passive",
+          "text": "Cannot be found, subpoenaed, bribed or interviewed."
+        },
+        {
+          "name": "Walk Away",
+          "kind": "ultimate",
+          "text": "Once per era, abandons a fortune to protect the thing built."
+        }
+      ],
+      "weakness": "Nothing. That is the entire problem.",
+      "lore": "The work was finished, the door was closed quietly, and the hall has spent every year since arguing about who was in the room. A fortune sits untouched under a name nobody can prove. The greatest thing built here was the decision to leave.",
+      "traits": [
+        {
+          "label": "No Face",
+          "text": "Every portrait of them is a guess."
+        },
+        {
+          "label": "Untouched Hoard",
+          "text": "A fortune that has never moved."
+        },
+        {
+          "label": "Clean Exit",
+          "text": "Left before the worship began."
+        },
+        {
+          "label": "Still Running",
+          "text": "The work continues without its author."
+        }
+      ],
+      "flavor": "The last thing built was the exit.",
+      "art_front": "art/approved/021_the_satoshi_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 22,
@@ -679,7 +743,71 @@
       "subtitle": "Fortune Forever Sealed",
       "rarity": "legendary",
       "category": "relic",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Relic",
+      "alignment": "Entropy",
+      "stats": [
+        {
+          "label": "Hidden Value",
+          "value": 100
+        },
+        {
+          "label": "Endurance",
+          "value": 96
+        },
+        {
+          "label": "Temptation",
+          "value": 93
+        },
+        {
+          "label": "Hope",
+          "value": 12
+        },
+        {
+          "label": "Reachability",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Seal Forever",
+          "kind": "active",
+          "text": "Removes a fortune from circulation. No appeal, no recovery, no exceptions."
+        },
+        {
+          "name": "Silent Deflation",
+          "kind": "passive",
+          "text": "Every coin it holds makes every other coin scarcer."
+        },
+        {
+          "name": "Two Guesses Left",
+          "kind": "ultimate",
+          "text": "Permits one final attempt at the password. The whole market holds its breath."
+        }
+      ],
+      "weakness": "A scrap of paper in an old coat pocket.",
+      "lore": "Somewhere a hard drive spins down for the last time, holding more wealth than a small nation. Its owner remembers the morning he earned it, but not the twelve words. The fortune is perfectly safe now. Safe from everyone.",
+      "traits": [
+        {
+          "label": "Iron Patience",
+          "text": "Will outwait every market and every heir."
+        },
+        {
+          "label": "Dead Weight",
+          "text": "Wealth that can never move again."
+        },
+        {
+          "label": "Quiet Gift",
+          "text": "Its loss enriches everyone else."
+        },
+        {
+          "label": "Landfill Legend",
+          "text": "Buried under a hill somewhere, allegedly."
+        }
+      ],
+      "flavor": "The richest wallets never spend.",
+      "art_front": "art/approved/028_the_lost_keys_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 29,
@@ -847,7 +975,71 @@
       "subtitle": "The Unseen Catastrophe",
       "rarity": "legendary",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Calamity",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Surprise",
+          "value": 100
+        },
+        {
+          "label": "Devastation",
+          "value": 96
+        },
+        {
+          "label": "Aftermath",
+          "value": 93
+        },
+        {
+          "label": "Frequency",
+          "value": 9
+        },
+        {
+          "label": "Warning",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Land Unseen",
+          "kind": "active",
+          "text": "Arrives from the one direction nobody hedged."
+        },
+        {
+          "name": "Off the Charts",
+          "kind": "passive",
+          "text": "No model contains it. That is the definition."
+        },
+        {
+          "name": "Rewrite History",
+          "kind": "ultimate",
+          "text": "After it passes, everyone claims they saw it coming."
+        }
+      ],
+      "weakness": "Hindsight. Everyone was about to predict it.",
+      "lore": "The analysts mapped every risk except the one that mattered. It did not announce itself; it simply arrived, and the old world ended between two candles. Afterward the survivors wrote books about the warning signs. There were none.",
+      "traits": [
+        {
+          "label": "No Warning",
+          "text": "The first signal is the impact."
+        },
+        {
+          "label": "Model Breaker",
+          "text": "Lives outside every backtest."
+        },
+        {
+          "label": "Great Equalizer",
+          "text": "Leverage dies first when it lands."
+        },
+        {
+          "label": "Rare Bird",
+          "text": "Seen once a decade, felt forever."
+        }
+      ],
+      "flavor": "Nobody hedges the impossible.",
+      "art_front": "art/approved/033_the_black_swan_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 34,
@@ -1223,7 +1415,71 @@
       "subtitle": "The Long Freeze",
       "rarity": "legendary",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Season",
+      "alignment": "Neutral",
+      "stats": [
+        {
+          "label": "Patience",
+          "value": 100
+        },
+        {
+          "label": "Attrition",
+          "value": 98
+        },
+        {
+          "label": "Silence",
+          "value": 91
+        },
+        {
+          "label": "Renewal",
+          "value": 85
+        },
+        {
+          "label": "Mercy",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Freeze the Feed",
+          "kind": "active",
+          "text": "Halts the hype mid-sentence. Timelines go quiet for years."
+        },
+        {
+          "name": "Test of Conviction",
+          "kind": "passive",
+          "text": "Only builders and believers survive the season."
+        },
+        {
+          "name": "The Thaw",
+          "kind": "ultimate",
+          "text": "Ends without announcement. The patient wake up wealthy."
+        }
+      ],
+      "weakness": "Spring. It has never once failed to arrive.",
+      "lore": "The music stops slowly, then all at once, and the tourists leave with the weather. What remains is quiet: builders committing code into the dark, believers averaging in unseen. The winter does not hate anyone. It is simply sorting them.",
+      "traits": [
+        {
+          "label": "Long Season",
+          "text": "Measured in years, not candles."
+        },
+        {
+          "label": "Great Filter",
+          "text": "Removes everything built on hype."
+        },
+        {
+          "label": "Quiet Forge",
+          "text": "The next cycle is built here."
+        },
+        {
+          "label": "Cold Math",
+          "text": "Prices return to what is real."
+        }
+      ],
+      "flavor": "Winter doesn't kill projects. It reveals them.",
+      "art_front": "art/approved/056_the_crypto_winter_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 57,
@@ -1415,7 +1671,71 @@
       "subtitle": "The Immutable Chronicle",
       "rarity": "legendary",
       "category": "relic",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Ledger",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Permanence",
+          "value": 100
+        },
+        {
+          "label": "Memory",
+          "value": 99
+        },
+        {
+          "label": "Transparency",
+          "value": 97
+        },
+        {
+          "label": "Speed",
+          "value": 34
+        },
+        {
+          "label": "Forgiveness",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Append Only",
+          "kind": "active",
+          "text": "Writes the next block. What is written cannot be unwritten."
+        },
+        {
+          "name": "Perfect Witness",
+          "kind": "passive",
+          "text": "Remembers every transaction ever made, forever, for everyone."
+        },
+        {
+          "name": "Consensus",
+          "kind": "ultimate",
+          "text": "Thousands of strangers agree on one truth without ever meeting."
+        }
+      ],
+      "weakness": "It remembers your mistakes too.",
+      "lore": "Every fortune, every folly, every midnight mistake — written in a book that cannot be edited and never closes. Kings and thieves alike get one line each. The chronicle does not judge. It only records.",
+      "traits": [
+        {
+          "label": "Immutable",
+          "text": "History without an eraser."
+        },
+        {
+          "label": "Public Record",
+          "text": "Everyone may read every page."
+        },
+        {
+          "label": "Trustless",
+          "text": "Needs no one's permission or honesty."
+        },
+        {
+          "label": "Eternal",
+          "text": "Outlives every author who writes in it."
+        }
+      ],
+      "flavor": "The chain remembers what everyone forgets.",
+      "art_front": "art/approved/072_the_blockchain_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 73,
@@ -1487,7 +1807,71 @@
       "subtitle": "Digital Gold",
       "rarity": "legendary",
       "category": "token",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Asset",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Scarcity",
+          "value": 100
+        },
+        {
+          "label": "Endurance",
+          "value": 98
+        },
+        {
+          "label": "Recognition",
+          "value": 97
+        },
+        {
+          "label": "Volatility",
+          "value": 88
+        },
+        {
+          "label": "Speed",
+          "value": 21
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Store of Value",
+          "kind": "active",
+          "text": "Absorbs the wealth of every fallen empire of the cycle."
+        },
+        {
+          "name": "Twenty-One Million",
+          "kind": "passive",
+          "text": "The supply never bends. Not for anyone."
+        },
+        {
+          "name": "Genesis Memory",
+          "kind": "ultimate",
+          "text": "Once per era, reminds the world why it exists."
+        }
+      ],
+      "weakness": "Its own children, moving faster than it ever will.",
+      "lore": "It was born in a financial crisis with a newspaper headline for a birth certificate. Everything since — every fork, every rival, every obituary — has orbited it. It does not innovate. It endures.",
+      "traits": [
+        {
+          "label": "First Mover",
+          "text": "Every chart begins with it."
+        },
+        {
+          "label": "Hard Cap",
+          "text": "Twenty-one million, and not one more."
+        },
+        {
+          "label": "Obituary Proof",
+          "text": "Declared dead hundreds of times, still here."
+        },
+        {
+          "label": "Slow King",
+          "text": "Moves last, arrives anyway."
+        }
+      ],
+      "flavor": "Everything else is an experiment.",
+      "art_front": "art/approved/081_the_bitcoin_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 82,
@@ -1495,7 +1879,71 @@
       "subtitle": "World Computer",
       "rarity": "legendary",
       "category": "token",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Asset",
+      "alignment": "Neutral",
+      "stats": [
+        {
+          "label": "Programmability",
+          "value": 100
+        },
+        {
+          "label": "Ambition",
+          "value": 96
+        },
+        {
+          "label": "Ecosystem",
+          "value": 94
+        },
+        {
+          "label": "Complexity",
+          "value": 90
+        },
+        {
+          "label": "Simplicity",
+          "value": 6
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Deploy Contract",
+          "kind": "active",
+          "text": "Turns an idea into unstoppable code in one transaction."
+        },
+        {
+          "name": "Fertile Ground",
+          "kind": "passive",
+          "text": "Every mania of the last decade sprouted from its soil."
+        },
+        {
+          "name": "The Merge",
+          "kind": "ultimate",
+          "text": "Reinvents its own foundations mid-flight, without stopping."
+        }
+      ],
+      "weakness": "A simple transfer, priced like a luxury.",
+      "lore": "It looked at the chronicle and asked why the book couldn't also think. From that question grew exchanges without buildings, art without frames, banks without bankers. Half the market lives on its land and complains about the rent.",
+      "traits": [
+        {
+          "label": "World Engine",
+          "text": "Runs code no one can stop."
+        },
+        {
+          "label": "Endless Frontier",
+          "text": "Whatever is next gets built here first."
+        },
+        {
+          "label": "Toll Road",
+          "text": "Every action pays the network."
+        },
+        {
+          "label": "Shapeshifter",
+          "text": "Rewrites itself while running."
+        }
+      ],
+      "flavor": "Code is the landlord now.",
+      "art_front": "art/approved/082_the_ethereum_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 83,
@@ -1631,7 +2079,71 @@
       "subtitle": "When the Last Bitcoin Falls",
       "rarity": "legendary",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Prophecy",
+      "alignment": "Neutral",
+      "stats": [
+        {
+          "label": "Inevitability",
+          "value": 100
+        },
+        {
+          "label": "Certainty",
+          "value": 99
+        },
+        {
+          "label": "Distance",
+          "value": 97
+        },
+        {
+          "label": "Weight",
+          "value": 94
+        },
+        {
+          "label": "Witnesses",
+          "value": 0
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Count Down",
+          "kind": "active",
+          "text": "Every block mined brings it one closer. Nothing slows it."
+        },
+        {
+          "name": "Distant Thunder",
+          "kind": "passive",
+          "text": "Felt in every halving, a century in advance."
+        },
+        {
+          "name": "The Last Coin",
+          "kind": "ultimate",
+          "text": "The final fraction is mined and the mint closes forever."
+        }
+      ],
+      "weakness": "None. It is the only certainty in the market.",
+      "lore": "Somewhere past the year 2140, a miner will seal the last fraction of the last coin. No one reading this card will see it. The whole experiment points at that block the way a cathedral points at heaven. It is already scheduled.",
+      "traits": [
+        {
+          "label": "Scheduled End",
+          "text": "The only deadline that cannot slip."
+        },
+        {
+          "label": "Century Away",
+          "text": "Promised to generations unborn."
+        },
+        {
+          "label": "Zero Issuance",
+          "text": "After it, only fees remain."
+        },
+        {
+          "label": "North Star",
+          "text": "Every cycle steers by it."
+        }
+      ],
+      "flavor": "The end was written in the beginning.",
+      "art_front": "art/approved/099_the_final_block_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 100,
@@ -1639,7 +2151,71 @@
       "subtitle": "Survivor of Every Cycle",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Sovereign",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Survival",
+          "value": 100
+        },
+        {
+          "label": "Scars",
+          "value": 97
+        },
+        {
+          "label": "Wisdom",
+          "value": 95
+        },
+        {
+          "label": "Patience",
+          "value": 93
+        },
+        {
+          "label": "Fear",
+          "value": 1
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Crown of Cycles",
+          "kind": "active",
+          "text": "Claims a share of every boom and every ruin."
+        },
+        {
+          "name": "Seen It All",
+          "kind": "passive",
+          "text": "Immune to euphoria, panic and everything between."
+        },
+        {
+          "name": "Outlive Them All",
+          "kind": "ultimate",
+          "text": "When the last rival capitulates, inherits the entire board."
+        }
+      ],
+      "weakness": "There is no one left to share the view.",
+      "lore": "He bought the tops and the bottoms, was liquidated twice, rugged three times, and declared dead with every winter. He is still here. The crown is not gold; it is scar tissue. Every cycle ends with him on the throne.",
+      "traits": [
+        {
+          "label": "Cycle Proof",
+          "text": "Four winters, four springs, one king."
+        },
+        {
+          "label": "Scar Crown",
+          "text": "Every loss became armor."
+        },
+        {
+          "label": "Last Standing",
+          "text": "Outlasted every rival and every trend."
+        },
+        {
+          "label": "Full Circle",
+          "text": "Ends where the Genesis began."
+        }
+      ],
+      "flavor": "Survive long enough and they call you king.",
+      "art_front": "art/approved/100_the_crypto_king_front.png",
+      "art_back_template": "art/templates/back_mythic.png"
     }
   ]
 }
