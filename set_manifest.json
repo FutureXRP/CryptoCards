@@ -15,7 +15,7 @@
       "subtitle": "Diamond Hands Eternal",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "art_approved",
+      "status": "composed",
       "type": "Ascetic",
       "alignment": "Order",
       "stats": [
@@ -87,7 +87,7 @@
       "subtitle": "Enforcement Incarnate",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "art_approved",
+      "status": "composed",
       "type": "Enforcer",
       "alignment": "Order",
       "stats": [
@@ -159,7 +159,7 @@
       "subtitle": "Market Mover",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "art_approved",
+      "status": "composed",
       "type": "Leviathan",
       "alignment": "Neutral",
       "stats": [
@@ -231,7 +231,7 @@
       "subtitle": "Liquidity Thief",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "art_approved",
+      "status": "composed",
       "type": "Trickster",
       "alignment": "Chaos",
       "stats": [

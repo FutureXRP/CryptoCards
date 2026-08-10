@@ -15,8 +15,8 @@ source of truth and this file mirrors it.
 | lore_complete | 18 |
 | art_prompted | 0 |
 | art_incoming | 0 |
-| art_approved | 4 |
-| composed | 0 |
+| art_approved | 0 |
+| composed | 4 |
 | proofed | 0 |
 | print_ready | 0 |
 | **total** | **100** |
@@ -25,10 +25,10 @@ source of truth and this file mirrors it.
 
 | # | Name | Tier | Category | Status |
 |---|---|---|---|---|
-| 001 | The HODLR | mythic | archetype | art_approved |
-| 002 | The SEC Punisher | mythic | archetype | art_approved |
-| 003 | The Whale | mythic | archetype | art_approved |
-| 004 | The Rug Puller | mythic | archetype | art_approved |
+| 001 | The HODLR | mythic | archetype | composed |
+| 002 | The SEC Punisher | mythic | archetype | composed |
+| 003 | The Whale | mythic | archetype | composed |
+| 004 | The Rug Puller | mythic | archetype | composed |
 | 005 | The Gas Fee Ghost | epic | archetype | named |
 | 006 | The Ponzi Schemer | common | archetype | named |
 | 007 | The Degen | epic | archetype | named |
