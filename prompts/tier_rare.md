@@ -1,4 +1,4 @@
-# Rare (015–034)
+# Rare (30 cards — assignment lives in the manifest)
 
 Ornament: restrained. Architectural detail and material texture carry the
 frame instead of gold ornament.

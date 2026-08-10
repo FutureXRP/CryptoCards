@@ -12,12 +12,12 @@
     {
       "num": 1,
       "name": "The HODLR",
-      "subtitle": "Conviction in Cold Storage",
-      "type": "Ascetic",
-      "alignment": "Order",
+      "subtitle": "Diamond Hands Eternal",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "composed",
+      "status": "art_approved",
+      "type": "Ascetic",
+      "alignment": "Order",
       "stats": [
         {
           "label": "Conviction",
@@ -84,12 +84,12 @@
     {
       "num": 2,
       "name": "The SEC Punisher",
-      "subtitle": "The Letter Always Arrives",
-      "type": "Enforcer",
-      "alignment": "Order",
+      "subtitle": "Enforcement Incarnate",
       "rarity": "mythic",
       "category": "archetype",
       "status": "art_approved",
+      "type": "Enforcer",
+      "alignment": "Order",
       "stats": [
         {
           "label": "Authority",
@@ -156,12 +156,12 @@
     {
       "num": 3,
       "name": "The Whale",
-      "subtitle": "The Tide Has a Name",
-      "type": "Leviathan",
-      "alignment": "Neutral",
+      "subtitle": "Market Mover",
       "rarity": "mythic",
       "category": "archetype",
       "status": "art_approved",
+      "type": "Leviathan",
+      "alignment": "Neutral",
       "stats": [
         {
           "label": "Mass",
@@ -228,12 +228,12 @@
     {
       "num": 4,
       "name": "The Rug Puller",
-      "subtitle": "Nothing Was Ever Under Your Feet",
-      "type": "Trickster",
-      "alignment": "Chaos",
+      "subtitle": "Liquidity Thief",
       "rarity": "mythic",
       "category": "archetype",
       "status": "art_approved",
+      "type": "Trickster",
+      "alignment": "Chaos",
       "stats": [
         {
           "label": "Charisma",
@@ -299,13 +299,61 @@
     },
     {
       "num": 5,
-      "name": "The Maximalist",
-      "subtitle": "One Ledger, No Others",
-      "type": "Zealot",
-      "alignment": "Order",
+      "name": "The Gas Fee Ghost",
+      "subtitle": "Transaction Torment",
       "rarity": "epic",
       "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 6,
+      "name": "The Ponzi Schemer",
+      "subtitle": "Profit Predator",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 7,
+      "name": "The Degen",
+      "subtitle": "Leverage Addict",
+      "rarity": "epic",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 8,
+      "name": "The Diamond Hands",
+      "subtitle": "Unbreakable Conviction",
+      "rarity": "epic",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 9,
+      "name": "The Paper Hands",
+      "subtitle": "First to Fold",
+      "rarity": "rare",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 10,
+      "name": "The Moonboy",
+      "subtitle": "Eternal Optimist",
+      "rarity": "rare",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 11,
+      "name": "The Maxi",
+      "subtitle": "One Coin to Rule Them All",
+      "rarity": "rare",
+      "category": "archetype",
       "status": "lore_complete",
+      "type": "Zealot",
+      "alignment": "Order",
       "stats": [
         {
           "label": "Conviction",
@@ -366,90 +414,98 @@
         }
       ],
       "flavor": "There is one ledger. The rest is noise.",
-      "art_front": "art/approved/005_the_maximalist_front.png",
-      "art_back_template": "art/templates/back_epic.png"
+      "art_front": "art/approved/011_the_maxi_front.png",
+      "art_back_template": "art/templates/back_rare.png"
     },
     {
-      "num": 6,
-      "name": "The Market Maker",
-      "subtitle": "Both Sides, Always",
-      "type": "Broker",
-      "alignment": "Neutral",
+      "num": 12,
+      "name": "The No-Coiner",
+      "subtitle": "Eternal Skeptic",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 13,
+      "name": "The Bag Holder",
+      "subtitle": "Left Holding the Dream",
+      "rarity": "rare",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 14,
+      "name": "The FOMO Chaser",
+      "subtitle": "Buyer of Tops",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 15,
+      "name": "The Dip Buyer",
+      "subtitle": "Hunter of Red Candles",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 16,
+      "name": "The Day Trader",
+      "subtitle": "Master of Minutes",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 17,
+      "name": "The Leverage King",
+      "subtitle": "Borrowed Power",
+      "rarity": "rare",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 18,
+      "name": "The Liquidated",
+      "subtitle": "Wrecked in One Candle",
+      "rarity": "epic",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 19,
+      "name": "The Shill",
+      "subtitle": "Merchant of Hype",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 20,
+      "name": "The Influencer",
+      "subtitle": "Mover of Crowds",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 21,
+      "name": "The Satoshi",
+      "subtitle": "The Vanished Founder",
+      "rarity": "legendary",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 22,
+      "name": "The Miner",
+      "subtitle": "Guardian of Proof",
       "rarity": "epic",
       "category": "archetype",
       "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Speed",
-          "value": 96
-        },
-        {
-          "label": "Reach",
-          "value": 94
-        },
-        {
-          "label": "Precision",
-          "value": 92
-        },
-        {
-          "label": "Neutrality",
-          "value": 87
-        },
-        {
-          "label": "Visibility",
-          "value": 8
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Quote Both Sides",
-          "kind": "active",
-          "text": "Offers to buy and sell the same thing, simultaneously."
-        },
-        {
-          "name": "Always Filled",
-          "kind": "passive",
-          "text": "Every order finds him, whichever way it leans."
-        },
-        {
-          "name": "Widen the Spread",
-          "kind": "ultimate",
-          "text": "Once per cycle, makes the exit cost whatever he decides."
-        }
-      ],
-      "weakness": "A market with only one direction left.",
-      "lore": "He holds no view on where price is going, which is why he is still here. Every trade in the hall passes through his hands and leaves a thin film behind. Nobody thanks him. Nobody could function without him.",
-      "traits": [
-        {
-          "label": "Two Faces",
-          "text": "Buys and sells the same breath."
-        },
-        {
-          "label": "Thin Margin",
-          "text": "Earns almost nothing, ten thousand times."
-        },
-        {
-          "label": "No Opinion",
-          "text": "Direction is somebody else's problem."
-        },
-        {
-          "label": "First Gone",
-          "text": "Withdraws the moment the floor tilts."
-        }
-      ],
-      "flavor": "Someone has to stand between the two of you.",
-      "art_front": "art/approved/006_the_market_maker_front.png",
-      "art_back_template": "art/templates/back_epic.png"
-    },
-    {
-      "num": 7,
-      "name": "The Miner",
-      "subtitle": "Heat, Hash and Patience",
       "type": "Smith",
       "alignment": "Order",
-      "rarity": "epic",
-      "category": "archetype",
-      "status": "lore_complete",
       "stats": [
         {
           "label": "Endurance",
@@ -510,378 +566,50 @@
         }
       ],
       "flavor": "Every coin was somebody's electricity.",
-      "art_front": "art/approved/007_the_miner_front.png",
+      "art_front": "art/approved/022_the_miner_front.png",
       "art_back_template": "art/templates/back_epic.png"
     },
     {
-      "num": 8,
-      "name": "The Oracle",
-      "subtitle": "Truth, Priced and Delivered",
-      "type": "Seer",
-      "alignment": "Neutral",
+      "num": 23,
+      "name": "The Validator",
+      "subtitle": "Keeper of Consensus",
+      "rarity": "rare",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 24,
+      "name": "The Node Runner",
+      "subtitle": "Silent Guardian",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 25,
+      "name": "The Developer",
+      "subtitle": "Builder of Worlds",
+      "rarity": "common",
+      "category": "archetype",
+      "status": "named"
+    },
+    {
+      "num": 26,
+      "name": "The Cypherpunk",
+      "subtitle": "Architect of Freedom",
       "rarity": "epic",
       "category": "archetype",
-      "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Authority",
-          "value": 93
-        },
-        {
-          "label": "Reach",
-          "value": 88
-        },
-        {
-          "label": "Precision",
-          "value": 85
-        },
-        {
-          "label": "Speed",
-          "value": 72
-        },
-        {
-          "label": "Redundancy",
-          "value": 39
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Report the Price",
-          "kind": "active",
-          "text": "Declares one number, and the ledger accepts it as fact."
-        },
-        {
-          "name": "Single Source",
-          "kind": "passive",
-          "text": "Everything downstream depends on being believed."
-        },
-        {
-          "name": "Bad Feed",
-          "kind": "ultimate",
-          "text": "Once per cycle, one wrong number liquidates a kingdom."
-        }
-      ],
-      "weakness": "Nobody checks the seer until the seer is wrong.",
-      "lore": "The chain cannot see outside itself, so it appointed someone to look. She reports the weather of the world in a single figure and the machinery obeys without asking how she knows. The whole structure rests on her not lying, and on her not being lied to.",
-      "traits": [
-        {
-          "label": "One Number",
-          "text": "The world, compressed to a single figure."
-        },
-        {
-          "label": "Blind Trust",
-          "text": "Believed instantly, verified rarely."
-        },
-        {
-          "label": "Chokepoint",
-          "text": "Everything downstream inherits her mistakes."
-        },
-        {
-          "label": "Quiet Power",
-          "text": "Rules a market she never trades in."
-        }
-      ],
-      "flavor": "The chain believes whatever it is told.",
-      "art_front": "art/approved/008_the_oracle_front.png",
-      "art_back_template": "art/templates/back_epic.png"
+      "status": "named"
     },
     {
-      "num": 9,
-      "name": "The Bear",
-      "subtitle": "Winter Wears a Coat of Fur",
-      "type": "Beast",
-      "alignment": "Chaos",
-      "rarity": "epic",
-      "category": "force",
-      "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Weight",
-          "value": 97
-        },
-        {
-          "label": "Endurance",
-          "value": 92
-        },
-        {
-          "label": "Patience",
-          "value": 90
-        },
-        {
-          "label": "Cruelty",
-          "value": 78
-        },
-        {
-          "label": "Speed",
-          "value": 31
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Maul",
-          "kind": "active",
-          "text": "Takes a third of everything and calls it a warning."
-        },
-        {
-          "name": "Long Sleep",
-          "kind": "passive",
-          "text": "Absent for years, then suddenly not."
-        },
-        {
-          "name": "Capitulation",
-          "kind": "ultimate",
-          "text": "Once per cycle, empties the hall of everyone who arrived late."
-        }
-      ],
-      "weakness": "Cannot last forever. Nothing eats forever.",
-      "lore": "It does not hunt the reckless first. It hunts the patient, the leveraged and the certain, in that order, and takes its time. When the hall is finally empty it lies down in the wreckage and sleeps, and the survivors call that a bottom.",
-      "traits": [
-        {
-          "label": "Slow Jaw",
-          "text": "Kills by duration, not by force."
-        },
-        {
-          "label": "Herd Thinner",
-          "text": "Leaves only those who never needed the money."
-        },
-        {
-          "label": "No Season",
-          "text": "Arrives whenever conviction is highest."
-        },
-        {
-          "label": "Honest",
-          "text": "Never promised anyone anything."
-        }
-      ],
-      "flavor": "It eats the certain first.",
-      "art_front": "art/approved/009_the_bear_front.png",
-      "art_back_template": "art/templates/back_epic.png"
-    },
-    {
-      "num": 10,
-      "name": "The Bull",
-      "subtitle": "The Charge Has No Brakes",
-      "type": "Beast",
-      "alignment": "Chaos",
-      "rarity": "epic",
-      "category": "force",
-      "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Momentum",
-          "value": 98
-        },
-        {
-          "label": "Weight",
-          "value": 91
-        },
-        {
-          "label": "Persuasion",
-          "value": 89
-        },
-        {
-          "label": "Endurance",
-          "value": 57
-        },
-        {
-          "label": "Restraint",
-          "value": 4
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Charge",
-          "kind": "active",
-          "text": "Doubles everything in the hall and asks no permission."
-        },
-        {
-          "name": "Contagion",
-          "kind": "passive",
-          "text": "Every witness becomes a believer, then a buyer."
-        },
-        {
-          "name": "Blow-Off Top",
-          "kind": "ultimate",
-          "text": "Once per cycle, runs so hard it breaks its own legs."
-        }
-      ],
-      "weakness": "Stamina. It always outruns its own supply.",
-      "lore": "It arrives without warning and everyone who doubted it becomes a convert by the second week. Fortunes are made by people who mistake the animal for their own judgement. It does not stop when the ground ends; it simply keeps running.",
-      "traits": [
-        {
-          "label": "No Brakes",
-          "text": "Deceleration is not in the anatomy."
-        },
-        {
-          "label": "Makes Geniuses",
-          "text": "Everyone is brilliant while it runs."
-        },
-        {
-          "label": "Short Lived",
-          "text": "Burns the whole season in a month."
-        },
-        {
-          "label": "Leaves Debt",
-          "text": "The bill arrives after it has gone."
-        }
-      ],
-      "flavor": "Everyone is a genius while it runs.",
-      "art_front": "art/approved/010_the_bull_front.png",
-      "art_back_template": "art/templates/back_epic.png"
-    },
-    {
-      "num": 11,
-      "name": "The Halving",
-      "subtitle": "The Faucet Narrows",
-      "type": "Rite",
-      "alignment": "Order",
-      "rarity": "epic",
-      "category": "force",
-      "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Inevitability",
-          "value": 100
-        },
-        {
-          "label": "Precision",
-          "value": 96
-        },
-        {
-          "label": "Patience",
-          "value": 94
-        },
-        {
-          "label": "Reach",
-          "value": 80
-        },
-        {
-          "label": "Mercy",
-          "value": 17
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Narrow the Flow",
-          "kind": "active",
-          "text": "Cuts new supply in half. No vote, no appeal."
-        },
-        {
-          "name": "Scheduled",
-          "kind": "passive",
-          "text": "Arrives on time, every time, forever."
-        },
-        {
-          "name": "Squeeze the Forge",
-          "kind": "ultimate",
-          "text": "Once per era, ends every operation running on thin margin."
-        }
-      ],
-      "weakness": "Priced in. Allegedly.",
-      "lore": "It is not an event so much as an appointment, written before anyone in this hall was born. The faucet narrows by exactly half, the weakest forges go cold, and the survivors inherit the heat. Everyone insists they saw it coming, and everyone is surprised anyway.",
-      "traits": [
-        {
-          "label": "On Schedule",
-          "text": "Announced decades in advance."
-        },
-        {
-          "label": "Half",
-          "text": "Precisely half. Never a fraction more."
-        },
-        {
-          "label": "Forge Cull",
-          "text": "The inefficient go dark that week."
-        },
-        {
-          "label": "Priced In",
-          "text": "Everyone says so. Nobody acts like it."
-        }
-      ],
-      "flavor": "Written before any of you arrived.",
-      "art_front": "art/approved/011_the_halving_front.png",
-      "art_back_template": "art/templates/back_epic.png"
-    },
-    {
-      "num": 12,
-      "name": "The Genesis Block",
-      "subtitle": "The First Stone",
-      "type": "Relic",
-      "alignment": "Order",
+      "num": 27,
+      "name": "The Cold Wallet",
+      "subtitle": "Keeper of the Keys",
       "rarity": "epic",
       "category": "relic",
       "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Permanence",
-          "value": 100
-        },
-        {
-          "label": "Authority",
-          "value": 95
-        },
-        {
-          "label": "Mystery",
-          "value": 92
-        },
-        {
-          "label": "Weight",
-          "value": 88
-        },
-        {
-          "label": "Utility",
-          "value": 12
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Anchor",
-          "kind": "active",
-          "text": "Every block since traces its lineage here."
-        },
-        {
-          "name": "Unspendable",
-          "kind": "passive",
-          "text": "Its contents can never be moved. By design."
-        },
-        {
-          "name": "First Light",
-          "kind": "ultimate",
-          "text": "Once per era, reminds the hall that all of this began with nothing."
-        }
-      ],
-      "weakness": "It cannot be used. Only revered.",
-      "lore": "It is the one stone laid before there was a wall, holding a message that has outlived every hand that read it. Nothing in it can ever be spent, which is precisely why it is priceless. Every ledger in existence is an argument that starts here.",
-      "traits": [
-        {
-          "label": "Cornerstone",
-          "text": "Everything after descends from it."
-        },
-        {
-          "label": "Locked Forever",
-          "text": "Its coins were never spendable."
-        },
-        {
-          "label": "Inscribed",
-          "text": "Carries a message about a failing world."
-        },
-        {
-          "label": "Unowned",
-          "text": "Belongs to no one and to the whole hall."
-        }
-      ],
-      "flavor": "It begins with nothing and holds everything.",
-      "art_front": "art/approved/012_the_genesis_block_front.png",
-      "art_back_template": "art/templates/back_epic.png"
-    },
-    {
-      "num": 13,
-      "name": "The Cold Vault",
-      "subtitle": "Silence, Rated to Absolute Zero",
       "type": "Relic",
       "alignment": "Order",
-      "rarity": "epic",
-      "category": "relic",
-      "status": "lore_complete",
       "stats": [
         {
           "label": "Security",
@@ -942,747 +670,976 @@
         }
       ],
       "flavor": "Safe from everyone. Including you.",
-      "art_front": "art/approved/013_the_cold_vault_front.png",
+      "art_front": "art/approved/027_the_cold_wallet_front.png",
       "art_back_template": "art/templates/back_epic.png"
-    },
-    {
-      "num": 14,
-      "name": "The Mempool",
-      "subtitle": "The Waiting Room of Intentions",
-      "type": "Realm",
-      "alignment": "Chaos",
-      "rarity": "epic",
-      "category": "realm",
-      "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Volume",
-          "value": 94
-        },
-        {
-          "label": "Chaos",
-          "value": 90
-        },
-        {
-          "label": "Visibility",
-          "value": 87
-        },
-        {
-          "label": "Speed",
-          "value": 61
-        },
-        {
-          "label": "Fairness",
-          "value": 15
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Queue",
-          "kind": "active",
-          "text": "Holds every intention in public view before it becomes real."
-        },
-        {
-          "name": "Nothing Is Private",
-          "kind": "passive",
-          "text": "Every waiting move can be read by anyone."
-        },
-        {
-          "name": "Congestion",
-          "kind": "ultimate",
-          "text": "Once per cycle, fills so completely that only the rich get through."
-        }
-      ],
-      "weakness": "Everything here is visible before it is final.",
-      "lore": "It is the antechamber where every decision waits, announced but not yet true. Predators pace the room reading intentions off the walls and stepping in front of them. Pay more and you are seen sooner, which is the only law the room recognises.",
-      "traits": [
-        {
-          "label": "Public Waiting",
-          "text": "Intentions posted before they are executed."
-        },
-        {
-          "label": "Hunted Ground",
-          "text": "Someone is always reading the queue."
-        },
-        {
-          "label": "Paid Passage",
-          "text": "Position is bought, not earned."
-        },
-        {
-          "label": "Never Empty",
-          "text": "Drains only to fill again."
-        }
-      ],
-      "flavor": "Everything true was public here first.",
-      "art_front": "art/approved/014_the_mempool_front.png",
-      "art_back_template": "art/templates/back_epic.png"
-    },
-    {
-      "num": 15,
-      "name": "The Degen",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 16,
-      "name": "The Moon Boy",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 17,
-      "name": "The Paper Hands",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 18,
-      "name": "The Diamond Hands",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 19,
-      "name": "The Shiller",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 20,
-      "name": "The Auditor",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 21,
-      "name": "The Validator",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 22,
-      "name": "The Liquidator",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 23,
-      "name": "The Arbitrageur",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 24,
-      "name": "The Custodian",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 25,
-      "name": "The Bag Holder",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 26,
-      "name": "The Founder",
-      "rarity": "rare",
-      "category": "archetype",
-      "status": "named"
-    },
-    {
-      "num": 27,
-      "name": "The Bridge",
-      "rarity": "rare",
-      "category": "relic",
-      "status": "named"
     },
     {
       "num": 28,
-      "name": "The Ledger",
-      "rarity": "rare",
+      "name": "The Lost Keys",
+      "subtitle": "Fortune Forever Sealed",
+      "rarity": "legendary",
       "category": "relic",
       "status": "named"
     },
     {
       "num": 29,
       "name": "The Seed Phrase",
-      "rarity": "rare",
+      "subtitle": "Twelve Sacred Words",
+      "rarity": "epic",
       "category": "relic",
       "status": "named"
     },
     {
       "num": 30,
-      "name": "The Bull Run",
-      "rarity": "rare",
-      "category": "force",
+      "name": "The Ledger",
+      "subtitle": "Memory of the Chain",
+      "rarity": "common",
+      "category": "relic",
       "status": "named"
     },
     {
       "num": 31,
-      "name": "The Long Winter",
-      "rarity": "rare",
+      "name": "The Bull",
+      "subtitle": "Bringer of Green Candles",
+      "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Beast",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Momentum",
+          "value": 98
+        },
+        {
+          "label": "Weight",
+          "value": 91
+        },
+        {
+          "label": "Persuasion",
+          "value": 89
+        },
+        {
+          "label": "Endurance",
+          "value": 57
+        },
+        {
+          "label": "Restraint",
+          "value": 4
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Charge",
+          "kind": "active",
+          "text": "Doubles everything in the hall and asks no permission."
+        },
+        {
+          "name": "Contagion",
+          "kind": "passive",
+          "text": "Every witness becomes a believer, then a buyer."
+        },
+        {
+          "name": "Blow-Off Top",
+          "kind": "ultimate",
+          "text": "Once per cycle, runs so hard it breaks its own legs."
+        }
+      ],
+      "weakness": "Stamina. It always outruns its own supply.",
+      "lore": "It arrives without warning and everyone who doubted it becomes a convert by the second week. Fortunes are made by people who mistake the animal for their own judgement. It does not stop when the ground ends; it simply keeps running.",
+      "traits": [
+        {
+          "label": "No Brakes",
+          "text": "Deceleration is not in the anatomy."
+        },
+        {
+          "label": "Makes Geniuses",
+          "text": "Everyone is brilliant while it runs."
+        },
+        {
+          "label": "Short Lived",
+          "text": "Burns the whole season in a month."
+        },
+        {
+          "label": "Leaves Debt",
+          "text": "The bill arrives after it has gone."
+        }
+      ],
+      "flavor": "Everyone is a genius while it runs.",
+      "art_front": "art/approved/031_the_bull_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 32,
-      "name": "The Flash Crash",
-      "rarity": "rare",
+      "name": "The Bear",
+      "subtitle": "Destroyer of Euphoria",
+      "rarity": "epic",
       "category": "force",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Beast",
+      "alignment": "Chaos",
+      "stats": [
+        {
+          "label": "Weight",
+          "value": 97
+        },
+        {
+          "label": "Endurance",
+          "value": 92
+        },
+        {
+          "label": "Patience",
+          "value": 90
+        },
+        {
+          "label": "Cruelty",
+          "value": 78
+        },
+        {
+          "label": "Speed",
+          "value": 31
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Maul",
+          "kind": "active",
+          "text": "Takes a third of everything and calls it a warning."
+        },
+        {
+          "name": "Long Sleep",
+          "kind": "passive",
+          "text": "Absent for years, then suddenly not."
+        },
+        {
+          "name": "Capitulation",
+          "kind": "ultimate",
+          "text": "Once per cycle, empties the hall of everyone who arrived late."
+        }
+      ],
+      "weakness": "Cannot last forever. Nothing eats forever.",
+      "lore": "It does not hunt the reckless first. It hunts the patient, the leveraged and the certain, in that order, and takes its time. When the hall is finally empty it lies down in the wreckage and sleeps, and the survivors call that a bottom.",
+      "traits": [
+        {
+          "label": "Slow Jaw",
+          "text": "Kills by duration, not by force."
+        },
+        {
+          "label": "Herd Thinner",
+          "text": "Leaves only those who never needed the money."
+        },
+        {
+          "label": "No Season",
+          "text": "Arrives whenever conviction is highest."
+        },
+        {
+          "label": "Honest",
+          "text": "Never promised anyone anything."
+        }
+      ],
+      "flavor": "It eats the certain first.",
+      "art_front": "art/approved/032_the_bear_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 33,
-      "name": "The Fork",
-      "rarity": "rare",
+      "name": "The Black Swan",
+      "subtitle": "The Unseen Catastrophe",
+      "rarity": "legendary",
       "category": "force",
       "status": "named"
     },
     {
       "num": 34,
-      "name": "The Dark Forest",
-      "rarity": "rare",
-      "category": "realm",
+      "name": "The Flash Crash",
+      "subtitle": "Minutes of Terror",
+      "rarity": "epic",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 35,
-      "name": "The Whale Watcher",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The God Candle",
+      "subtitle": "Heaven in One Block",
+      "rarity": "rare",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 36,
-      "name": "The Sniper",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Death Candle",
+      "subtitle": "One Wick to Ruin Them All",
+      "rarity": "rare",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 37,
-      "name": "The Yield Farmer",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Pump",
+      "subtitle": "Rise Without Reason",
+      "rarity": "common",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 38,
-      "name": "The Staker",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Dump",
+      "subtitle": "Gravity Always Wins",
+      "rarity": "common",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 39,
-      "name": "The Lurker",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Short Squeeze",
+      "subtitle": "Hunter of Bears",
+      "rarity": "rare",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 40,
-      "name": "The Moderator",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Liquidation Cascade",
+      "subtitle": "The Domino Effect",
+      "rarity": "epic",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 41,
-      "name": "The Alpha Caller",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The FUD Machine",
+      "subtitle": "Manufacturer of Fear",
+      "rarity": "rare",
+      "category": "relic",
       "status": "named"
     },
     {
       "num": 42,
-      "name": "The Analyst",
-      "rarity": "uncommon",
+      "name": "The Hopium Dealer",
+      "subtitle": "Seller of Dreams",
+      "rarity": "common",
       "category": "archetype",
       "status": "named"
     },
     {
       "num": 43,
-      "name": "The Quant",
-      "rarity": "uncommon",
+      "name": "The Fear & Greed Oracle",
+      "subtitle": "Reader of Emotion",
+      "rarity": "common",
       "category": "archetype",
       "status": "named"
     },
     {
       "num": 44,
-      "name": "The Tourist",
-      "rarity": "uncommon",
+      "name": "The Market Maker",
+      "subtitle": "Keeper of the Spread",
+      "rarity": "epic",
       "category": "archetype",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Broker",
+      "alignment": "Neutral",
+      "stats": [
+        {
+          "label": "Speed",
+          "value": 96
+        },
+        {
+          "label": "Reach",
+          "value": 94
+        },
+        {
+          "label": "Precision",
+          "value": 92
+        },
+        {
+          "label": "Neutrality",
+          "value": 87
+        },
+        {
+          "label": "Visibility",
+          "value": 8
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Quote Both Sides",
+          "kind": "active",
+          "text": "Offers to buy and sell the same thing, simultaneously."
+        },
+        {
+          "name": "Always Filled",
+          "kind": "passive",
+          "text": "Every order finds him, whichever way it leans."
+        },
+        {
+          "name": "Widen the Spread",
+          "kind": "ultimate",
+          "text": "Once per cycle, makes the exit cost whatever he decides."
+        }
+      ],
+      "weakness": "A market with only one direction left.",
+      "lore": "He holds no view on where price is going, which is why he is still here. Every trade in the hall passes through his hands and leaves a thin film behind. Nobody thanks him. Nobody could function without him.",
+      "traits": [
+        {
+          "label": "Two Faces",
+          "text": "Buys and sells the same breath."
+        },
+        {
+          "label": "Thin Margin",
+          "text": "Earns almost nothing, ten thousand times."
+        },
+        {
+          "label": "No Opinion",
+          "text": "Direction is somebody else's problem."
+        },
+        {
+          "label": "First Gone",
+          "text": "Withdraws the moment the floor tilts."
+        }
+      ],
+      "flavor": "Someone has to stand between the two of you.",
+      "art_front": "art/approved/044_the_market_maker_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 45,
-      "name": "The Convert",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Liquidity Pool",
+      "subtitle": "Well of Capital",
+      "rarity": "common",
+      "category": "realm",
       "status": "named"
     },
     {
       "num": 46,
-      "name": "The Skeptic",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Slippage Beast",
+      "subtitle": "Devourer of Large Orders",
+      "rarity": "common",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 47,
-      "name": "The Regulator",
-      "rarity": "uncommon",
+      "name": "The Arbitrageur",
+      "subtitle": "Hunter Between Markets",
+      "rarity": "common",
       "category": "archetype",
       "status": "named"
     },
     {
       "num": 48,
-      "name": "The Tax Collector",
-      "rarity": "uncommon",
-      "category": "archetype",
+      "name": "The Stablecoin",
+      "subtitle": "Anchor in the Storm",
+      "rarity": "rare",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 49,
-      "name": "The Exchange",
-      "rarity": "uncommon",
-      "category": "realm",
+      "name": "The Depeg",
+      "subtitle": "When $1 Isn't $1",
+      "rarity": "rare",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 50,
-      "name": "The Liquidity Pool",
-      "rarity": "uncommon",
-      "category": "realm",
-      "status": "named"
+      "name": "The Halving",
+      "subtitle": "The Supply Reckoning",
+      "rarity": "legendary",
+      "category": "force",
+      "status": "lore_complete",
+      "type": "Rite",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Inevitability",
+          "value": 100
+        },
+        {
+          "label": "Precision",
+          "value": 96
+        },
+        {
+          "label": "Patience",
+          "value": 94
+        },
+        {
+          "label": "Reach",
+          "value": 80
+        },
+        {
+          "label": "Mercy",
+          "value": 17
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Narrow the Flow",
+          "kind": "active",
+          "text": "Cuts new supply in half. No vote, no appeal."
+        },
+        {
+          "name": "Scheduled",
+          "kind": "passive",
+          "text": "Arrives on time, every time, forever."
+        },
+        {
+          "name": "Squeeze the Forge",
+          "kind": "ultimate",
+          "text": "Once per era, ends every operation running on thin margin."
+        }
+      ],
+      "weakness": "Priced in. Allegedly.",
+      "lore": "It is not an event so much as an appointment, written before anyone in this hall was born. The faucet narrows by exactly half, the weakest forges go cold, and the survivors inherit the heat. Everyone insists they saw it coming, and everyone is surprised anyway.",
+      "traits": [
+        {
+          "label": "On Schedule",
+          "text": "Announced decades in advance."
+        },
+        {
+          "label": "Half",
+          "text": "Precisely half. Never a fraction more."
+        },
+        {
+          "label": "Forge Cull",
+          "text": "The inefficient go dark that week."
+        },
+        {
+          "label": "Priced In",
+          "text": "Everyone says so. Nobody acts like it."
+        }
+      ],
+      "flavor": "Written before any of you arrived.",
+      "art_front": "art/approved/050_the_halving_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 51,
-      "name": "The Order Book",
-      "rarity": "uncommon",
+      "name": "The Genesis Block",
+      "subtitle": "Where It All Began",
+      "rarity": "legendary",
       "category": "relic",
-      "status": "named"
+      "status": "lore_complete",
+      "type": "Relic",
+      "alignment": "Order",
+      "stats": [
+        {
+          "label": "Permanence",
+          "value": 100
+        },
+        {
+          "label": "Authority",
+          "value": 95
+        },
+        {
+          "label": "Mystery",
+          "value": 92
+        },
+        {
+          "label": "Weight",
+          "value": 88
+        },
+        {
+          "label": "Utility",
+          "value": 12
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Anchor",
+          "kind": "active",
+          "text": "Every block since traces its lineage here."
+        },
+        {
+          "name": "Unspendable",
+          "kind": "passive",
+          "text": "Its contents can never be moved. By design."
+        },
+        {
+          "name": "First Light",
+          "kind": "ultimate",
+          "text": "Once per era, reminds the hall that all of this began with nothing."
+        }
+      ],
+      "weakness": "It cannot be used. Only revered.",
+      "lore": "It is the one stone laid before there was a wall, holding a message that has outlived every hand that read it. Nothing in it can ever be spent, which is precisely why it is priceless. Every ledger in existence is an argument that starts here.",
+      "traits": [
+        {
+          "label": "Cornerstone",
+          "text": "Everything after descends from it."
+        },
+        {
+          "label": "Locked Forever",
+          "text": "Its coins were never spendable."
+        },
+        {
+          "label": "Inscribed",
+          "text": "Carries a message about a failing world."
+        },
+        {
+          "label": "Unowned",
+          "text": "Belongs to no one and to the whole hall."
+        }
+      ],
+      "flavor": "It begins with nothing and holds everything.",
+      "art_front": "art/approved/051_the_genesis_block_front.png",
+      "art_back_template": "art/templates/back_legendary.png"
     },
     {
       "num": 52,
-      "name": "The Hot Wallet",
-      "rarity": "uncommon",
-      "category": "relic",
+      "name": "The Pizza Buyer",
+      "subtitle": "The Most Expensive Dinner",
+      "rarity": "rare",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 53,
-      "name": "The Hardware Key",
-      "rarity": "uncommon",
-      "category": "relic",
+      "name": "The Silk Road",
+      "subtitle": "The Forbidden Marketplace",
+      "rarity": "rare",
+      "category": "realm",
       "status": "named"
     },
     {
       "num": 54,
-      "name": "The Paper Wallet",
-      "rarity": "uncommon",
-      "category": "relic",
+      "name": "The Mt. Gox Ghost",
+      "subtitle": "Haunting the Market",
+      "rarity": "rare",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 55,
-      "name": "The Gas Fee",
-      "rarity": "uncommon",
+      "name": "The ICO Gold Rush",
+      "subtitle": "Tokens Everywhere",
+      "rarity": "common",
       "category": "force",
       "status": "named"
     },
     {
       "num": 56,
-      "name": "The Slippage",
-      "rarity": "uncommon",
+      "name": "The Crypto Winter",
+      "subtitle": "The Long Freeze",
+      "rarity": "legendary",
       "category": "force",
       "status": "named"
     },
     {
       "num": 57,
-      "name": "The Dip",
-      "rarity": "uncommon",
+      "name": "The NFT Mania",
+      "subtitle": "JPEG Fever",
+      "rarity": "common",
       "category": "force",
       "status": "named"
     },
     {
       "num": 58,
-      "name": "The Pump",
-      "rarity": "uncommon",
-      "category": "force",
+      "name": "The Meme Coin",
+      "subtitle": "Powered by Nothing but Belief",
+      "rarity": "rare",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 59,
-      "name": "The Dump",
-      "rarity": "uncommon",
-      "category": "force",
+      "name": "The Dog Coin",
+      "subtitle": "Joke Turned Giant",
+      "rarity": "rare",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 60,
-      "name": "The Airdrop",
-      "rarity": "uncommon",
+      "name": "The FTX Collapse",
+      "subtitle": "Empire to Ashes",
+      "rarity": "epic",
       "category": "force",
       "status": "named"
     },
     {
       "num": 61,
-      "name": "The Vesting Cliff",
-      "rarity": "uncommon",
+      "name": "The Bank Run",
+      "subtitle": "Everybody Out",
+      "rarity": "common",
       "category": "force",
       "status": "named"
     },
     {
       "num": 62,
-      "name": "The Burn",
-      "rarity": "uncommon",
-      "category": "force",
+      "name": "The Exchange Hacker",
+      "subtitle": "Thief in the Chain",
+      "rarity": "common",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 63,
-      "name": "The Snapshot",
-      "rarity": "uncommon",
-      "category": "force",
+      "name": "The Bridge Hacker",
+      "subtitle": "Raider Between Worlds",
+      "rarity": "common",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 64,
-      "name": "The Multisig",
-      "rarity": "uncommon",
-      "category": "relic",
+      "name": "The Exploiter",
+      "subtitle": "Code Is Law",
+      "rarity": "common",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 65,
-      "name": "The Newcomer",
+      "name": "The Exit Scam",
+      "subtitle": "Gone Before Dawn",
       "rarity": "common",
-      "category": "archetype",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 66,
-      "name": "The Believer",
+      "name": "The Honeypot",
+      "subtitle": "Easy In, Never Out",
       "rarity": "common",
-      "category": "archetype",
+      "category": "relic",
       "status": "named"
     },
     {
       "num": 67,
-      "name": "The Doubter",
+      "name": "The Pump Group",
+      "subtitle": "Coordinated Chaos",
       "rarity": "common",
-      "category": "archetype",
+      "category": "realm",
       "status": "named"
     },
     {
       "num": 68,
-      "name": "The Copy Trader",
-      "rarity": "common",
+      "name": "The MEV Bot",
+      "subtitle": "Predator in the Mempool",
+      "rarity": "epic",
       "category": "archetype",
       "status": "named"
     },
     {
       "num": 69,
-      "name": "The Screenshot",
+      "name": "The Front Runner",
+      "subtitle": "Always One Block Ahead",
       "rarity": "common",
-      "category": "relic",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 70,
-      "name": "The Group Chat",
-      "rarity": "common",
-      "category": "realm",
-      "status": "named"
+      "name": "The Oracle",
+      "subtitle": "Voice of the Outside World",
+      "rarity": "epic",
+      "category": "archetype",
+      "status": "lore_complete",
+      "type": "Seer",
+      "alignment": "Neutral",
+      "stats": [
+        {
+          "label": "Authority",
+          "value": 93
+        },
+        {
+          "label": "Reach",
+          "value": 88
+        },
+        {
+          "label": "Precision",
+          "value": 85
+        },
+        {
+          "label": "Speed",
+          "value": 72
+        },
+        {
+          "label": "Redundancy",
+          "value": 39
+        }
+      ],
+      "abilities": [
+        {
+          "name": "Report the Price",
+          "kind": "active",
+          "text": "Declares one number, and the ledger accepts it as fact."
+        },
+        {
+          "name": "Single Source",
+          "kind": "passive",
+          "text": "Everything downstream depends on being believed."
+        },
+        {
+          "name": "Bad Feed",
+          "kind": "ultimate",
+          "text": "Once per cycle, one wrong number liquidates a kingdom."
+        }
+      ],
+      "weakness": "Nobody checks the seer until the seer is wrong.",
+      "lore": "The chain cannot see outside itself, so it appointed someone to look. She reports the weather of the world in a single figure and the machinery obeys without asking how she knows. The whole structure rests on her not lying, and on her not being lied to.",
+      "traits": [
+        {
+          "label": "One Number",
+          "text": "The world, compressed to a single figure."
+        },
+        {
+          "label": "Blind Trust",
+          "text": "Believed instantly, verified rarely."
+        },
+        {
+          "label": "Chokepoint",
+          "text": "Everything downstream inherits her mistakes."
+        },
+        {
+          "label": "Quiet Power",
+          "text": "Rules a market she never trades in."
+        }
+      ],
+      "flavor": "The chain believes whatever it is told.",
+      "art_front": "art/approved/070_the_oracle_front.png",
+      "art_back_template": "art/templates/back_epic.png"
     },
     {
       "num": 71,
-      "name": "The Ticker",
-      "rarity": "common",
+      "name": "The Smart Contract",
+      "subtitle": "Code Without Mercy",
+      "rarity": "epic",
       "category": "relic",
       "status": "named"
     },
     {
       "num": 72,
-      "name": "The Green Candle",
-      "rarity": "common",
-      "category": "force",
+      "name": "The Blockchain",
+      "subtitle": "The Immutable Chronicle",
+      "rarity": "legendary",
+      "category": "relic",
       "status": "named"
     },
     {
       "num": 73,
-      "name": "The Red Candle",
-      "rarity": "common",
+      "name": "Proof of Work",
+      "subtitle": "Forged by Energy",
+      "rarity": "epic",
       "category": "force",
       "status": "named"
     },
     {
       "num": 74,
-      "name": "The Support Line",
-      "rarity": "common",
-      "category": "relic",
+      "name": "Proof of Stake",
+      "subtitle": "Power by Commitment",
+      "rarity": "rare",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 75,
-      "name": "The Resistance",
-      "rarity": "common",
+      "name": "The Fork",
+      "subtitle": "One Chain Becomes Two",
+      "rarity": "rare",
       "category": "force",
       "status": "named"
     },
     {
       "num": 76,
-      "name": "The Volume Spike",
+      "name": "The Layer Two",
+      "subtitle": "The Scaling Engine",
       "rarity": "common",
-      "category": "force",
+      "category": "realm",
       "status": "named"
     },
     {
       "num": 77,
-      "name": "The Crab",
+      "name": "The Cross-Chain Bridge",
+      "subtitle": "Connector of Kingdoms",
       "rarity": "common",
-      "category": "force",
+      "category": "relic",
       "status": "named"
     },
     {
       "num": 78,
-      "name": "The Overnight Gap",
+      "name": "The Tokenizer",
+      "subtitle": "Everything Becomes an Asset",
       "rarity": "common",
-      "category": "force",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 79,
-      "name": "The Stop Loss",
+      "name": "The DAO",
+      "subtitle": "Rule by the Collective",
       "rarity": "common",
-      "category": "relic",
+      "category": "realm",
       "status": "named"
     },
     {
       "num": 80,
-      "name": "The Limit Order",
-      "rarity": "common",
-      "category": "relic",
+      "name": "The Airdrop",
+      "subtitle": "Coins From Heaven",
+      "rarity": "rare",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 81,
-      "name": "The Leverage",
-      "rarity": "common",
-      "category": "force",
+      "name": "The Bitcoin",
+      "subtitle": "Digital Gold",
+      "rarity": "legendary",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 82,
-      "name": "The Margin Call",
-      "rarity": "common",
-      "category": "force",
+      "name": "The Ethereum",
+      "subtitle": "World Computer",
+      "rarity": "legendary",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 83,
-      "name": "The Cooldown",
-      "rarity": "common",
-      "category": "force",
+      "name": "The XRP",
+      "subtitle": "The Bridge Asset",
+      "rarity": "rare",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 84,
-      "name": "The Whitepaper",
+      "name": "The XLM",
+      "subtitle": "Stellar Messenger",
       "rarity": "common",
-      "category": "relic",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 85,
-      "name": "The Roadmap",
+      "name": "The XDC",
+      "subtitle": "Trade Finance Rail",
       "rarity": "common",
-      "category": "relic",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 86,
-      "name": "The Testnet",
-      "rarity": "common",
-      "category": "realm",
+      "name": "The Chainlink",
+      "subtitle": "Oracle of Oracles",
+      "rarity": "rare",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 87,
-      "name": "The Mainnet",
-      "rarity": "common",
-      "category": "realm",
+      "name": "The Solana",
+      "subtitle": "Speed Demon",
+      "rarity": "rare",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 88,
-      "name": "The Node",
-      "rarity": "common",
-      "category": "relic",
+      "name": "The Stablecoin King",
+      "subtitle": "Digital Dollar",
+      "rarity": "rare",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 89,
-      "name": "The Faucet",
+      "name": "The Tokenized Treasury",
+      "subtitle": "Old Money, New Rails",
       "rarity": "common",
-      "category": "relic",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 90,
-      "name": "The Watchlist",
+      "name": "The Real-World Asset",
+      "subtitle": "The Physical Goes Digital",
       "rarity": "common",
-      "category": "relic",
+      "category": "token",
       "status": "named"
     },
     {
       "num": 91,
-      "name": "The Portfolio",
-      "rarity": "common",
+      "name": "The ETF",
+      "subtitle": "Wall Street's Gateway",
+      "rarity": "rare",
       "category": "relic",
       "status": "named"
     },
     {
       "num": 92,
-      "name": "The Meme Coin",
-      "rarity": "common",
-      "category": "token",
+      "name": "The Institution",
+      "subtitle": "The Giant Awakens",
+      "rarity": "rare",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 93,
-      "name": "The Stablecoin",
-      "rarity": "common",
-      "category": "token",
+      "name": "The Regulator",
+      "subtitle": "Keeper of the Gate",
+      "rarity": "rare",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 94,
-      "name": "The Governance Token",
-      "rarity": "common",
-      "category": "token",
+      "name": "The Central Banker",
+      "subtitle": "Master of Fiat",
+      "rarity": "rare",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 95,
-      "name": "The Wrapped Asset",
-      "rarity": "common",
+      "name": "The CBDC",
+      "subtitle": "The Sovereign Token",
+      "rarity": "rare",
       "category": "token",
       "status": "named"
     },
     {
       "num": 96,
-      "name": "The Blue Chip",
-      "rarity": "common",
-      "category": "token",
+      "name": "The Quantum Threat",
+      "subtitle": "Breaker of Keys",
+      "rarity": "epic",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 97,
-      "name": "The Vapor Coin",
-      "rarity": "common",
-      "category": "token",
+      "name": "The AI Trader",
+      "subtitle": "Machine of the Market",
+      "rarity": "rare",
+      "category": "archetype",
       "status": "named"
     },
     {
       "num": 98,
-      "name": "The Test Token",
-      "rarity": "common",
-      "category": "token",
+      "name": "The Supercycle",
+      "subtitle": "This Time Is Different",
+      "rarity": "epic",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 99,
-      "name": "The Dust",
-      "rarity": "common",
-      "category": "token",
+      "name": "The Final Block",
+      "subtitle": "When the Last Bitcoin Falls",
+      "rarity": "legendary",
+      "category": "force",
       "status": "named"
     },
     {
       "num": 100,
-      "name": "The Architect",
-      "subtitle": "Ghost of Genesis",
-      "type": "Founder",
-      "alignment": "Neutral",
+      "name": "The Crypto King",
+      "subtitle": "Survivor of Every Cycle",
       "rarity": "mythic",
       "category": "archetype",
-      "status": "lore_complete",
-      "stats": [
-        {
-          "label": "Mystery",
-          "value": 100
-        },
-        {
-          "label": "Foresight",
-          "value": 97
-        },
-        {
-          "label": "Restraint",
-          "value": 96
-        },
-        {
-          "label": "Authority",
-          "value": 91
-        },
-        {
-          "label": "Presence",
-          "value": 2
-        }
-      ],
-      "abilities": [
-        {
-          "name": "Lay the Stone",
-          "kind": "active",
-          "text": "Builds a system that no longer requires its builder."
-        },
-        {
-          "name": "Absent",
-          "kind": "passive",
-          "text": "Cannot be found, subpoenaed, bribed or interviewed."
-        },
-        {
-          "name": "Walk Away",
-          "kind": "ultimate",
-          "text": "Once per era, abandons a fortune to protect the thing built."
-        }
-      ],
-      "weakness": "Nothing. That is the entire problem.",
-      "lore": "The work was finished, the door was closed quietly, and the hall has spent every year since arguing about who was in the room. A fortune sits untouched under a name nobody can prove. The greatest thing built here was the decision to leave.",
-      "traits": [
-        {
-          "label": "No Face",
-          "text": "Every portrait of them is a guess."
-        },
-        {
-          "label": "Untouched Hoard",
-          "text": "A fortune that has never moved."
-        },
-        {
-          "label": "Clean Exit",
-          "text": "Left before the worship began."
-        },
-        {
-          "label": "Still Running",
-          "text": "The work continues without its author."
-        }
-      ],
-      "flavor": "The last thing built was the exit.",
-      "art_front": "art/approved/100_the_architect_front.png",
-      "art_back_template": "art/templates/back_mythic.png"
+      "status": "named"
     }
   ]
 }

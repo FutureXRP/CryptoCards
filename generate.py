@@ -57,7 +57,7 @@ SAFE_BOX = (BLEED + SAFE, BLEED + SAFE, BLEED + TRIM_W - SAFE, BLEED + TRIM_H - 
 BORDER_BAND = 96       # opal foil edge; covers the 75px bleed with margin
 INNER_RULE = 14        # gold rule inboard of the border band
 
-RARITIES = ("mythic", "epic", "rare", "uncommon", "common")
+RARITIES = ("mythic", "legendary", "epic", "rare", "common")
 CATEGORIES = ("archetype", "force", "relic", "realm", "token")
 ABILITY_KINDS = ("active", "passive", "ultimate")
 STATUSES = (
@@ -67,15 +67,17 @@ STATUSES = (
 # Cards at or beyond this status must carry the full content payload.
 CONTENT_FROM = STATUSES.index("lore_complete")
 
-TIER_TABLE = {"mythic": 5, "epic": 10, "rare": 20, "uncommon": 30, "common": 35}
+TIER_TABLE = {"mythic": 5, "legendary": 10, "epic": 20, "rare": 30, "common": 35}
 
-# Tier palettes: (foil, foil_dark, accent, holo_strength)
+# Tier palettes: (foil, foil_dark, accent, holo_strength). Tier assignment is
+# per-card in the manifest, not by number range — the set's icons are scattered
+# across the checklist.
 TIER_STYLE = {
-    "mythic":   {"foil": (232, 190, 104), "dark": (94, 66, 22), "accent": (255, 226, 158), "holo": 1.00, "serial": (240, 200, 112)},
-    "epic":     {"foil": (222, 178, 96),  "dark": (84, 58, 20),  "accent": (246, 214, 146), "holo": 0.72, "serial": (232, 196, 120)},
-    "rare":     {"foil": (208, 166, 88),  "dark": (74, 52, 18),  "accent": (238, 204, 136), "holo": 0.42, "serial": (214, 182, 116)},
-    "uncommon": {"foil": (186, 190, 198), "dark": (62, 66, 72),  "accent": (226, 230, 238), "holo": 0.30, "serial": (198, 202, 210)},
-    "common":   {"foil": (154, 132, 96),  "dark": (54, 46, 32),  "accent": (198, 178, 140), "holo": 0.22, "serial": (176, 160, 128)},
+    "mythic":    {"foil": (232, 190, 104), "dark": (94, 66, 22), "accent": (255, 226, 158), "holo": 1.00, "serial": (240, 200, 112)},
+    "legendary": {"foil": (228, 184, 100), "dark": (90, 62, 21), "accent": (252, 220, 152), "holo": 0.85, "serial": (236, 198, 116)},
+    "epic":      {"foil": (222, 178, 96),  "dark": (84, 58, 20),  "accent": (246, 214, 146), "holo": 0.68, "serial": (232, 196, 120)},
+    "rare":      {"foil": (208, 166, 88),  "dark": (74, 52, 18),  "accent": (238, 204, 136), "holo": 0.42, "serial": (214, 182, 116)},
+    "common":    {"foil": (154, 132, 96),  "dark": (54, 46, 32),  "accent": (198, 178, 140), "holo": 0.22, "serial": (176, 160, 128)},
 }
 
 INK = (232, 224, 208)

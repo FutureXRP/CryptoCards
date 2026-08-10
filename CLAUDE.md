@@ -9,16 +9,17 @@ Design and produce a 100-card premium physical trading card set ("Crypto Lore Se
 - Fixed 100-card set × 100 serialized editions. Every card carries `XXX/100`.
 - Rarity = physical finish tier, not pull odds (every set contains all 100 cards):
 
-| Tier | Count | Card #s | Finish |
-|---|---|---|---|
-| Mythic | 5 | 001–004, 100 | Rainbow holo border, textured gold foil, embossed sigil, gold serial |
-| Epic | 10 | 005–014 | Full holo overlay + gold foil title/icons |
-| Rare | 20 | 015–034 | Gold foil title + foil rarity crest |
-| Uncommon | 30 | 035–064 | Silver foil title + standard holo border |
-| Common | 35 | 065–099 | Standard print + holo border |
+| Tier | Count | Finish |
+|---|---|---|
+| Mythic | 5 | Rainbow holo border, textured gold foil, embossed sigil, gold serial |
+| Legendary | 10 | Near-Mythic holo + textured gold foil title and crest |
+| Epic | 20 | Full holo overlay + gold foil title/icons |
+| Rare | 30 | Gold foil title + foil rarity crest |
+| Common | 35 | Standard print + holo border |
 
+- Tier assignment is **per card in the manifest**, not by number range — the set's icons are scattered through the checklist. `validate` enforces the counts.
 - Cards #001–004 (The HODLR, The SEC Punisher, The Whale, The Rug Puller) have finished approved art in `art/approved/`. Match their look exactly.
-- Card #100 "The Architect — Ghost of Genesis" is the set-closing Mythic chase card.
+- Card #100 "The Crypto King — Survivor of Every Cycle" is the set-closing Mythic chase card.
 - Every card has a FRONT (stats/abilities frame) and a BACK (lore/traits frame).
 
 ## Repo structure
@@ -110,13 +111,13 @@ python generate.py validate                                         # manifest l
 - Style bible: dark epic fantasy meets financial mythology. Ornate engraved gold frames, black/bronze palette, opalescent holographic border, parchment inset panels, dramatic rim lighting, painterly not photoreal. Match cards #001–004.
 - Prompt templates live in `/prompts/` — one per tier (border/frame treatment differs) and per category (archetype/force/relic/realm/token). When generating a new card's prompt, fill the template with the card's name, subtitle, and 2–3 scene beats derived from its lore.
 - **Generate art WITHOUT text.** All type is set by the pipeline from the manifest. AI-rendered lettering is banned in new art (garbled words killed the first Whale front). The only text allowed in AI art is incidental in-scene signage, and it must be proofed letter-by-letter.
-- No real people, no real logos or brand marks, no existing IP characters, no real token logos. Archetypes and symbols only.
+- Owner's call (2026-08-10): the checklist deliberately includes real assets and historic events (The Bitcoin, The XRP, The Satoshi, Mt. Gox, FTX, Silk Road…). Card NAMES may reference them; card ART stays archetypal — no trademarked logo lockups, no real people's likenesses, no exchange branding. Symbols (₿-style coin marks) are allowed as the owner's reference cards use them.
 
 ## Writing style (lore, traits, abilities, flavor)
 
 - Voice: mythic, wry, economical. The set is dark satire of crypto culture that still flatters the collector. Second person never; present tense preferred.
 - Lore: 2–4 sentences. Traits: exactly 4, label ≤ 2 words + one clause. Flavor: one line, quotable, ≤ 10 words. Abilities: name ≤ 3 words; text ≤ 20 words; exactly one active, one passive, one ultimate.
-- Banned in copy: "delve", "unleash your", "in the world of", "game-changer", "revolutionary", "to the moon" (except as deliberate irony on The Moon Boy), any real project/exchange/person names, any price predictions or investment claims. This is lore, not financial advice — keep it archetypal.
+- Banned in copy: "delve", "unleash your", "in the world of", "game-changer", "revolutionary", "to the moon" (except as deliberate irony on The Moonboy), any price predictions or investment claims. Real project/event names appear only where the card itself is named for them. This is lore, not financial advice — keep it archetypal.
 - Stats are 0–100 integers chosen for character truth, not balance math; exactly 5 per card; at most one stat of 100.
 
 ## Claude Code session protocol

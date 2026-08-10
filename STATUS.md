@@ -11,12 +11,12 @@ source of truth and this file mirrors it.
 
 | Status | Cards |
 |---|---|
-| named | 85 |
-| lore_complete | 11 |
+| named | 87 |
+| lore_complete | 9 |
 | art_prompted | 0 |
 | art_incoming | 0 |
-| art_approved | 3 |
-| composed | 1 |
+| art_approved | 4 |
+| composed | 0 |
 | proofed | 0 |
 | print_ready | 0 |
 | **total** | **100** |
@@ -25,112 +25,113 @@ source of truth and this file mirrors it.
 
 | # | Name | Tier | Category | Status |
 |---|---|---|---|---|
-| 001 | The HODLR | mythic | archetype | composed |
+| 001 | The HODLR | mythic | archetype | art_approved |
 | 002 | The SEC Punisher | mythic | archetype | art_approved |
 | 003 | The Whale | mythic | archetype | art_approved |
 | 004 | The Rug Puller | mythic | archetype | art_approved |
-| 005 | The Maximalist | epic | archetype | lore_complete |
-| 006 | The Market Maker | epic | archetype | lore_complete |
-| 007 | The Miner | epic | archetype | lore_complete |
-| 008 | The Oracle | epic | archetype | lore_complete |
-| 009 | The Bear | epic | force | lore_complete |
-| 010 | The Bull | epic | force | lore_complete |
-| 011 | The Halving | epic | force | lore_complete |
-| 012 | The Genesis Block | epic | relic | lore_complete |
-| 013 | The Cold Vault | epic | relic | lore_complete |
-| 014 | The Mempool | epic | realm | lore_complete |
-| 015 | The Degen | rare | archetype | named |
-| 016 | The Moon Boy | rare | archetype | named |
-| 017 | The Paper Hands | rare | archetype | named |
-| 018 | The Diamond Hands | rare | archetype | named |
-| 019 | The Shiller | rare | archetype | named |
-| 020 | The Auditor | rare | archetype | named |
-| 021 | The Validator | rare | archetype | named |
-| 022 | The Liquidator | rare | archetype | named |
-| 023 | The Arbitrageur | rare | archetype | named |
-| 024 | The Custodian | rare | archetype | named |
-| 025 | The Bag Holder | rare | archetype | named |
-| 026 | The Founder | rare | archetype | named |
-| 027 | The Bridge | rare | relic | named |
-| 028 | The Ledger | rare | relic | named |
-| 029 | The Seed Phrase | rare | relic | named |
-| 030 | The Bull Run | rare | force | named |
-| 031 | The Long Winter | rare | force | named |
-| 032 | The Flash Crash | rare | force | named |
-| 033 | The Fork | rare | force | named |
-| 034 | The Dark Forest | rare | realm | named |
-| 035 | The Whale Watcher | uncommon | archetype | named |
-| 036 | The Sniper | uncommon | archetype | named |
-| 037 | The Yield Farmer | uncommon | archetype | named |
-| 038 | The Staker | uncommon | archetype | named |
-| 039 | The Lurker | uncommon | archetype | named |
-| 040 | The Moderator | uncommon | archetype | named |
-| 041 | The Alpha Caller | uncommon | archetype | named |
-| 042 | The Analyst | uncommon | archetype | named |
-| 043 | The Quant | uncommon | archetype | named |
-| 044 | The Tourist | uncommon | archetype | named |
-| 045 | The Convert | uncommon | archetype | named |
-| 046 | The Skeptic | uncommon | archetype | named |
-| 047 | The Regulator | uncommon | archetype | named |
-| 048 | The Tax Collector | uncommon | archetype | named |
-| 049 | The Exchange | uncommon | realm | named |
-| 050 | The Liquidity Pool | uncommon | realm | named |
-| 051 | The Order Book | uncommon | relic | named |
-| 052 | The Hot Wallet | uncommon | relic | named |
-| 053 | The Hardware Key | uncommon | relic | named |
-| 054 | The Paper Wallet | uncommon | relic | named |
-| 055 | The Gas Fee | uncommon | force | named |
-| 056 | The Slippage | uncommon | force | named |
-| 057 | The Dip | uncommon | force | named |
-| 058 | The Pump | uncommon | force | named |
-| 059 | The Dump | uncommon | force | named |
-| 060 | The Airdrop | uncommon | force | named |
-| 061 | The Vesting Cliff | uncommon | force | named |
-| 062 | The Burn | uncommon | force | named |
-| 063 | The Snapshot | uncommon | force | named |
-| 064 | The Multisig | uncommon | relic | named |
-| 065 | The Newcomer | common | archetype | named |
-| 066 | The Believer | common | archetype | named |
-| 067 | The Doubter | common | archetype | named |
-| 068 | The Copy Trader | common | archetype | named |
-| 069 | The Screenshot | common | relic | named |
-| 070 | The Group Chat | common | realm | named |
-| 071 | The Ticker | common | relic | named |
-| 072 | The Green Candle | common | force | named |
-| 073 | The Red Candle | common | force | named |
-| 074 | The Support Line | common | relic | named |
-| 075 | The Resistance | common | force | named |
-| 076 | The Volume Spike | common | force | named |
-| 077 | The Crab | common | force | named |
-| 078 | The Overnight Gap | common | force | named |
-| 079 | The Stop Loss | common | relic | named |
-| 080 | The Limit Order | common | relic | named |
-| 081 | The Leverage | common | force | named |
-| 082 | The Margin Call | common | force | named |
-| 083 | The Cooldown | common | force | named |
-| 084 | The Whitepaper | common | relic | named |
-| 085 | The Roadmap | common | relic | named |
-| 086 | The Testnet | common | realm | named |
-| 087 | The Mainnet | common | realm | named |
-| 088 | The Node | common | relic | named |
-| 089 | The Faucet | common | relic | named |
-| 090 | The Watchlist | common | relic | named |
-| 091 | The Portfolio | common | relic | named |
-| 092 | The Meme Coin | common | token | named |
-| 093 | The Stablecoin | common | token | named |
-| 094 | The Governance Token | common | token | named |
-| 095 | The Wrapped Asset | common | token | named |
-| 096 | The Blue Chip | common | token | named |
-| 097 | The Vapor Coin | common | token | named |
-| 098 | The Test Token | common | token | named |
-| 099 | The Dust | common | token | named |
-| 100 | The Architect | mythic | archetype | lore_complete |
+| 005 | The Gas Fee Ghost | epic | archetype | named |
+| 006 | The Ponzi Schemer | common | archetype | named |
+| 007 | The Degen | epic | archetype | named |
+| 008 | The Diamond Hands | epic | archetype | named |
+| 009 | The Paper Hands | rare | archetype | named |
+| 010 | The Moonboy | rare | archetype | named |
+| 011 | The Maxi | rare | archetype | lore_complete |
+| 012 | The No-Coiner | common | archetype | named |
+| 013 | The Bag Holder | rare | archetype | named |
+| 014 | The FOMO Chaser | common | archetype | named |
+| 015 | The Dip Buyer | common | archetype | named |
+| 016 | The Day Trader | common | archetype | named |
+| 017 | The Leverage King | rare | archetype | named |
+| 018 | The Liquidated | epic | archetype | named |
+| 019 | The Shill | common | archetype | named |
+| 020 | The Influencer | common | archetype | named |
+| 021 | The Satoshi | legendary | archetype | named |
+| 022 | The Miner | epic | archetype | lore_complete |
+| 023 | The Validator | rare | archetype | named |
+| 024 | The Node Runner | common | archetype | named |
+| 025 | The Developer | common | archetype | named |
+| 026 | The Cypherpunk | epic | archetype | named |
+| 027 | The Cold Wallet | epic | relic | lore_complete |
+| 028 | The Lost Keys | legendary | relic | named |
+| 029 | The Seed Phrase | epic | relic | named |
+| 030 | The Ledger | common | relic | named |
+| 031 | The Bull | epic | force | lore_complete |
+| 032 | The Bear | epic | force | lore_complete |
+| 033 | The Black Swan | legendary | force | named |
+| 034 | The Flash Crash | epic | force | named |
+| 035 | The God Candle | rare | force | named |
+| 036 | The Death Candle | rare | force | named |
+| 037 | The Pump | common | force | named |
+| 038 | The Dump | common | force | named |
+| 039 | The Short Squeeze | rare | force | named |
+| 040 | The Liquidation Cascade | epic | force | named |
+| 041 | The FUD Machine | rare | relic | named |
+| 042 | The Hopium Dealer | common | archetype | named |
+| 043 | The Fear & Greed Oracle | common | archetype | named |
+| 044 | The Market Maker | epic | archetype | lore_complete |
+| 045 | The Liquidity Pool | common | realm | named |
+| 046 | The Slippage Beast | common | force | named |
+| 047 | The Arbitrageur | common | archetype | named |
+| 048 | The Stablecoin | rare | token | named |
+| 049 | The Depeg | rare | force | named |
+| 050 | The Halving | legendary | force | lore_complete |
+| 051 | The Genesis Block | legendary | relic | lore_complete |
+| 052 | The Pizza Buyer | rare | archetype | named |
+| 053 | The Silk Road | rare | realm | named |
+| 054 | The Mt. Gox Ghost | rare | archetype | named |
+| 055 | The ICO Gold Rush | common | force | named |
+| 056 | The Crypto Winter | legendary | force | named |
+| 057 | The NFT Mania | common | force | named |
+| 058 | The Meme Coin | rare | token | named |
+| 059 | The Dog Coin | rare | token | named |
+| 060 | The FTX Collapse | epic | force | named |
+| 061 | The Bank Run | common | force | named |
+| 062 | The Exchange Hacker | common | archetype | named |
+| 063 | The Bridge Hacker | common | archetype | named |
+| 064 | The Exploiter | common | archetype | named |
+| 065 | The Exit Scam | common | force | named |
+| 066 | The Honeypot | common | relic | named |
+| 067 | The Pump Group | common | realm | named |
+| 068 | The MEV Bot | epic | archetype | named |
+| 069 | The Front Runner | common | archetype | named |
+| 070 | The Oracle | epic | archetype | lore_complete |
+| 071 | The Smart Contract | epic | relic | named |
+| 072 | The Blockchain | legendary | relic | named |
+| 073 | Proof of Work | epic | force | named |
+| 074 | Proof of Stake | rare | force | named |
+| 075 | The Fork | rare | force | named |
+| 076 | The Layer Two | common | realm | named |
+| 077 | The Cross-Chain Bridge | common | relic | named |
+| 078 | The Tokenizer | common | archetype | named |
+| 079 | The DAO | common | realm | named |
+| 080 | The Airdrop | rare | force | named |
+| 081 | The Bitcoin | legendary | token | named |
+| 082 | The Ethereum | legendary | token | named |
+| 083 | The XRP | rare | token | named |
+| 084 | The XLM | common | token | named |
+| 085 | The XDC | common | token | named |
+| 086 | The Chainlink | rare | token | named |
+| 087 | The Solana | rare | token | named |
+| 088 | The Stablecoin King | rare | token | named |
+| 089 | The Tokenized Treasury | common | token | named |
+| 090 | The Real-World Asset | common | token | named |
+| 091 | The ETF | rare | relic | named |
+| 092 | The Institution | rare | archetype | named |
+| 093 | The Regulator | rare | archetype | named |
+| 094 | The Central Banker | rare | archetype | named |
+| 095 | The CBDC | rare | token | named |
+| 096 | The Quantum Threat | epic | force | named |
+| 097 | The AI Trader | rare | archetype | named |
+| 098 | The Supercycle | epic | force | named |
+| 099 | The Final Block | legendary | force | named |
+| 100 | The Crypto King | mythic | archetype | named |
 
 ## Next up
 
-1. Owner sign-off on card 001 front + back (the house style is now set).
-2. Resolve the copy question: the manifest's wording for 001-004 differs from
-   the owner's reference cards (subtitle, type, alignment, stat labels).
-3. Generate `art/templates/back_epic|rare|uncommon|common.png` from the same
-   prompt as `back_mythic.png`, then re-check `BACK_BANDS` against each.
-4. Compose + proof 002-004, then write content for the Rare block 015-024.
+1. Owner sign-off on the remapped Genesis 100 checklist (this file).
+2. Re-compose 001 with its new subtitle (Diamond Hands Eternal) and proof 001-004.
+3. Generate back plates for the legendary/epic/rare/common tiers from the
+   back_mythic prompt; re-check BACK_BANDS against each.
+4. Write content for the remaining Mythic + Legendary cards first (100, 021,
+   028, 033, 050*, 051*, 056, 072, 081, 082, 099 — * already lore_complete),
+   then proceed in blocks of 10 down the tiers.

@@ -47,13 +47,16 @@ Rarity is a **finish tier, not a pull rate** — every complete set contains all
 100 cards. Spot-foil masks are supplied as 1-bit PNGs at 600 DPI, registered
 to the same 1650 × 2250 canvas (`output/foil/`).
 
-| Tier | Count | Card #s | Finish |
-|---|---|---|---|
-| Mythic | 5 | 001–004, 100 | Rainbow holographic border, textured gold foil, embossed sigil, gold serial |
-| Epic | 10 | 005–014 | Full holographic overlay + gold foil title and icons |
-| Rare | 20 | 015–034 | Gold foil title + foil rarity crest |
-| Uncommon | 30 | 035–064 | Silver foil title + standard holographic border |
-| Common | 35 | 065–099 | Standard print + holographic border |
+| Tier | Count | Finish |
+|---|---|---|
+| Mythic | 5 | Rainbow holographic border, textured gold foil, embossed sigil, gold serial |
+| Legendary | 10 | Near-Mythic holographic border + textured gold foil title and crest |
+| Epic | 20 | Full holographic overlay + gold foil title and icons |
+| Rare | 30 | Gold foil title + foil rarity crest |
+| Common | 35 | Standard print + holographic border |
+
+Tier assignment is per card in `set_manifest.json`, not by number range; the
+manifest is the authoritative tier list for the finisher.
 
 Notes for the finisher:
 

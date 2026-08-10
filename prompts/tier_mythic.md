@@ -1,4 +1,4 @@
-# Mythic (001–004, 100)
+# Mythic (5 cards — assignment lives in the manifest)
 
 Ornament: maximum. A vast engraved gold rosette, seal or halo behind the
 subject, oxidised and cracked. Heaviest chiaroscuro in the set.
