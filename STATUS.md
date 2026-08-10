@@ -13,9 +13,9 @@ source of truth and this file mirrors it.
 |---|---|
 | named | 78 |
 | lore_complete | 7 |
-| art_prompted | 11 |
+| art_prompted | 0 |
 | art_incoming | 0 |
-| art_approved | 0 |
+| art_approved | 11 |
 | composed | 4 |
 | proofed | 0 |
 | print_ready | 0 |
@@ -45,19 +45,19 @@ source of truth and this file mirrors it.
 | 018 | The Liquidated | epic | archetype | named |
 | 019 | The Shill | common | archetype | named |
 | 020 | The Influencer | common | archetype | named |
-| 021 | The Satoshi | legendary | archetype | art_prompted |
+| 021 | The Satoshi | legendary | archetype | art_approved |
 | 022 | The Miner | epic | archetype | lore_complete |
 | 023 | The Validator | rare | archetype | named |
 | 024 | The Node Runner | common | archetype | named |
 | 025 | The Developer | common | archetype | named |
 | 026 | The Cypherpunk | epic | archetype | named |
 | 027 | The Cold Wallet | epic | relic | lore_complete |
-| 028 | The Lost Keys | legendary | relic | art_prompted |
+| 028 | The Lost Keys | legendary | relic | art_approved |
 | 029 | The Seed Phrase | epic | relic | named |
 | 030 | The Ledger | common | relic | named |
 | 031 | The Bull | epic | force | lore_complete |
 | 032 | The Bear | epic | force | lore_complete |
-| 033 | The Black Swan | legendary | force | art_prompted |
+| 033 | The Black Swan | legendary | force | art_approved |
 | 034 | The Flash Crash | epic | force | named |
 | 035 | The God Candle | rare | force | named |
 | 036 | The Death Candle | rare | force | named |
@@ -74,13 +74,13 @@ source of truth and this file mirrors it.
 | 047 | The Arbitrageur | common | archetype | named |
 | 048 | The Stablecoin | rare | token | named |
 | 049 | The Depeg | rare | force | named |
-| 050 | The Halving | legendary | force | art_prompted |
-| 051 | The Genesis Block | legendary | relic | art_prompted |
+| 050 | The Halving | legendary | force | art_approved |
+| 051 | The Genesis Block | legendary | relic | art_approved |
 | 052 | The Pizza Buyer | rare | archetype | named |
 | 053 | The Silk Road | rare | realm | named |
 | 054 | The Mt. Gox Ghost | rare | archetype | named |
 | 055 | The ICO Gold Rush | common | force | named |
-| 056 | The Crypto Winter | legendary | force | art_prompted |
+| 056 | The Crypto Winter | legendary | force | art_approved |
 | 057 | The NFT Mania | common | force | named |
 | 058 | The Meme Coin | rare | token | named |
 | 059 | The Dog Coin | rare | token | named |
@@ -96,7 +96,7 @@ source of truth and this file mirrors it.
 | 069 | The Front Runner | common | archetype | named |
 | 070 | The Oracle | epic | archetype | lore_complete |
 | 071 | The Smart Contract | epic | relic | named |
-| 072 | The Blockchain | legendary | relic | art_prompted |
+| 072 | The Blockchain | legendary | relic | art_approved |
 | 073 | Proof of Work | epic | force | named |
 | 074 | Proof of Stake | rare | force | named |
 | 075 | The Fork | rare | force | named |
@@ -105,8 +105,8 @@ source of truth and this file mirrors it.
 | 078 | The Tokenizer | common | archetype | named |
 | 079 | The DAO | common | realm | named |
 | 080 | The Airdrop | rare | force | named |
-| 081 | The Bitcoin | legendary | token | art_prompted |
-| 082 | The Ethereum | legendary | token | art_prompted |
+| 081 | The Bitcoin | legendary | token | art_approved |
+| 082 | The Ethereum | legendary | token | art_approved |
 | 083 | The XRP | rare | token | named |
 | 084 | The XLM | common | token | named |
 | 085 | The XDC | common | token | named |
@@ -123,8 +123,8 @@ source of truth and this file mirrors it.
 | 096 | The Quantum Threat | epic | force | named |
 | 097 | The AI Trader | rare | archetype | named |
 | 098 | The Supercycle | epic | force | named |
-| 099 | The Final Block | legendary | force | art_prompted |
-| 100 | The Crypto King | mythic | archetype | art_prompted |
+| 099 | The Final Block | legendary | force | art_approved |
+| 100 | The Crypto King | mythic | archetype | art_approved |
 
 ## Next up
 
